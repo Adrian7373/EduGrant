@@ -1,6 +1,6 @@
 "use server"
 import { createClient } from '@supabase/supabase-js';
-import { z } from 'zod';
+import { success, z } from 'zod';
 
 interface Children {
     childrenName: string,
@@ -89,8 +89,6 @@ export async function submitApplication(formData: FormData) {
     const rawData = Object.fromEntries(formData.entries());
 
     const numberOfChild = Number(rawData.numberOfChild);
-
-
 
     const childrenNameArray = formData.getAll("childrenName");
     const childrenOccupationArray = formData.getAll("childrenOccupation");
@@ -212,4 +210,26 @@ export async function submitApplication(formData: FormData) {
         console.error("Parallel upload Error:", error)
         return { success: false, message: "One or more files failed to upload" }
     }
+}
+
+export async function authenticateUser(formData: FormData) {
+    if (!formData) {
+        return { success: false, message: "Cannot authenticate!" }
+    }
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if (error) {
+        return { success: false, message: "Login failed! Incorrect username or password." }
+    }
+
+    return { success: true, message: "Login Successful" };
+
 }
