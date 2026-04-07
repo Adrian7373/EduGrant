@@ -1,10 +1,7 @@
 import style from "./PendingApplicationsCard.module.css";
 
-interface PendingApplicationsProp {
-    pendingCount: number
-}
 
-export default function PendingApplicationsCard({ pendingCount }: PendingApplicationsProp) {
+export default function PendingApplicationsCard({ pendingCount }: { pendingCount: number }) {
     return (
         <div className={style.mainDiv}>
             <p>PENDING APPLICATIONS</p>
