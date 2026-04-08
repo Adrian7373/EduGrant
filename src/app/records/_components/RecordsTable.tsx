@@ -2,7 +2,20 @@
 import style from "./RecordsTable.module.css";
 import { useState } from "react";
 
-export default function RecordsTable() {
+interface Application {
+    id: string;
+    student_level: string;
+    name: string;
+    status: string;
+    created_at: string;
+    contact: string;
+};
+
+interface ApplicationProp {
+    applications: Application[];
+}
+
+export default function RecordsTable({ applications }: ApplicationProp) {
 
     const [isAscending, setIsAscending] = useState<boolean>(true);
     const [sort, setSort] = useState<string>("date");
@@ -91,8 +104,44 @@ export default function RecordsTable() {
                         <option value="5">5th Year</option>
                     </>
                 )}
-
             </select>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Created at</th>
+                        <th>Level</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {applications.map((app) => (
+                        <tr key={app.id}>
+                            <td>
+                                {app.name}
+                            </td>
+                            <td>
+                                {new Date(app.created_at).toLocaleDateString()}
+                            </td>
+                            <td>
+                                {app.student_level}
+                            </td>
+                            <td>
+                                {app.contact}
+                            </td>
+                            <td>
+                                {app.status}
+                            </td>
+                            <td>
+                                <button>Review</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
         </div>
     )
 }
