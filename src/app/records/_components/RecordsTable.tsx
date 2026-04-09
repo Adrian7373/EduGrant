@@ -1,6 +1,7 @@
 "use client";
 import style from "./RecordsTable.module.css";
 import { useState } from "react";
+import Link from "next/link";
 
 interface Application {
     id: string;
@@ -21,6 +22,8 @@ export default function RecordsTable({ applications }: ApplicationProp) {
     const [sort, setSort] = useState<string>("date");
     const [filter, setFilter] = useState<string>("status");
     const [filterSpecial, setfilterSpecial] = useState<string>("pending");
+
+    console.log(applications[0].id);
 
     return (
         <div className={style.mainDiv}>
@@ -135,7 +138,10 @@ export default function RecordsTable({ applications }: ApplicationProp) {
                                 {app.status}
                             </td>
                             <td>
-                                <button>Review</button>
+                                <Link
+                                    href={`/records/${app.id}`}
+                                    className="text-blue-600 font-semibold hover:underline"
+                                >Review</Link>
                             </td>
                         </tr>
                     ))}

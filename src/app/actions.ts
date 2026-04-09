@@ -233,3 +233,25 @@ export async function authenticateUser(formData: FormData) {
     return { success: true, message: "Login Successful" };
 
 }
+
+export async function getSecuredFileURL(filePath: string) {
+    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+
+    const cleanPath = filePath.split('educ-assistance-application-documents/')[1];
+
+    // Safety check in case the string split fails
+    if (!cleanPath) {
+        throw new Error("Invalid file path format");
+    }
+
+    const { data, error } = await supabase.storage
+        .from("educ-assistance-application-documents")
+        .createSignedUrl(cleanPath, 60);
+
+    if (error || !data) {
+        throw new Error("Failed to generate secure link.")
+    }
+
+    return data.signedUrl;
+
+}

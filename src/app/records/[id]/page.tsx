@@ -1,11 +1,15 @@
 import style from "./page.module.css";
 import { createClient } from "@supabase/supabase-js";
+import FileButtons from "./_components/FileButtons/FileButtons";
+import ActionButtons from "./_components/ActionButtons/ActionButtons";
 
 interface DetailPageProps {
-    id: string
+    params: Promise<{ id: string }>
 }
 
-export async function RecordDetailsPage({ id }: DetailPageProps) {
+export default async function RecordDetailsPage({ params }: DetailPageProps) {
+
+    const { id } = await params;
 
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
@@ -15,13 +19,16 @@ export async function RecordDetailsPage({ id }: DetailPageProps) {
         .eq("id", id)
         .single();
 
-    if (error || !profile) {
-        return <div>Failed to fetch application data.</div>
-    }
-
     return (
         <div className={style.mainDiv}>
-
+            <FileButtons
+                name={profile.name}
+                status={profile.status}
+                enrollPath={profile.document_urls[0]}
+                gradePath={profile.document_urls[1]}
+                idPath={profile.document_urls[2]}
+            />
+            <ActionButtons />
         </div>
     )
 }
