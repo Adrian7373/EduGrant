@@ -1,8 +1,9 @@
 "use client";
 import style from "./RecordsTable.module.css";
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 
+// 1. Updated Interface to include all filterable fields
 interface Application {
     id: string;
     student_level: string;
@@ -10,6 +11,12 @@ interface Application {
     status: string;
     created_at: string;
     contact: string;
+    sex: string;
+    marital_status: string;
+    school_type: string;
+    grade_level?: string;
+    year_level?: string;
+    age: number;
 };
 
 interface ApplicationProp {
@@ -17,35 +24,90 @@ interface ApplicationProp {
 }
 
 export default function RecordsTable({ applications }: ApplicationProp) {
-
     const [isAscending, setIsAscending] = useState<boolean>(true);
     const [sort, setSort] = useState<string>("date");
     const [filter, setFilter] = useState<string>("status");
-    const [filterSpecial, setfilterSpecial] = useState<string>("pending");
+    const [filterSpecial, setfilterSpecial] = useState<string>("");
+    const [searchTerm, setSearchTerm] = useState<string>("");
+    const [displaySearch, setDisplaySearch] = useState<string>("");
 
-    console.log(applications[0].id);
+    // 2. Proper Debouncing for Search
+    // This prevents the table from flickering on every single keystroke
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setSearchTerm(displaySearch);
+        }, 300); // 300ms delay is usually the sweet spot
+
+        return () => clearTimeout(handler);
+    }, [displaySearch]);
+
+    const filteredAndSortedData = useMemo(() => {
+        let result = [...applications];
+
+        // 3. Search Logic
+        if (searchTerm) {
+            result = result.filter(app =>
+                app.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // 4. Completed Filter Logic
+        if (filterSpecial) {
+            const target = filterSpecial.toLowerCase();
+
+            if (filter === "status" && filterSpecial !== "") {
+                result = result.filter(app => app.status.toLowerCase() === target);
+            } else if (filter === "studentLevel") {
+                result = result.filter(app => app.student_level.toLowerCase() === target);
+            }
+        }
+        // 5. Completed Sorting Logic
+        result.sort((a, b) => {
+            let comparison = 0;
+            if (sort === "date") {
+                comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+            } else if (sort === "name") {
+                comparison = a.name.localeCompare(b.name);
+            } else if (sort === "age") {
+                comparison = a.age - b.age;
+            }
+
+            return isAscending ? comparison : -comparison;
+        });
+
+        return result;
+    }, [applications, searchTerm, filter, filterSpecial, sort, isAscending]);
 
     return (
         <div className={style.mainDiv}>
             <label>Search:
-                <input type="text" />
+                <input
+                    type="text"
+                    value={displaySearch}
+                    onChange={(e) => setDisplaySearch(e.target.value)}
+                    placeholder="Search by name..."
+                />
             </label>
-            <select name="sortBy" id="sortBy">
-                <option value="date">Sort by:Date</option>
-                <option value="age">Sort by:Age</option>
-                <option value="name">Sort by:Name</option>
+
+            <select value={sort} onChange={(e) => setSort(e.target.value)}>
+                <option value="date">Sort by: Date</option>
+                <option value="name">Sort by: Name</option>
             </select>
-            <button>{isAscending ? "Ascending" : "Descending"}</button>
-            <select name="filterBy" id="filterBy">
-                <option value="status">Filter by:Status</option>
-                <option value="sex">Filter by:Sex</option>
-                <option value="maritalStatus">Filter by:Marital Status</option>
-                <option value="schoolType">Filter by:School Type</option>
-                <option value="studentLevel">Filter by:Student Level</option>
-                <option value="gradeLevel">Filter by:Grade Level</option>
-                <option value="yearLevel">Filter by:Year Level</option>
+
+            <button onClick={() => setIsAscending(!isAscending)}>
+                {isAscending ? "Ascending ↑" : "Descending ↓"}
+            </button>
+
+            <select value={filter} onChange={(e) => {
+                setFilter(e.target.value);
+                setfilterSpecial(""); // Reset special filter when category changes
+            }}>
+                <option value="status">Filter by: Status</option>
+                <option value="studentLevel">Filter by: Student Level</option>
             </select>
-            <select name="filterSpecial" id="filterSpecial">
+
+            <select value={filterSpecial} onChange={(e) => setfilterSpecial(e.target.value)}>
+                <option value="">Select Option</option>
                 {filter == "status" && (
                     <>
                         <option value="pending">Pending</option>
@@ -53,58 +115,11 @@ export default function RecordsTable({ applications }: ApplicationProp) {
                         <option value="rejected">Rejected</option>
                     </>
                 )}
-
-                {filter == "sex" && (
-                    <>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </>
-                )}
-
-                {filter == "maritalStatus" && (
-                    <>
-                        <option value="single">Single</option>
-                        <option value="married">Married</option>
-                        <option value="separated">Separated</option>
-                        <option value="divorced">Divorced</option>
-                        <option value="widowed">Widowed</option>
-                    </>
-                )}
-
-                {filter == "schoolType" && (
-                    <>
-                        <option value="private">Private</option>
-                        <option value="public">Public</option>
-                        <option value="vocational">Vocational</option>
-                    </>
-                )}
-
                 {filter == "studentLevel" && (
                     <>
-                        <option value="junior">Junior High Student</option>
-                        <option value="senior">Senior High Student</option>
-                        <option value="college">College Student</option>
-                    </>
-                )}
-
-                {filter == "gradeLevel" && (
-                    <>
-                        <option value="7">Grade 7</option>
-                        <option value="8">Grade 8</option>
-                        <option value="9">Grade 9</option>
-                        <option value="10">Grade 10</option>
-                        <option value="11">Grade 11</option>
-                        <option value="12">Grade 12</option>
-                    </>
-                )}
-
-                {filter == "yearLevel" && (
-                    <>
-                        <option value="1">1st Year</option>
-                        <option value="2">2nd Year</option>
-                        <option value="3">3rd Year</option>
-                        <option value="4">4th Year</option>
-                        <option value="5">5th Year</option>
+                        <option value="junior">Junior High</option>
+                        <option value="senior">Senior High</option>
+                        <option value="college">College</option>
                     </>
                 )}
             </select>
@@ -117,37 +132,26 @@ export default function RecordsTable({ applications }: ApplicationProp) {
                         <th>Level</th>
                         <th>Contact</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {applications.map((app) => (
+                    {filteredAndSortedData.map((app) => (
                         <tr key={app.id}>
+                            <td>{app.name}</td>
+                            <td>{new Date(app.created_at).toLocaleDateString()}</td>
+                            <td>{app.student_level}</td>
+                            <td>{app.contact}</td>
+                            <td>{app.status}</td>
                             <td>
-                                {app.name}
-                            </td>
-                            <td>
-                                {new Date(app.created_at).toLocaleDateString()}
-                            </td>
-                            <td>
-                                {app.student_level}
-                            </td>
-                            <td>
-                                {app.contact}
-                            </td>
-                            <td>
-                                {app.status}
-                            </td>
-                            <td>
-                                <Link
-                                    href={`/records/${app.id}`}
-                                    className="text-blue-600 font-semibold hover:underline"
-                                >Review</Link>
+                                <Link href={`/records/${app.id}`} className={style.reviewLink}>
+                                    Review
+                                </Link>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-
         </div>
-    )
+    );
 }

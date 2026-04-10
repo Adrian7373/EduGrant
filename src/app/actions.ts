@@ -74,7 +74,7 @@ export async function checkNameExists(name: string) {
 
     const { data, error } = await supabase
         .from("applications")
-        .select("name")
+        .select("name, status")
         .ilike("name", name)
         .maybeSingle();
 
@@ -83,7 +83,14 @@ export async function checkNameExists(name: string) {
         return false;
     }
 
-    return !!data;
+    if (!!data) {
+        if (data.status === "PENDING" || data.status === "APPROVED") {
+            return true;
+        }
+        return false;
+    }
+
+    return false;
 
 }
 
