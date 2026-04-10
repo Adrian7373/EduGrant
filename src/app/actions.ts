@@ -1,6 +1,6 @@
 "use server"
 import { createClient } from '@/utils/supabase/server';
-import { success, z } from 'zod';
+import { z } from 'zod';
 import { redirect } from "next/navigation"
 import { revalidatePath } from 'next/cache';
 
@@ -291,4 +291,19 @@ export async function signoutUser() {
     }
 
     redirect("/login");
+}
+
+export async function getApplicationCount() {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from("applications")
+        .select("status");
+
+    if (error) {
+        throw new Error("Failed to get application count", error);
+    }
+
+    return { fullCount: data.length, approvedCount: data.filter((record) => record.status === "APPROVED").length }
+
 }
