@@ -215,7 +215,7 @@ export async function submitApplication(formData: FormData) {
                 tracking_id: trackingID
             })
 
-        redirect(`/apply/success`)
+        redirect(`/apply/success?${trackingID}`)
 
     } catch (error) {
         console.error("Parallel upload Error:", error)

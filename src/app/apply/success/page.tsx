@@ -5,9 +5,13 @@ import { getApplicationCount } from "@/app/actions";
 import { redirect } from "next/navigation";
 
 //Will refractor later to be a server component
+interface SuccessProps {
+    searchParams: Promise<{ id?: string }>;
+}
 
-export default function SuccessPage() {
+export default async function SuccessPage({ searchParams }: SuccessProps) {
 
+    const { id } = await searchParams;
     const [appsCount, setAppsCount] = useState<number>(0);
     const [approvesCount, setApprovesCount] = useState<number>(0);
 
@@ -29,6 +33,8 @@ export default function SuccessPage() {
             <div>
                 Total approved applicants:{approvesCount}
             </div>
+            <p>Your application tracking ID:{id}</p>
+            <p>Please save your tracking ID.</p>
             <button onClick={() => redirect("/track")}>Track your application</button>
         </div>
     )
