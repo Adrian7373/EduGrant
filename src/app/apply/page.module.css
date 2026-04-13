@@ -1,0 +1,136 @@
+.personalInfoDiv[hidden] {
+    padding: clamp(1rem, calc(0.909rem + 0.455vw), 2rem);
+    display: none !important;
+}
+
+.mainDiv {
+    border: 1px solid red;
+}
+
+.header {
+    font-size: clamp(1.50rem, calc(1.250rem + 1.250vw), 4.25rem);
+    font-weight: bold;
+    text-align: center;
+}
+
+.personalInfoDiv>label {
+    margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
+    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    display: flex;
+    flex-direction: column;
+
+    input {
+        width: clamp(15rem, calc(-0.682rem + 78.409vw), 187.5rem);
+        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
+        ;
+    }
+}
+
+.familyBackgroundDiv>label {
+    margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
+    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    display: flex;
+    flex-direction: column;
+
+    input {
+        width: clamp(4rem, calc(7.636px + 7.614vw), 300px);
+        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
+        ;
+    }
+}
+
+.familyBackgroundDiv[hidden] {
+    padding: clamp(1rem, calc(0.909rem + 0.455vw), 2rem);
+    display: none !important;
+}
+
+.motherInfoDiv>label {
+    margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
+    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    display: flex;
+    flex-direction: column;
+
+    input {
+        width: clamp(15rem, calc(-0.682rem + 78.409vw), 187.5rem);
+        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
+        ;
+    }
+}
+
+.motherInfoDiv[hidden] {
+    padding: clamp(1rem, calc(0.909rem + 0.455vw), 2rem);
+    display: none !important;
+}
+
+.fatherInfoDiv>label {
+    margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
+    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    display: flex;
+    flex-direction: column;
+
+    input {
+        width: clamp(15rem, calc(-0.682rem + 78.409vw), 187.5rem);
+        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
+        ;
+    }
+}
+
+.fatherInfoDiv[hidden] {
+    padding: clamp(1rem, calc(0.909rem + 0.455vw), 2rem);
+    display: none !important;
+}
+
+.dependentDiv>label {
+    margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
+    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    display: flex;
+    flex-direction: column;
+
+    input {
+        width: clamp(15rem, calc(-0.682rem + 78.409vw), 187.5rem);
+        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
+        ;
+    }
+}
+
+.dependentDiv[hidden] {
+    padding: clamp(1rem, calc(0.909rem + 0.455vw), 2rem);
+    display: none !important;
+}
+
+.requirementFilesDiv>label {
+    margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
+    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    display: flex;
+    flex-direction: column;
+
+    input {
+        width: clamp(15rem, calc(-0.682rem + 78.409vw), 187.5rem);
+        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
+        ;
+    }
+}
+
+.nextButton {
+    background-color: #2563eb;
+    width: 20%;
+    max-width: 200px;
+    height: 6vh;
+    max-height: ;
+    font-size: clamp(0.7rem, 1.1rem, 8rem);
+    color: white;
+    border-style: hidden;
+    border-radius: clamp(1rem, 1.2rem, 4rem);
+}
+
+.backButton {
+    border: 2px solid;
+    width: 20%;
+    background-color: white;
+    max-width: 200px;
+    height: 6vh;
+    max-height: ;
+    font-size: clamp(0.7rem, 1.1rem, 8rem);
+    color: #2563eb;
+    border-radius: clamp(1rem, 1.2rem, 4rem);
+}

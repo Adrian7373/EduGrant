@@ -89,18 +89,17 @@ export default function ApplicationForm() {
     }
 
     return (
-        <div>
-            <p>Barangay Ayuda Application</p>
+        <div className={style.mainDiv}>
             <form action="POST" onSubmit={handleSubmit} ref={formRef}>
                 <div id="step-1" className={style.personalInfoDiv} hidden={formStep != 1}>
-                    <p>PERSONAL INFORMATION</p>
+                    <p className={style.header}>PERSONAL INFORMATION</p>
                     <label>Name:
                         <input ref={nameInputRef} onChange={(e) => setNameInput(e.target.value)} required name="name" type="text" className={style.nameInput} />
                     </label>
                     <label>Age:
                         <input required name="age" type="number" className={style.ageInput} />
                     </label>
-                    <label>sex:
+                    <label>Sex:
                         <select name="sex" id="sex">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -211,8 +210,8 @@ export default function ApplicationForm() {
 
                 {/*STEP 2 FAMILY BACKGROUND*/}
 
-                <div id="step-2" className={style.familyBackgorundDiv} hidden={formStep != 2}>
-                    <p>FAMILY BACKGROUND</p>
+                <div id="step-2" className={style.familyBackgroundDiv} hidden={formStep != 2}>
+                    <p className={style.header}>FAMILY BACKGROUND</p>
                     <label>Mother:
                         <label htmlFor="aliveTrue">
                             <input type="radio" id="aliveMotherTrue" name="isMotherAlive" value="true" className={style.aliveInput} />Alive
@@ -245,7 +244,7 @@ export default function ApplicationForm() {
                 {/*MOTHER INFORMATION*/}
 
                 <div id="step-3" className={style.motherInfoDiv} hidden={formStep != 3}>
-                    <p>MOTHER INFORMATION</p>
+                    <p className={style.header}>MOTHER INFORMATION</p>
 
                     <label>Name:
                         <input name="motherName" type="text" className={style.motherNameInput} />
@@ -275,7 +274,7 @@ export default function ApplicationForm() {
                 {/*FATHER INFORMATION*/}
 
                 <div id="step-4" className={style.fatherInfoDiv} hidden={formStep != 4}>
-                    <p>FATHER INFORMATION</p>
+                    <p className={style.header}>FATHER INFORMATION</p>
 
                     <label>Name:
                         <input name="fatherName" type="text" className={style.fatherNameInput} />
@@ -305,7 +304,7 @@ export default function ApplicationForm() {
                 {/*CHILDREN INFORMATION */}
 
                 <div id="step-5" className={style.childrenInfoDiv} hidden={formStep != 5}>
-                    <p>CHILDREN INFORMATION</p>
+                    <p className={style.header}>CHILDREN INFORMATION</p>
                     {Array.from({ length: dependents }).map((_, index) => (
                         <div className="dependentDiv" key={index}>
                             <label>Name:
@@ -330,7 +329,7 @@ export default function ApplicationForm() {
                 {/*REQUIREMENT FILES*/}
 
                 <div id="step-6" className={style.requirementFilesDiv} hidden={formStep != 6 || isSubmitting}>
-                    <p>ADDITIONAL REQUIREMENTS</p>
+                    <p className={style.header}>ADDITIONAL REQUIREMENTS</p>
                     <label>Certificate of Registration/Enrollment:
                         <input required name="coe" type="file" className={style.coeInput} />
                     </label>
@@ -349,7 +348,7 @@ export default function ApplicationForm() {
                 </div>
 
                 <button type="button" onClick={handleBack} className={style.backButton} hidden={formStep == 1}>Back</button>
-                <button type="button" onClick={handleNext} className={style.nextButton} hidden={formStep == 6} disabled={nameStatus === "record already exists!"}>Next</button>
+                <button type="button" onClick={handleNext} className={style.nextButton} hidden={formStep == 6} disabled={nameStatus === "record already exists!"}>Next&#8594;</button>
                 <button type="submit" className={style.formSubmitButton} hidden={formStep != 6}>
                     {isSubmitting ? "Uploading submission" : "Submit"}
                 </button>

@@ -25,19 +25,23 @@ export default function TrackPage() {
 
     return (
         <div className={style.mainDiv}>
-            <label>Enter tracking ID:
-                <input type="text" onChange={(e) => {
-                    setId(e.target.value)
-                    e.target.value.length > 8 ? setIsValid(true) : setIsValid(false);
-                }} />
-            </label>
-            <button onClick={handleTracking} disabled={!isvalid}>Track Application</button>
+            <div className={style.trackDiv}>
+                <label className={style.inputLabel}>Enter tracking ID:
+                    <input className={style.trackInput} type="text" onChange={(e) => {
+                        setId(e.target.value)
+                        e.target.value.length > 8 ? setIsValid(true) : setIsValid(false);
+                    }} />
+                </label>
+                <button className={style.trackButton} onClick={handleTracking} disabled={!isvalid}>Track Application</button>
 
-            <p>{result?.message || "Status:"}</p>
-            <p>{result?.application?.status}</p><br />
-            <p>{result?.message || "Application submitted on:"}</p>
-            <p>{result?.application?.created_at}</p>
-            <Link href={"/"}>Go back</Link>
+                <div className={style.trackInfo}>
+                    <p>{result ? result?.message || "Status:" : ""}</p>
+                    <p>{result?.application?.status}</p><br />
+                    <p>{result ? result?.message || "Application submitted on:" : ""}</p>
+                    <p>{result ? new Date(result.application?.created_at).toLocaleDateString() : ""}</p>
+                </div>
+            </div>
+            <Link className={style.backButton} href={"/"}>Go back</Link>
         </div>
     )
 }

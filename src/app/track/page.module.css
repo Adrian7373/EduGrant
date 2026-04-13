@@ -1,0 +1,82 @@
+.trackDiv {
+    width: 80%;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.inputLabel {
+    display: contents;
+    font-size: clamp(1.5rem, 2rem, 5rem);
+}
+
+.trackInput {
+    width: 80%;
+    height: 40px;
+}
+
+.trackButton {
+    margin-top: 10px;
+    width: 50%;
+    height: 45px;
+    border-style: none;
+    background-color: rgb(53, 233, 21);
+    border-radius: clamp(1rem, 2rem, 5rem);
+    color: white;
+}
+
+.trackButton:hover {
+    background-color: rgb(59, 255, 24);
+}
+
+.trackInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.trackInfo> :nth-child(1) {
+    margin: 0 auto;
+}
+
+.trackInfo> :nth-child(4) {
+    margin: 0 auto;
+}
+
+.trackInfo> :nth-child(2) {
+    font-size: clamp(1rem, 2.5rem, 10rem);
+}
+
+.trackInfo> :nth-child(5) {
+    font-size: clamp(1rem, 2.5rem, 10rem);
+}
+
+.backButton {
+    width: 40%;
+    max-width: 500px;
+    height: 5vh;
+    max-height: 60px;
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #2563eb;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    font-size: clamp(1rem, 1.5rem, 10rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

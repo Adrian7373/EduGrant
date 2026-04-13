@@ -11,8 +11,56 @@
     align-items: center;
 }
 
-.applyButton {
-    width: 70%;
-    height: 40;
+.link {
+    text-decoration: none;
+    font-size: clamp(1rem, 1.5rem, 5rem);
+    text-align: center;
+    color: white;
+}
 
+.link2 {
+    text-decoration: none;
+    font-size: clamp(1rem, 1.5rem, 5rem);
+    text-align: center;
+    color: rgb(53, 233, 21)
+}
+
+.applyButton {
+    width: 50%;
+    max-width: 600px;
+    height: 50px;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: rgb(53, 233, 21);
+    padding: clamp(0.2rem, 0.5rem, 2rem);
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.applyButton:hover {
+    background-color: rgb(59, 255, 24);
+}
+
+.trackButton {
+    width: 50%;
+    max-width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.2rem, 0.5rem, 2rem);
+    cursor: pointer;
+    border: 2px solid rgb(53, 233, 21);
+}
+
+.trackButton:hover {
+    background-color: rgb(61, 255, 27);
+    border-color: rgb(61, 255, 27);
+
+    .link2 {
+        color: white;
+    }
 }
