@@ -2,7 +2,7 @@
 import { useState } from "react";
 import style from "./page.module.css";
 import { getTrackingDetails } from "@/app/actions";
-import Link from "next/link";
+import { redirect } from "next/navigation";
 
 interface Result {
     application?: {
@@ -23,9 +23,15 @@ export default function TrackPage() {
         setResult(details);
     }
 
+    const handleHome = () => {
+        redirect("/");
+    }
+
     return (
         <div className={style.mainDiv}>
             <div className={style.trackDiv}>
+                <button type="button" onClick={handleHome} className={style.homeButton1}>&#9664; Home</button>
+                <button type="button" onClick={handleHome} className={style.mobileHomeButton1}>&#9664;</button>
                 <label className={style.inputLabel}>Enter tracking ID:
                     <input className={style.trackInput} type="text" onChange={(e) => {
                         setId(e.target.value)
@@ -41,7 +47,6 @@ export default function TrackPage() {
                     <p>{result ? new Date(result.application?.created_at).toLocaleDateString() : ""}</p>
                 </div>
             </div>
-            <Link className={style.backButton} href={"/"}>Go back</Link>
         </div>
     )
 }
