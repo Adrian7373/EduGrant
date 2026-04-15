@@ -14,10 +14,10 @@ export default function LoginForm() {
     };
 
     return (
-        <div className={style.formDiv}>
+        <div className={style.mainDiv}>
 
-            <div hidden={isAuthing}>
-                <p>LOG IN</p>
+            <div className={style.formDiv} hidden={isAuthing}>
+                <p>Log In</p>
                 <form action={handleSubmit}>
                     <label>Username:
                         <input name="email" type="text" />
@@ -25,7 +25,7 @@ export default function LoginForm() {
                     <label>Password:
                         <input name="password" type="text" />
                     </label>
-                    <button type="submit" >Login</button>
+                    <button className={style.loginButton} type="submit" >Login</button>
                 </form>
             </div>
 
