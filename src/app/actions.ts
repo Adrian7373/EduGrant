@@ -323,7 +323,7 @@ export async function verifyCode(code: string) {
         .select("id, max_approved, deadline, is_active")
         .eq("is_active", true)
         .ilike("verification_code", normalizedCode)
-        .maybeSingle();
+        .single();
 
     if (error) console.log(error);
 
