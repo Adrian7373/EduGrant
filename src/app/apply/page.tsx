@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import style from "./page.module.css"
 import { submitApplication, checkNameExists } from "../actions";
 import { redirect } from "next/navigation";
+import { verifyCode } from "../actions";
 
 export default function ApplicationForm() {
 
@@ -15,6 +16,18 @@ export default function ApplicationForm() {
     const [nameInput, setNameInput] = useState<string>("");
     const [nameStatus, setNameStatus] = useState<"idle" | "checking" | "record already exists!" | "Available for application">("idle");
     const nameInputRef = useRef<HTMLInputElement>(null);
+    const [code, setCode] = useState<string>("");
+    const [message, setMessage] = useState<string>("");
+    const [verifiedBatchId, setVerifiedBatchId] = useState<number | null>(null)
+
+    const handleVerify = async () => {
+        if (!code) return;
+
+        const response = await verifyCode(code);
+
+        if (!response.success) setMessage(response.message);
+
+    }
 
     const handleHome = () => {
         redirect("/");
@@ -94,6 +107,19 @@ export default function ApplicationForm() {
     }
 
     return (
+
+        {!verifiedBatchId && (
+            <div className={style.verifyDiv}>
+                <p>Enter Verification Code</p>
+                <input type="text" onChange={(e) => setCode(e.target.value)} />
+                <p>{message}</p>
+                <button className={style.verifyButton} onClick={handleVerify}>Verify</button>
+            </div>
+        )
+}
+
+{
+    verifiedBatchId && (
         <div className={style.mainDiv}>
             <form action="POST" onSubmit={handleSubmit} ref={formRef}>
                 <div id="step-1" className={style.personalInfoDiv} hidden={formStep != 1}>
@@ -365,3 +391,6 @@ export default function ApplicationForm() {
         </div >
     )
 }
+        
+    )
+}}
