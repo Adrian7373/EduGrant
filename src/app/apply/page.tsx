@@ -110,6 +110,8 @@ export default function ApplicationForm() {
 
     if (!verifiedBatchId) return (
         <div className={style.verifyDiv}>
+            <button type="button" onClick={handleHome} className={style.homeButton1} hidden={formStep !== 1}>&#9664; Home</button>
+            <button type="button" onClick={handleHome} className={style.mobileHomeButton1} hidden={formStep !== 1}>&#9664;</button>
             <p>Enter Verification Code</p>
             <input type="text" onChange={(e) => setCode(e.target.value)} />
             <p>{message}</p>

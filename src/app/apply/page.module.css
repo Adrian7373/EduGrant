@@ -219,3 +219,52 @@
     color: white;
     font-size: clamp(1rem, 2rem, 5rem);
 }
+
+.homeButton1 {
+    border: 2px solid;
+    width: 20%;
+    background-color: white;
+    max-width: 200px;
+    height: 6vh;
+    font-size: clamp(0.7rem, 1.1rem, 8rem);
+    color: #2563eb;
+    border-radius: clamp(1rem, 1.2rem, 4rem);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.homeButton1:hover {
+    background-color: #2563eb;
+    color: white;
+}
+
+.mobileHomeButton1 {
+    border: 2px solid;
+    width: 20%;
+    background-color: white;
+    max-width: 200px;
+    height: 6vh;
+    font-size: clamp(0.7rem, 1.1rem, 8rem);
+    color: #2563eb;
+    border-radius: clamp(1rem, 1.2rem, 4rem);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    margin-right: auto;
+    display: none;
+}
+
+.mobileHomeButton1:hover {
+    background-color: #2563eb;
+    color: white;
+}
+
+@media screen and (max-width:600px) {
+    .mobileHomeButton1 {
+        display: inline;
+    }
+
+    .homeButton1 {
+        display: none;
+    }
+}
