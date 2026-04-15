@@ -25,7 +25,9 @@ export default function ApplicationForm() {
 
         const response = await verifyCode(code);
 
-        if (!response.success) setMessage(response.message);
+        setMessage(response.message);
+
+        if (response.id) setVerifiedBatchId(response.id);
 
     }
 
@@ -122,6 +124,7 @@ export default function ApplicationForm() {
                 <div id="step-1" className={style.personalInfoDiv} hidden={formStep != 1}>
                     <p className={style.header}>PERSONAL INFORMATION</p>
                     <button type="button" onClick={handleHome} className={style.homeButton} hidden={formStep !== 1}>&#9664; Home</button>
+                    <input type="hidden" value={verifiedBatchId} name="batch_id" />
                     <label>Name:
                         <input ref={nameInputRef} onChange={(e) => setNameInput(e.target.value)} required name="name" type="text" className={style.nameInput} />
                     </label>
