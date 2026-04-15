@@ -316,9 +316,9 @@ export async function verifyCode(code: string) {
         .from("batches")
         .select("id, max_approved, deadline, is_active")
         .eq("verification_code", code)
-        .single()
+        .single();
 
-    if (!batch || error) return { success: false, message: "Incorrect code", id: null };
+    if (!batch) return { success: false, message: "Incorrect code", id: null };
 
     if (new Date() > new Date(batch.deadline)) return { success: false, message: "The application deadline has passed.", id: null }
 

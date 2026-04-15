@@ -118,7 +118,7 @@ export default function ApplicationForm() {
 
 
 
-    return (
+    if (verifiedBatchId) return (
         <div className={style.mainDiv}>
             <form action="POST" onSubmit={handleSubmit} ref={formRef}>
                 <div id="step-1" className={style.personalInfoDiv} hidden={formStep != 1}>
