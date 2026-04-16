@@ -5,13 +5,8 @@ export default function Home() {
   return (
     <div className={style.mainDiv}>
       <p className={style.header}>Gabay Ayuda: Empowering the Future of Our Youth</p>
-      <div className={style.applyButton}>
-        <Link className={style.link} href="/apply">Apply for Assistance</Link>
-      </div>
-      <div className={style.trackButton}>
-        <Link className={style.link2} href="/track">Track my Application</Link>
-      </div>
-
+      <Link className={style.applyButton} href="/apply">Apply for Assistance</Link>
+      <Link className={style.trackButton} href="/track">Track my Application</Link>
     </div>
   )
 }

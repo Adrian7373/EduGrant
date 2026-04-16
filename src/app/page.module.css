@@ -11,14 +11,14 @@
     align-items: center;
 }
 
-.link {
+.applyButton {
     text-decoration: none;
     font-size: clamp(1rem, 1.5rem, 5rem);
     text-align: center;
     color: white;
 }
 
-.link2 {
+.trackButton {
     text-decoration: none;
     font-size: clamp(1rem, 1.5rem, 5rem);
     text-align: center;
@@ -61,8 +61,5 @@
 .trackButton:hover {
     background-color: rgb(61, 255, 27);
     border-color: rgb(61, 255, 27);
-
-    .link2 {
-        color: white;
-    }
+    color: white;
 }
