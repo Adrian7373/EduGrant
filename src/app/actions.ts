@@ -223,9 +223,14 @@ export async function submitApplication(formData: FormData) {
     redirect(`/apply/success?id=${trackingID}`);
 }
 
-export async function authenticateUser(formData: FormData): Promise<void> {
+interface Response {
+    success: boolean,
+    message: string
+}
+
+export async function authenticateUser(formData: FormData): Promise<Response> {
     if (!formData) {
-        return;
+        return { success: false, message: "Invalid input." };
     }
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -247,15 +252,7 @@ export async function authenticateUser(formData: FormData): Promise<void> {
         return { success: false, message: "Authentication failed!" }
     }
 
-    const { data: { profile } } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id)
-        .single()
-
-    if (profile.role === "SUPER_ADMIN")
-        redirect("/dashboard")
-
+    redirect("/dashboard");
 }
 
 
