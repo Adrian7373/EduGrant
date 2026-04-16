@@ -6,6 +6,7 @@ import ApprovesCard from "./components/ApprovesCard/ApprovesCard";
 import RejectsCard from "./components/RejectsCard/RejectsCard";
 import RecentApplications from "./components/RecentApplications/RecentApplications";
 import { redirect } from "next/navigation";
+import SuperDashboard from "./components/SuperDashboard/page";
 
 export default async function Dashboard() {
     const supabase = await createClient();
@@ -15,6 +16,12 @@ export default async function Dashboard() {
     if (!user) {
         redirect("/login");
     }
+
+    const { data: profile } = await supabase
+        .from("profiles")
+        .select("role, name")
+        .eq("id", user.id)
+        .single()
 
     const [{ count: pending },
         { count: approved },
@@ -52,20 +59,25 @@ export default async function Dashboard() {
     return (
         <div className={style.mainDiv}>
             <SideBar />
-            <div className={style.detailsDiv}>
-                <PendingApplicationsCard
-                    pendingCount={pending}
-                />
-                <ApprovesCard
-                    approvesCount={approved}
-                />
-                <RejectsCard
-                    rejectsCount={rejected}
-                />
-                <RecentApplications
-                    recentApps={recentApps}
-                />
-            </div>
+            {profile?.role === "SUPER_ADMIN" ? (
+                <SuperDashboard />
+            ) : (
+                <div className={style.detailsDiv}>
+                    <PendingApplicationsCard
+                        pendingCount={pending}
+                    />
+                    <ApprovesCard
+                        approvesCount={approved}
+                    />
+                    <RejectsCard
+                        rejectsCount={rejected}
+                    />
+                    <RecentApplications
+                        recentApps={recentApps}
+                    />
+                </div>
+            )}
+
         </div>
     )
 }
