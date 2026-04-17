@@ -1,10 +1,6 @@
 import style from "./SessionCardList.module.css";
 import SessionCard from "../SessionCard/SessionCard";
 
-interface Profile {
-    id: string,
-    name: string
-}
 
 interface Session {
     id: string;
@@ -17,11 +13,10 @@ interface Session {
 }
 
 interface SessionCardListProps {
-    profiles: Profile[],
     sessions: Session[]
 }
 
-export default function SessionCardList({ profiles, sessions }: SessionCardListProps) {
+export default function SessionCardList({ sessions }: SessionCardListProps) {
 
 
 

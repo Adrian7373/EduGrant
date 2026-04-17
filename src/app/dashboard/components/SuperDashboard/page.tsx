@@ -10,14 +10,6 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
 
     const supabase = await createClient();
 
-    const { data: profiles, error: profileFetchError } = await supabase
-        .from("profiles")
-        .select("id,name");
-
-    if (!profiles || profileFetchError) {
-        throw new Error("Error fetching profiles");
-    }
-
     const { data: sessions, error: sessionFetchError } = await supabase
         .from("batches")
         .select("id,created_at, name, max_approved, verification_code, deadline, is_active");
@@ -33,7 +25,6 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
                 <p>{userName}</p>
             </div>
             <SessionCardList
-                profiles={profiles}
                 sessions={sessions}
             />
         </div>
