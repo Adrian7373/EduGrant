@@ -3,7 +3,6 @@ import { createClient } from "@/utils/supabase/server";
 
 interface SessionCardProps {
     id: string;
-    created_at: string;
     name: string;
     max_approved: number;
     verification_code: string;
@@ -11,7 +10,7 @@ interface SessionCardProps {
     is_active: boolean;
 }
 
-export default async function SessionCard({ id, created_at, name, max_approved,
+export default async function SessionCard({ id, name, max_approved,
     verification_code, deadline, is_active }: SessionCardProps) {
 
     const supabase = await createClient();
@@ -22,17 +21,13 @@ export default async function SessionCard({ id, created_at, name, max_approved,
         .eq("batch_id", id)
         .maybeSingle()
 
-    if (!admin?.admin_id) {
-        console.log("No assigned admin yet.")
-    }
-
 
     return (
         <div className={style.mainDiv}>
             <p>{name}</p>
             <p>{is_active ? "ACTIVE" : "INACTIVE"}</p>
             <p>{verification_code}</p>
-
+            <p>{admin?.admin_id ? admin.admin_id : "No assigned admin yet."}</p>
         </div>
     )
 }

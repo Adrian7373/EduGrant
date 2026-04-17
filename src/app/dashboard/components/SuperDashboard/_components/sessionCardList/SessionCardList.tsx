@@ -4,7 +4,6 @@ import SessionCard from "../SessionCard/SessionCard";
 
 interface Session {
     id: string;
-    created_at: string;
     name: string;
     max_approved: number;
     verification_code: string;

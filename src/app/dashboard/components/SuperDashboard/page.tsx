@@ -12,7 +12,7 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
 
     const { data: sessions, error: sessionFetchError } = await supabase
         .from("batches")
-        .select("id,created_at, name, max_approved, verification_code, deadline, is_active");
+        .select("id, name, max_approved, verification_code, deadline, is_active");
 
     if (!sessions || sessionFetchError) {
         throw new Error("Error fetching sessions");
