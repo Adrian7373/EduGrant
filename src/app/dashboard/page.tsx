@@ -61,7 +61,9 @@ export default async function Dashboard() {
         <div className={style.mainDiv}>
             <SideBar />
             {profile?.role === "SUPER_ADMIN" ? (
-                <SuperDashboard />
+                <SuperDashboard
+                    userName={profile.name}
+                />
             ) : (
                 <div className={style.detailsDiv}>
                     <h1>Profile:{profile?.name}</h1>

@@ -1,7 +1,12 @@
 import style from "./page.module.css";
 import { createClient } from "@/utils/supabase/server";
+import SideBar from "@/components/SideBar/SideBar";
 
-export default async function SuperDashboard() {
+interface SuperDashboardProps {
+    userName: string
+}
+
+export default async function SuperDashboard({ userName }: SuperDashboardProps) {
 
     const supabase = await createClient();
 
@@ -23,7 +28,13 @@ export default async function SuperDashboard() {
 
     return (
         <div className={style.mainDiv}>
-            Super Dashboard
+            <div>
+                <p>DASHBOARD</p>
+                <p>{userName}</p>
+            </div>
+            <div>
+
+            </div>
         </div>
     )
 }
