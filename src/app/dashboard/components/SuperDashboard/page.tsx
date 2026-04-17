@@ -1,6 +1,6 @@
 import style from "./page.module.css";
 import { createClient } from "@/utils/supabase/server";
-import SideBar from "@/components/SideBar/SideBar";
+import SessionCardList from "./_components/sessionCardList/SessionCardList";
 
 interface SuperDashboardProps {
     userName: string
@@ -12,7 +12,7 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
 
     const { data: profiles, error: profileFetchError } = await supabase
         .from("profiles")
-        .select("name, role");
+        .select("id,name");
 
     if (!profiles || profileFetchError) {
         throw new Error("Error fetching profiles");
@@ -20,7 +20,7 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
 
     const { data: sessions, error: sessionFetchError } = await supabase
         .from("batches")
-        .select("created_at, name, max_approved, verification_code, deadline, is_active");
+        .select("id,created_at, name, max_approved, verification_code, deadline, is_active");
 
     if (!sessions || sessionFetchError) {
         throw new Error("Error fetching sessions");
@@ -32,9 +32,10 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
                 <p>DASHBOARD</p>
                 <p>{userName}</p>
             </div>
-            <div className={style.sessionCards}>
-
-            </div>
+            <SessionCardList
+                profiles={profiles}
+                sessions={sessions}
+            />
         </div>
     )
 }
