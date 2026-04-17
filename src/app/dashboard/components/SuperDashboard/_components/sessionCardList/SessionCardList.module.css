@@ -1,0 +1,7 @@
+.mainDiv {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1;
+    border: 1px solid red;
+    width: 60vw;
+}
