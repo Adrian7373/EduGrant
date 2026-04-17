@@ -28,11 +28,11 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
 
     return (
         <div className={style.mainDiv}>
-            <div>
+            <div className={style.header}>
                 <p>DASHBOARD</p>
                 <p>{userName}</p>
             </div>
-            <div>
+            <div className={style.sessionCards}>
 
             </div>
         </div>
