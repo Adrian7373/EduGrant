@@ -21,11 +21,43 @@ export default async function Configure() {
         redirect("/dashboard");
     }
 
+    const { data: profiles } = await supabase
+        .from("profiles")
+        .select("name,id")
+        .eq("role", "ADMIN");
+
     return (
         <div className={style.mainDiv}>
             <div className={style.header}>
                 <p>CREATE A NEW BATCH/SESSION</p>
                 <p>{profile.name}</p>
+            </div>
+            <div className={style.formDiv}>
+                <form action="">
+                    <label>Name:
+                        <input type="text" />
+                    </label>
+                    <label>Max Beneficiaries:
+                        <input type="text" />
+                    </label>
+                    <label>Set Verification Code:
+                        <input type="text" />
+                    </label>
+                    <label>Deadline:
+                        <input type="date" />
+                    </label>
+                    <label>Assign Admin:
+                        <select name="" id="">
+                            {!profiles ? (
+                                <option value="" disabled >No admin available</option>
+                            ) : (
+                                profiles.map((profile) => (
+                                    <option key={profile.id} value={profile.id}>{profile.name}</option>
+                                ))
+                            )}
+                        </select>
+                    </label>
+                </form>
             </div>
         </div>
     )
