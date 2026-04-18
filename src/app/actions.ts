@@ -359,6 +359,13 @@ export async function verifyCode(code: string) {
 
 }
 
+const batchSchema = z.object({
+    name: z.string().min(2, "Name too short"),
+    max_ben: z.coerce.number().optional,
+    code: z.string(),
+    deadline: z.string().optional()
+})
+
 export default async function createBatch(e: React.FormEvent<HTMLFormElement>) {
     const supabase = await createClient();
     const formElement = e.currentTarget.closest('form');
@@ -370,17 +377,23 @@ export default async function createBatch(e: React.FormEvent<HTMLFormElement>) {
 
     const formData = new FormData(formElement);
     const rawData = Object.fromEntries(formData.entries());
+    const validatedFields = batchSchema.safeParse(rawData);
+    const cleanData = validatedFields.data;
 
-    const { data: newBatch, error } = await supabase
+    const { data: newBatch, error: batchError } = await supabase
         .from("batches")
         .insert({
-            name: rawData.name,
-            max_approved: rawData.max_ben,
-            verification_code: rawData.code,
-            deadline: rawData.deadlne
+            name: cleanData?.name,
+            max_approved: cleanData?.max_ben,
+            verification_code: cleanData?.code,
+            deadline: cleanData?.deadline
         })
         .select("id")
         .single();
+
+    if (!newBatch || batchError) {
+        throw new Error(`Batch insert error: ${batchError}`)
+    }
 
     const { data: assign, error: assignError } = await supabase
         .from("batch_admins")
@@ -388,5 +401,11 @@ export default async function createBatch(e: React.FormEvent<HTMLFormElement>) {
             batch_id: newBatch?.id,
             admin_id: rawData.assignedAdmin
         })
+
+    if (!assign || assignError) {
+        throw new Error(`Assigning error: ${assignError}`)
+    }
+
+    redirect("/dashboard");
 
 }   
