@@ -21,14 +21,19 @@ export default async function SessionCard({ session }: SessionCardProps) {
         .from("batch_admins")
         .select("admin_id")
         .eq("batch_id", session.id)
-        .maybeSingle()
+        .maybeSingle();
 
+    const { count, error } = await supabase
+        .from("applications")
+        .select('*', { count: 'exact', head: true })
+        .eq("batch_id", session.id)
+        .eq("status", "APPROVED");
 
     return (
         <div className={style.mainDiv}>
             <p>{session.name}</p>
             <p>{session.is_active ? "ACTIVE" : "INACTIVE"}</p>
-            <p>0/{session.max_approved}</p>
+            <p>{count}/{session.max_approved}</p>
             <p>{session.verification_code}</p>
             <p>{admin?.admin_id ? admin.admin_id : "No assigned admin yet."}</p>
             <p>Application closes at {new Date(session.deadline).toLocaleDateString()}</p>
