@@ -1,5 +1,6 @@
 import style from "./SessionCard.module.css";
 import { createClient } from "@/utils/supabase/server";
+import ShowCodeButton from "./_components/ShowCodeButton/ShowCodeButton";
 
 interface SessionCardProps {
     session: {
@@ -34,6 +35,9 @@ export default async function SessionCard({ session }: SessionCardProps) {
             <p>{session.name}</p>
             <p>{session.is_active ? "ACTIVE" : "INACTIVE"}</p>
             <p>{count}/{session.max_approved}</p>
+            <ShowCodeButton
+                code={session.verification_code}
+            />
             <p>{session.verification_code}</p>
             <p>{admin?.admin_id ? admin.admin_id : "No assigned admin yet."}</p>
             <p>Application closes at {new Date(session.deadline).toLocaleDateString()}</p>
