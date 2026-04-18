@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import style from "./page.module.css";
 import { createClient } from "@/utils/supabase/server";
+import { createBatch } from "@/app/actions";
 
 export default async function Configure() {
 
@@ -33,21 +34,21 @@ export default async function Configure() {
                 <p>{profile.name}</p>
             </div>
             <div className={style.formDiv}>
-                <form action="">
+                <form action="POST" onSubmit={createBatch}>
                     <label>Name:
-                        <input type="text" />
+                        <input name="name" type="text" required />
                     </label>
                     <label>Max Beneficiaries:
-                        <input type="text" />
+                        <input name="max_ben" type="text" />
                     </label>
                     <label>Set Verification Code:
-                        <input type="text" />
+                        <input name="code" type="text" required />
                     </label>
                     <label>Deadline:
-                        <input type="date" />
+                        <input name="deadline" type="date" />
                     </label>
                     <label>Assign Admin:
-                        <select name="" id="">
+                        <select name="assignedAdmin">
                             {!profiles ? (
                                 <option value="" disabled >No admin available</option>
                             ) : (

@@ -358,3 +358,35 @@ export async function verifyCode(code: string) {
     return { success: true, message: "Success", id: batch.id }
 
 }
+
+export default async function createBatch(e: React.FormEvent<HTMLFormElement>) {
+    const supabase = await createClient();
+    const formElement = e.currentTarget.closest('form');
+    e.preventDefault();
+
+    if (!formElement) {
+        redirect("/dashboard")
+    }
+
+    const formData = new FormData(formElement);
+    const rawData = Object.fromEntries(formData.entries());
+
+    const { data: newBatch, error } = await supabase
+        .from("batches")
+        .insert({
+            name: rawData.name,
+            max_approved: rawData.max_ben,
+            verification_code: rawData.code,
+            deadline: rawData.deadlne
+        })
+        .select("id")
+        .single();
+
+    const { data: assign, error: assignError } = await supabase
+        .from("batch_admins")
+        .insert({
+            batch_id: newBatch?.id,
+            admin_id: rawData.assignedAdmin
+        })
+
+}   
