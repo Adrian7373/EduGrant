@@ -12,7 +12,7 @@ export default async function Configure() {
 
     const { data: profile } = await supabase
         .from("profiles")
-        .select("role")
+        .select("role,name")
         .eq("id", user.id)
         .eq("role", "SUPER_ADMIN")
         .maybeSingle();
@@ -22,6 +22,11 @@ export default async function Configure() {
     }
 
     return (
-        <p>Configure session</p>
+        <div className={style.mainDiv}>
+            <div className={style.header}>
+                <p>CREATE A NEW BATCH/SESSION</p>
+                <p>{profile.name}</p>
+            </div>
+        </div>
     )
 }

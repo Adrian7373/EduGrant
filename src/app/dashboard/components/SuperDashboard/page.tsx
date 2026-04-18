@@ -1,6 +1,7 @@
 import style from "./page.module.css";
 import { createClient } from "@/utils/supabase/server";
 import SessionCardList from "./_components/sessionCardList/SessionCardList";
+import Link from "next/link";
 
 interface SuperDashboardProps {
     userName: string
@@ -22,6 +23,7 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
         <div className={style.mainDiv}>
             <div className={style.header}>
                 <p>DASHBOARD</p>
+                <Link href="/dashboard/configure">Create new Batch</Link>
                 <p>{userName}</p>
             </div>
             <SessionCardList
