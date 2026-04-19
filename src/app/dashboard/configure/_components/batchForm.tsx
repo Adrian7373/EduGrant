@@ -9,11 +9,26 @@ interface Profile {
 
 interface BatchFormProps {
     profiles: Profile[] | null
+    initialData?: {
+        adminName: string;
+        adminId: string;
+        name: string;
+        max_approved?: number;
+        verification_code?: string;
+        deadline?: string;
+        is_active?: boolean;
+    }
 }
 
-export default function BatchForm({ profiles }: BatchFormProps) {
+export default function BatchForm({ profiles, initialData }: BatchFormProps) {
+
+    const isEditing = !!initialData;
+
     return (
         <div className={style.mainDiv}>
+            {isEditing && (
+                <input type="hidden" name="batchId" value={initialData.} />
+            )}
             <div className={style.formDiv}>
                 <form action={createBatch}>
                     <label>Name:
