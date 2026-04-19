@@ -43,7 +43,7 @@ export default async function Configure({ searchParams }: ConfigurePageProps) {
             .eq("id", editId)
             .single()
 
-        initialData = { ...batchData, adminName: searchParams.adminName, adminId: searchParams.adminId };
+        initialData = { ...batchData, adminName: searchParams.adminName, adminId: searchParams.adminId, batchId: searchParams.id };
     }
 
     const { data: profiles } = await supabase
@@ -58,7 +58,7 @@ export default async function Configure({ searchParams }: ConfigurePageProps) {
                 <p>{profile.name}</p>
             </div>
             <BatchForm
-                initialData={initialData}
+                initialData={initialData || null}
                 profiles={profiles || null}
             />
         </div>

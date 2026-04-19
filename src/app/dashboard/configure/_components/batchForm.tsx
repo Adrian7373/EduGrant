@@ -10,14 +10,15 @@ interface Profile {
 interface BatchFormProps {
     profiles: Profile[] | null
     initialData?: {
-        adminName: string;
-        adminId: string;
-        name: string;
-        max_approved?: number;
-        verification_code?: string;
-        deadline?: string;
-        is_active?: boolean;
-    }
+        batchId?: string,
+        adminName?: string,
+        adminId?: string,
+        name?: string,
+        max_approved?: number,
+        verification_code?: string,
+        deadline?: string,
+        is_active?: boolean
+    } | null
 }
 
 export default function BatchForm({ profiles, initialData }: BatchFormProps) {
@@ -27,24 +28,24 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
     return (
         <div className={style.mainDiv}>
             {isEditing && (
-                <input type="hidden" name="batchId" value={initialData.} />
+                <input type="hidden" name="batchId" value={initialData.batchId} />
             )}
             <div className={style.formDiv}>
                 <form action={createBatch}>
                     <label>Name:
-                        <input name="name" type="text" required />
+                        <input name="name" type="text" required defaultValue={initialData?.name} />
                     </label>
                     <label>Max Beneficiaries:
-                        <input name="max_ben" type="text" />
+                        <input name="max_ben" type="text" defaultValue={initialData?.max_approved} />
                     </label>
                     <label>Set Verification Code:
-                        <input name="code" type="text" required />
+                        <input name="code" type="text" required defaultValue={initialData?.verification_code} />
                     </label>
                     <label>Deadline:
-                        <input name="deadline" type="date" />
+                        <input name="deadline" type="date" defaultValue={initialData?.deadline} />
                     </label>
                     <label>Assign Admin:
-                        <select name="assignedAdmin">
+                        <select name="assignedAdmin" defaultValue={initialData?.adminId}>
                             {!profiles ? (
                                 <option value="" disabled >No admin available</option>
                             ) : (
