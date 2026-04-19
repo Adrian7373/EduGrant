@@ -27,11 +27,11 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
 
     return (
         <div className={style.mainDiv}>
-            {isEditing && (
-                <input type="hidden" name="batchId" value={initialData.batchId} />
-            )}
             <div className={style.formDiv}>
                 <form action={createBatch}>
+                    {isEditing && (
+                        <input type="hidden" name="batchId" value={initialData.batchId} />
+                    )}
                     <label>Name:
                         <input name="name" type="text" required defaultValue={initialData?.name} />
                     </label>

@@ -399,7 +399,8 @@ export async function createBatch(formData: FormData) {
                 max_approved: cleanData?.max_ben,
                 verification_code: cleanData?.code,
                 deadline: cleanData?.deadline
-            });
+            })
+            .eq("id", cleanData?.batchId);
 
         const { error } = await supabase
             .from("batch_admins")
