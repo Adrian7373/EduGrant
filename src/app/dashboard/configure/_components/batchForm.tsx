@@ -27,6 +27,9 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
 
     return (
         <div className={style.mainDiv}>
+            {isEditing && (
+                <p></p>
+            )}
             <div className={style.formDiv}>
                 <form action={createBatch}>
                     {isEditing && (

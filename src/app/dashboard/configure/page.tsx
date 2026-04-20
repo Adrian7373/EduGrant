@@ -54,6 +54,7 @@ export default async function Configure({ searchParams }: ConfigurePageProps) {
         .select("name,id")
         .eq("role", "ADMIN");
 
+
     return (
         <div className={style.mainDiv}>
             <div className={style.header}>
