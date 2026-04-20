@@ -55,7 +55,7 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
                         initialData.admins.map((admin) => (
                             <>
                                 <p key={admin.adminId}>{admin.profiles[0]?.name}</p>
-                                <button onClick={unassignAdmin(admin.adminId)}>Unassign</button>
+                                <button onClick={unassignAdmin(admin.adminId, initialData.batchId)}>Unassign</button>
                             </>
                         ))
                     ) : (
