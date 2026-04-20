@@ -465,7 +465,7 @@ export async function deleteSession(sessionId: string) {
 
 }
 
-export async function unassignAdmin(adminId: string, batchId: string) {
+export async function unassignAdmin(adminId: string, batchId: string | undefined) {
     if (!adminId || !batchId) redirect("/dashboard");
 
     const supabase = await createClient();
@@ -475,5 +475,7 @@ export async function unassignAdmin(adminId: string, batchId: string) {
         .delete()
         .eq("admin_id", adminId)
         .eq("batch_id", batchId)
+
+    revalidatePath("/configure");
 
 }
