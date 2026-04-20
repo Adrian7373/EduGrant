@@ -448,4 +448,19 @@ export async function createBatch(formData: FormData) {
     }
     redirect("/dashboard");
 
-}   
+}
+
+export async function deleteSession(sessionId: string) {
+    if (!sessionId) {
+        redirect("/dashboard")
+    }
+
+    const supabase = await createClient();
+    await supabase
+        .from("batches")
+        .delete()
+        .eq("id", sessionId)
+
+    redirect("/dashboard");
+
+}

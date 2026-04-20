@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import style from "./DeleteSessionButton.module.css";
+import { deleteSession } from "@/app/actions";
 
 interface DeleteSessionProps {
     sessionId: string,
@@ -26,7 +27,7 @@ export default function DeleteButton({ sessionId, sessionName }: DeleteSessionPr
                             <input type="text" value={confirmText} onChange={(e) => setConfirmText(e.target.value)} />
                             <div className={style.modalActions}>
                                 <button onClick={() => setIsOpen(false)}>Cancel</button>
-                                <button disabled={confirmText !== sessionName}>Delete</button>
+                                <button onClick={() => deleteSession(sessionId)} disabled={confirmText !== sessionName}>Delete</button>
                             </div>
                         </div>
                     </div>
