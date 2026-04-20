@@ -19,18 +19,15 @@ export default async function SessionCard({ session }: SessionCardProps) {
 
     const supabase = await createClient();
 
-    const { data: adminId } = await supabase
+    const { data: admins, error: adminError } = await supabase
         .from("batch_admins")
-        .select("admin_id")
-        .eq("batch_id", session.id)
-        .maybeSingle();
-
-
-    const { data: admin } = await supabase
-        .from("profiles")
-        .select("name")
-        .eq("id", adminId?.admin_id)
-        .maybeSingle();
+        .select(`
+        admin_id,
+        profiles (
+            name
+        )
+    `)
+        .eq("batch_id", session.id);
 
     const { count, error } = await supabase
         .from("applications")
@@ -46,9 +43,13 @@ export default async function SessionCard({ session }: SessionCardProps) {
             <ShowCodeButton
                 code={session.verification_code}
             />
-            <p>{admin ? admin.name : "No assigned admin yet."}</p>
+            <p>
+                {admins && admins.length > 0
+                    ? admins.map(admin => (admin.profiles as any)?.name).join(", ")
+                    : "No assigned admin yet."}
+            </p>
             <p>Application closes at {new Date(session.deadline).toLocaleDateString()}</p>
-            <Link href={`/dashboard/configure?id=${session.id}&adminId=${adminId?.admin_id}&admin_name=${admin?.name}`}>EDIT</Link>
+            <Link href={`/dashboard/configure?id=${session.id}&admins=${admins}`}>EDIT</Link>
         </div>
     )
 }
