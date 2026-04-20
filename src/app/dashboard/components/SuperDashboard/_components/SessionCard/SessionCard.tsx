@@ -2,6 +2,7 @@ import style from "./SessionCard.module.css";
 import { createClient } from "@/utils/supabase/server";
 import ShowCodeButton from "./_components/ShowCodeButton/ShowCodeButton";
 import Link from "next/link";
+import DeleteButton from "./_components/DeleteSessionButton/DeleteSessionButton";
 
 interface SessionCardProps {
     session: {
@@ -50,6 +51,10 @@ export default async function SessionCard({ session }: SessionCardProps) {
             </p>
             <p>Application closes at {new Date(session.deadline).toLocaleDateString()}</p>
             <Link href={`/dashboard/configure?id=${session.id}&admins=${admins}`}>EDIT</Link>
+            <DeleteButton
+                sessionId={session.id}
+                sessionName={session.name}
+            />
         </div>
     )
 }

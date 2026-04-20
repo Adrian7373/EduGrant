@@ -2,7 +2,12 @@
 import { useState } from "react";
 import style from "./DeleteSessionButton.module.css";
 
-export default function DeleteButton() {
+interface DeleteSessionProps {
+    sessionId: string,
+    sessionName: string
+}
+
+export default function DeleteButton({ sessionId, sessionName }: DeleteSessionProps) {
 
     const [isOpen, setIsOpen] = useState(false);
     const [confirmText, setConfirmText] = useState("");
@@ -16,12 +21,12 @@ export default function DeleteButton() {
                     <div className={style.modalOverlay}>
                         <div className={style.modalContent}>
                             <p>Are you sure?</p>
-                            <p>This action cannot be undone. This will permanently delete "" session</p>
-                            <p>Please type "" to confirm</p>
+                            <p>This action cannot be undone. This will permanently delete {sessionName} session</p>
+                            <p>Please type "<b>{sessionName}</b>"" to confirm</p>
                             <input type="text" value={confirmText} onChange={(e) => setConfirmText(e.target.value)} />
                             <div className={style.modalActions}>
                                 <button onClick={() => setIsOpen(false)}>Cancel</button>
-                                <button>Delete</button>
+                                <button disabled={confirmText !== sessionName}>Delete</button>
                             </div>
                         </div>
                     </div>
