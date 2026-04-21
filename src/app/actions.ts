@@ -360,10 +360,7 @@ export async function verifyCode(code: string) {
 }
 
 const batchSchema = z.object({
-    batchId: z.preprocess(
-        (value) => value === "" ? undefined : value,
-        z.string().optional()
-    ),
+    batchId: z.string().nullable().optional(),
     name: z.string().min(2, "Name too short"),
     max_ben: z.preprocess(
         (value) => value === "" ? undefined : value,
@@ -383,8 +380,6 @@ export async function createBatch(adminsToDelete: string[], formData: FormData) 
         redirect("/dashboard")
     }
 
-    console.log(adminsToDelete)
-
     const supabase = await createClient();
 
     const rawData = {
@@ -398,12 +393,17 @@ export async function createBatch(adminsToDelete: string[], formData: FormData) 
 
     const isEditing = !!rawData.batchId;
     const validatedFields = batchSchema.safeParse(rawData);
+
+    if (!validatedFields.success) {
+        console.error("Zod Validation Failed:", validatedFields.error.flatten());
+        return;
+    }
     const cleanData = validatedFields.data;
     if (!cleanData) {
         return;
     }
 
-    if (adminsToDelete.length !== 0) {
+    if (adminsToDelete && adminsToDelete.length > 0) {
         await supabase
             .from("batch_admins")
             .delete()
