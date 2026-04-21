@@ -385,13 +385,15 @@ export async function createBatch(adminsToDelete: string[], formData: FormData) 
         redirect("/dashboard")
     }
 
+    console.log(adminsToDelete)
+
     const supabase = await createClient();
     const rawData = Object.fromEntries(formData.entries());
     const isEditing = !!rawData.batchId;
     const validatedFields = batchSchema.safeParse(rawData);
     const cleanData = validatedFields.data;
 
-    if (adminsToDelete.length === 0) {
+    if (adminsToDelete.length !== 0) {
         await supabase
             .from("batch_admins")
             .delete()
@@ -410,21 +412,22 @@ export async function createBatch(adminsToDelete: string[], formData: FormData) 
             })
             .eq("id", cleanData?.batchId);
 
-        const { error } = await supabase
-            .from("batch_admins")
-            .upsert(
-                {
-                    batch_id: cleanData?.batchId,
-                    admin_id: cleanData?.assignedAdmin
-                },
-                {
-                    onConflict: 'batch_id, admin_id',
-                    ignoreDuplicates: true
-                }
-            );
-
-        if (error) {
-            throw new Error("Failed to assign admin");
+        if (cleanData?.assignedAdmin) {
+            const { error } = await supabase
+                .from("batch_admins")
+                .upsert(
+                    {
+                        batch_id: cleanData?.batchId,
+                        admin_id: cleanData?.assignedAdmin
+                    },
+                    {
+                        onConflict: 'batch_id, admin_id',
+                        ignoreDuplicates: true
+                    }
+                );
+            if (error) {
+                throw new Error("Failed to assign admin");
+            }
         }
     } else {
         const { data: newBatch, error: batchError } = await supabase
@@ -442,15 +445,16 @@ export async function createBatch(adminsToDelete: string[], formData: FormData) 
             throw new Error(`Batch insert error: ${batchError.message}`)
         }
 
-        const { error: assignError } = await supabase
-            .from("batch_admins")
-            .insert({
-                batch_id: newBatch?.id,
-                admin_id: rawData.assignedAdmin
-            })
-
-        if (assignError) {
-            throw new Error(`Assigning error: ${assignError?.message}`)
+        if (cleanData?.assignedAdmin) {
+            const { error: assignError } = await supabase
+                .from("batch_admins")
+                .insert({
+                    batch_id: newBatch?.id,
+                    admin_id: cleanData?.assignedAdmin
+                })
+            if (assignError) {
+                throw new Error(`Assigning error: ${assignError?.message}`)
+            }
         }
     }
 
