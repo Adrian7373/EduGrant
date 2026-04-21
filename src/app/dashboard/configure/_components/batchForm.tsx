@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import style from "./batchForm.module.css";
-import { createBatch, unassignAdmin } from "@/app/actions";
+import { createBatch, } from "@/app/actions";
 
 
 interface Profile {
@@ -77,7 +77,9 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
                 </div>
             )}
             <div className={style.formDiv}>
-                <form action={createBatch}>
+                <form action={async (formData) => {
+                    await createBatch(unassignedAdmins, formData);
+                }}>
                     {isEditing && (
                         <input type="hidden" name="batchId" value={initialData.batchId} />
                     )}
