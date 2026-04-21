@@ -425,7 +425,7 @@ export async function createBatch(adminsToDelete: string[], formData: FormData) 
             .in("admin_id", adminsToDelete)
             .eq("batch_id", cleanData?.batchId)
 
-
+        revalidatePath("/dashboard/configure")
     } else {
         const { data: newBatch, error: batchError } = await supabase
             .from("batches")
