@@ -108,10 +108,10 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
                                     )}
                                 </select>
                             </label>
-                            <button onClick={() => setIsAddingAdmin(false)}>Cancel</button>
+                            <button type="button" onClick={() => setIsAddingAdmin(false)}>Cancel</button>
                         </>
                     ) : (
-                        <button className={style.newAdminButton} onClick={() => setIsAddingAdmin(true)}>Add a new admin</button>
+                        <button type="button" className={style.newAdminButton} onClick={() => setIsAddingAdmin(true)}>Add a new admin</button>
                     )}
 
                     <button type="submit">Create</button>

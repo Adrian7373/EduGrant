@@ -465,15 +465,15 @@ export async function deleteSession(sessionId: string) {
 
 }
 
-export async function unassignAdmin(adminId: string, batchId: string | undefined) {
-    if (!adminId || !batchId) redirect("/dashboard");
+export async function unassignAdmin(adminsToDelete: string[], batchId: string | undefined) {
+    if (adminsToDelete.length === 0 || !batchId) redirect("/dashboard");
 
     const supabase = await createClient();
 
     await supabase
         .from("batch_admins")
         .delete()
-        .eq("admin_id", adminId)
+        .in("admin_id", adminsToDelete)
         .eq("batch_id", batchId)
 
     revalidatePath("/configure");
