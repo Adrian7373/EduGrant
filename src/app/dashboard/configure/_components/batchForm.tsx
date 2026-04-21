@@ -35,7 +35,7 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
 
     const [isAddingAdmin, setIsAddingAdmin] = useState(false);
     const [unassignedAdmins, setUnassignedAdmins] = useState<string[]>([]);
-
+    console.log(unassignedAdmins);
     const handleUnassign = (adminId: string) => {
         setUnassignedAdmins([...unassignedAdmins, adminId]);
     }
@@ -64,7 +64,7 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
                         initialData.admins.map((admin) => (
                             <div key={admin.adminId}>
                                 <p>{admin.profiles[0]?.name}</p>
-                                {unassignedAdmins.find(id => admin.adminId) === admin.adminId ? (
+                                {unassignedAdmins.includes(admin.adminId) ? (
                                     <button onClick={() => handleReassign(admin.adminId)}>Reassign</button>
                                 ) : (
                                     <button onClick={() => handleUnassign(admin.adminId)}>Unassign</button>
