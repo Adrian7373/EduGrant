@@ -496,11 +496,19 @@ export async function deleteSession(sessionId: string) {
 
 export async function changeBatchStatus(sessionStatus: boolean, sessionId: string) {
 
+    if (sessionStatus === null || !sessionId) {
+        return
+    }
+
     const supabase = await createClient()
 
     const { error: updateError } = await supabase
         .from("batches")
-        .update({ is_active: !sessionStatus }) // FLIPPED!
+        .update({ is_active: !sessionStatus })
         .eq("id", sessionId);
+
+    if (updateError) throw new Error(updateError.message);
+
+    revalidatePath("/dashboard");
 
 }
