@@ -494,11 +494,6 @@ export async function deleteSession(sessionId: string) {
 
 }
 
-export async function unassignAdmin(adminsToDelete: string[], batchId: string | undefined) {
-    if (adminsToDelete.length === 0 || !batchId) redirect("/dashboard");
-
-    const supabase = await createClient();
-
-
+export async function changeBatchStatus() {
 
 }
