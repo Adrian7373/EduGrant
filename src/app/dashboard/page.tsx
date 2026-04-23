@@ -9,6 +9,11 @@ import { redirect } from "next/navigation";
 import SuperDashboard from "./components/SuperDashboard/page";
 import { cookies } from "next/headers";
 
+interface BatchOption {
+    id: string;
+    name: string;
+}
+
 interface Application {
     id: string;
     student_level: string;
@@ -37,7 +42,7 @@ export default async function Dashboard() {
     const cookieStore = await cookies();
     const savedCookieId = cookieStore.get("active_batch_id")?.value;
 
-    let assignedBatches = [];
+    let assignedBatches: BatchOption[] = [];
     let activeBatchId = savedCookieId;
     let isFallback = false;
 
@@ -103,7 +108,11 @@ export default async function Dashboard() {
 
     return (
         <div className={style.mainDiv}>
-            <SideBar />
+            <SideBar
+                assignedBatches={assignedBatches}
+                currentBatchId={activeBatchId}
+                isFallback={isFallback}
+            />
             {profile?.role === "SUPER_ADMIN" ? (
                 <SuperDashboard
                     userName={profile.name}
