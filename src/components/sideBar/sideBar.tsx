@@ -2,7 +2,7 @@
 
 import style from "./SideBar.module.css"
 import Link from "next/link";
-import { signoutUser } from "@/app/actions";
+import { setActiveBatch, signoutUser } from "@/app/actions";
 
 interface BatchOption {
     id: string;
@@ -27,6 +27,10 @@ export function SideBar({ assignedBatches, currentBatchId, isFallback }: SideBar
         signoutUser();
     }
 
+    const handleBatchChange = async (newBatchId: string) => {
+        await setActiveBatch(newBatchId)
+    }
+
 
     return (
         <div className={style.mainDiv}>
@@ -34,9 +38,9 @@ export function SideBar({ assignedBatches, currentBatchId, isFallback }: SideBar
             {assignedBatches && assignedBatches.length > 0 && (
                 <div className={style.batchDiv}>
                     <p>Active Branches:</p>
-                    <select name="currentBatch">
+                    <select name="currentBatch" onChange={(e) => handleBatchChange(e.target.value)}>
                         {assignedBatches.map((batch) => (
-                            <option value={batch.id}>{batch.name}</option>
+                            <option key={batch.id} value={batch.id}>{batch.name}</option>
                         ))}
                     </select>
                 </div>
