@@ -33,11 +33,16 @@ export default async function Dashboard() {
         redirect("/login");
     }
 
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
         .from("profiles")
         .select("role, name")
         .eq("id", user.id)
-        .single()
+        .single();
+
+    if (profileError || !profile) {
+        console.log(profileError);
+        return <div>Failed to fetch user profile.</div>;
+    }
 
     const cookieStore = await cookies();
     const savedCookieId = cookieStore.get("active_batch_id")?.value;
@@ -46,23 +51,30 @@ export default async function Dashboard() {
     let activeBatchId = savedCookieId;
     let isFallback = false;
 
-    if (profile?.role === "ADMIN") {
-        const { data: adminBatches } = await supabase
+    if (profile.role === "ADMIN") {
+        const { data: adminBatches, error: adminBatchesError } = await supabase
             .from("batch_admins")
             .select("batch_id, batches(name, created_at)")
             .eq("admin_id", user.id);
 
-        assignedBatches = adminBatches?.map(ab => {
+        if (adminBatchesError) {
+            console.log(adminBatchesError);
+            return <div>Failed to fetch assigned batches.</div>;
+        }
+
+        assignedBatches = adminBatches?.map((ab) => {
             const batchData = ab.batches as any;
             return {
                 id: ab.batch_id,
-                name: batchData?.name,
+                name: batchData?.name ?? "Unnamed batch",
                 createdAt: batchData?.created_at
             };
-        }) || [];
+        }).filter((batch) => Boolean(batch.id)) || [];
 
-        // Auto-select if no cookie exists
-        if (!activeBatchId && assignedBatches.length > 0) {
+        const hasCookieMatch = assignedBatches.some((batch) => batch.id === activeBatchId);
+
+        // Auto-select if cookie is missing or stale.
+        if ((!activeBatchId || !hasCookieMatch) && assignedBatches.length > 0) {
             activeBatchId = assignedBatches[0].id;
             isFallback = true;
         }
@@ -71,7 +83,7 @@ export default async function Dashboard() {
     let pending = 0, approved = 0, rejected = 0, recentApps: Application[] = [];
     let fetchError = null;
 
-    if (activeBatchId && profile?.role !== "SUPER_ADMIN") {
+    if (activeBatchId && profile.role !== "SUPER_ADMIN") {
         const [
             pendingRes,
             approvedRes,
@@ -116,13 +128,13 @@ export default async function Dashboard() {
                 currentBatchId={activeBatchId}
                 isFallback={isFallback}
             />
-            {profile?.role === "SUPER_ADMIN" ? (
+            {profile.role === "SUPER_ADMIN" ? (
                 <SuperDashboard
                     userName={profile.name}
                 />
             ) : (
                 <div className={style.detailsDiv}>
-                    <h1>Profile:{profile?.name}</h1>
+                    <h1>Profile:{profile.name}</h1>
                     <PendingApplicationsCard
                         pendingCount={pending}
                     />

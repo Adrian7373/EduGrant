@@ -15,7 +15,7 @@ interface SideBarProps {
     isFallback?: boolean;
 }
 
-export function SideBar({ assignedBatches, currentBatchId, isFallback }: SideBarProps) {
+export function SideBar({ assignedBatches = [], currentBatchId = "", isFallback = false }: SideBarProps) {
 
     useEffect(() => {
         if (isFallback && currentBatchId) {
@@ -36,14 +36,11 @@ export function SideBar({ assignedBatches, currentBatchId, isFallback }: SideBar
     const handleBatchChange = async (newBatchId: string) => {
         await setActiveBatch(newBatchId)
     }
-    console.log(currentBatchId)
-    console.log(assignedBatches)
-
 
     return (
         <div className={style.mainDiv}>
             <p className={style.title}>GABAY AYUDA</p>
-            {assignedBatches && assignedBatches.length > 0 && (
+            {assignedBatches.length > 0 && (
                 <div className={style.batchDiv}>
                     <p>Active Branches:</p>
                     <select value={currentBatchId} name="currentBatch" onChange={(e) => handleBatchChange(e.target.value)}>
