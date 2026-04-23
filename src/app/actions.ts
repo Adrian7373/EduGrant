@@ -3,6 +3,7 @@ import { createClient } from '@/utils/supabase/server';
 import { z } from 'zod';
 import { redirect } from "next/navigation"
 import { revalidatePath } from 'next/cache';
+import { cookies } from "next/headers";
 
 interface Children {
     childrenName: string,
@@ -511,4 +512,15 @@ export async function changeBatchStatus(sessionStatus: boolean, sessionId: strin
 
     revalidatePath("/dashboard");
 
+}
+
+export async function setActiveBatch(batchId: string) {
+    const cookieStore = await cookies();
+
+    cookieStore.set("active_batch_id", batchId, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7,
+    });
+
+    revalidatePath("/", "layout");
 }
