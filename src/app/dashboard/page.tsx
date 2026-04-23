@@ -7,6 +7,7 @@ import RejectsCard from "./components/RejectsCard/RejectsCard";
 import RecentApplications from "./components/RecentApplications/RecentApplications";
 import { redirect } from "next/navigation";
 import SuperDashboard from "./components/SuperDashboard/page";
+import { cookies } from "next/headers";
 
 export default async function Dashboard() {
     const supabase = await createClient();
@@ -23,38 +24,71 @@ export default async function Dashboard() {
         .eq("id", user.id)
         .single()
 
+    const cookieStore = await cookies();
+    const savedCookieId = cookieStore.get("active_batch_id")?.value;
 
-    const [{ count: pending },
-        { count: approved },
-        { count: rejected },
-        { data: recentApps, error }] = await Promise.all([
+    let assignedBatches = [];
+    let activeBatchId = savedCookieId;
+    let isFallback = false;
 
-            supabase
-                .from('applications')
-                .select('*', { count: 'exact', head: true })
-                .eq('status', 'PENDING'),
+    if (profile?.role === "ADMIN") {
+        const { data: adminBatches } = await supabase
+            .from("batch_admins")
+            .select("batch_id, batches(name, created_at)")
+            .eq("admin_id", user.id);
 
-            supabase
-                .from('applications')
-                .select('*', { count: 'exact', head: true })
-                .eq('status', 'APPROVED'),
+        assignedBatches = adminBatches?.map(ab => ({
+            id: ab.batch_id,
+            name: ab.batches?.name,
+            createdAt: ab.batches?.created_at
+        })) || [];
 
-            supabase
-                .from('applications')
-                .select('*', { count: 'exact', head: true })
-                .eq('status', 'REJECTED'),
+        // Auto-select if no cookie exists
+        if (!activeBatchId && assignedBatches.length > 0) {
+            activeBatchId = assignedBatches[0].id;
+            isFallback = true;
+        }
+    }
 
-            supabase
-                .from('applications')
+    let pending = 0, approved = 0, rejected = 0, recentApps = [];
+    let fetchError = null;
+
+    if (activeBatchId && profile?.role !== "SUPER_ADMIN") {
+        const [
+            pendingRes,
+            approvedRes,
+            rejectedRes,
+            recentRes
+        ] = await Promise.all([
+            supabase.from('applications').select('*', { count: 'exact', head: true })
+                .eq('status', 'PENDING')
+                .eq('batch_id', activeBatchId), // Filtered!
+
+            supabase.from('applications').select('*', { count: 'exact', head: true })
+                .eq('status', 'APPROVED')
+                .eq('batch_id', activeBatchId), // Filtered!
+
+            supabase.from('applications').select('*', { count: 'exact', head: true })
+                .eq('status', 'REJECTED')
+                .eq('batch_id', activeBatchId), // Filtered!
+
+            supabase.from('applications')
                 .select('id, student_level, name, status, created_at, contact, address')
+                .eq('batch_id', activeBatchId)  // Filtered!
                 .order('created_at', { ascending: false })
                 .limit(6)
-
         ]);
 
-    if (pending == null || approved == null || rejected == null || recentApps == null) {
-        console.log(error);
-        return <div>Failed to fetch data from database.</div>
+        pending = pendingRes.count || 0;
+        approved = approvedRes.count || 0;
+        rejected = rejectedRes.count || 0;
+        recentApps = recentRes.data || [];
+        fetchError = pendingRes.error || approvedRes.error || rejectedRes.error || recentRes.error;
+    }
+
+    if (fetchError) {
+        console.log(fetchError);
+        return <div>Failed to fetch data from database.</div>;
     }
 
     return (
