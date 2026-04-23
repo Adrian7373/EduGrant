@@ -52,11 +52,14 @@ export default async function Dashboard() {
             .select("batch_id, batches(name, created_at)")
             .eq("admin_id", user.id);
 
-        assignedBatches = adminBatches?.map(ab => ({
-            id: ab.batch_id,
-            name: ab.batches?.name,
-            createdAt: ab.batches?.created_at
-        })) || [];
+        assignedBatches = adminBatches?.map(ab => {
+            const batchData = ab.batches as any;
+            return {
+                id: ab.batch_id,
+                name: batchData?.name,
+                createdAt: batchData?.created_at
+            };
+        }) || [];
 
         // Auto-select if no cookie exists
         if (!activeBatchId && assignedBatches.length > 0) {

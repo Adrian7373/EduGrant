@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect } from "react";
 import style from "./SideBar.module.css"
 import Link from "next/link";
 import { setActiveBatch, signoutUser } from "@/app/actions";
@@ -17,6 +17,12 @@ interface SideBarProps {
 
 export function SideBar({ assignedBatches, currentBatchId, isFallback }: SideBarProps) {
 
+    useEffect(() => {
+        if (isFallback && currentBatchId) {
+            setActiveBatch(currentBatchId);
+        }
+    }, [isFallback, currentBatchId]);
+
     const handleSignOut = () => {
         const hasConfirmed = window.confirm(`Are you sure you want to logout?`);
 
@@ -30,6 +36,8 @@ export function SideBar({ assignedBatches, currentBatchId, isFallback }: SideBar
     const handleBatchChange = async (newBatchId: string) => {
         await setActiveBatch(newBatchId)
     }
+    console.log(currentBatchId)
+    console.log(assignedBatches)
 
 
     return (
@@ -38,7 +46,8 @@ export function SideBar({ assignedBatches, currentBatchId, isFallback }: SideBar
             {assignedBatches && assignedBatches.length > 0 && (
                 <div className={style.batchDiv}>
                     <p>Active Branches:</p>
-                    <select name="currentBatch" onChange={(e) => handleBatchChange(e.target.value)}>
+                    <select value={currentBatchId} name="currentBatch" onChange={(e) => handleBatchChange(e.target.value)}>
+                        <option value="" disabled>Select a batch</option>
                         {assignedBatches.map((batch) => (
                             <option key={batch.id} value={batch.id}>{batch.name}</option>
                         ))}
