@@ -8,6 +8,7 @@ export default function CreateAdminButton() {
     const [newAdminName, setNewAdminName] = useState("");
     const [newAdminEmail, setNewAdminEmail] = useState("");
     const [newAdminPassword, setNewAdminPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     return (
         <div className={style.mainDiv}>
@@ -23,8 +24,9 @@ export default function CreateAdminButton() {
                             <input type="text" onChange={(e) => setNewAdminEmail(e.target.value)} />
                         </label>
                         <label>Password:
-                            <input type="password" onChange={(e) => setNewAdminPassword(e.target.value)} />
+                            <input type={showPassword ? "text" : "password"} onChange={(e) => setNewAdminPassword(e.target.value)} />
                         </label>
+                        <button onClick={() => setShowPassword(!showPassword)}>Show password</button>
                         <div className={style.modalActions}>
                             <button onClick={() => setIsOpen(false)}>Cancel</button>
                             <button >Create</button>
