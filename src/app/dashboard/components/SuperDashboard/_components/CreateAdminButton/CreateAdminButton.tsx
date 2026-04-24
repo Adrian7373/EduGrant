@@ -6,6 +6,7 @@ export default function CreateAdminButton() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [newAdminName, setNewAdminName] = useState("");
+    const [newAdminEmail, setNewAdminEmail] = useState("");
 
     return (
         <div className={style.mainDiv}>
@@ -16,6 +17,9 @@ export default function CreateAdminButton() {
                     <div className={style.modalContent}>
                         <label>Name:
                             <input type="text" onChange={(e) => setNewAdminName(e.target.value)} />
+                        </label>
+                        <label>Email:
+                            <input type="text" onChange={(e) => setNewAdminEmail(e.target.value)} />
                         </label>
                         <div className={style.modalActions}>
                             <button onClick={() => setIsOpen(false)}>Cancel</button>
