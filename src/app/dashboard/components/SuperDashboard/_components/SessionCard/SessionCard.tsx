@@ -49,11 +49,11 @@ export default async function SessionCard({ session }: SessionCardProps) {
             <ShowCodeButton
                 code={session.verification_code}
             />
-            <p>
-                {admins && admins.length > 0
-                    ? admins.map(admin => (admin.profiles as any)?.name).join(", ")
-                    : <AssignAdminButton />}
-            </p>
+
+            {admins && admins.length > 0
+                ? <p> {admins.map(admin => (admin.profiles as any)?.name).join(", ")}</p>
+                : <AssignAdminButton />}
+
             <p>Application closes at {new Date(session.deadline).toLocaleDateString()}</p>
             <Link href={`/dashboard/configure?id=${session.id}&admins=${admins}`}>EDIT</Link>
             <DeleteButton
