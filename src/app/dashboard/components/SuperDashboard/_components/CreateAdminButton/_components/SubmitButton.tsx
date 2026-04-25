@@ -6,6 +6,8 @@ export default function SubmitButton() {
     const { pending } = useFormStatus();
 
     return (
-        <button>Create</button>
+        <button type="submit" disabled={pending}>
+            {pending ? "Creating..." : "Create"}
+        </button>
     )
 }
