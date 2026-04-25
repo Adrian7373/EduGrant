@@ -33,7 +33,7 @@ export default function CreateAdminButton() {
                             <label>Password:
                                 <input type={showPassword ? "text" : "password"} />
                             </label>
-                            <button onClick={() => setShowPassword(!showPassword)}>Show password</button>
+                            <button type="button" onClick={() => setShowPassword(!showPassword)}>Show password</button>
                             <div className={style.modalActions}>
                                 <button type="button" onClick={() => setIsOpen(false)}>Cancel</button>
                                 <SubmitButton />
