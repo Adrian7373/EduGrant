@@ -20,7 +20,7 @@ export default function CreateAdminButton() {
         <div className={style.mainDiv}>
             <button onClick={() => setIsOpen(true)}>Create new Admin</button>
 
-            {isOpen && (
+            {isOpen && !isPending && (
                 <div className={style.modalOverlay}>
                     <div className={style.modalContent}>
                         <form action={formAction}>
