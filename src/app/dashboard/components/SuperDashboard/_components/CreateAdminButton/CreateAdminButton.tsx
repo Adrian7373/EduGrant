@@ -1,11 +1,18 @@
 "use client";
 import style from "./CreateAdminButton.module.css";
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import SubmitButton from "./_components/SubmitButton";
 import { createNewAdmin } from "@/app/actions";
 
+const initialState = {
+    success: false,
+    message: "",
+    errors: null,
+};
+
 export default function CreateAdminButton() {
 
+    const [state, formAction, isPending] = useActionState(createNewAdmin, initialState)
     const [isOpen, setIsOpen] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
