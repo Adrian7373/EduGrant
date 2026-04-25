@@ -1,9 +1,10 @@
 "use server"
 import { createClient } from '@/utils/supabase/server';
-import { z } from 'zod';
+import { success, z } from 'zod';
 import { redirect } from "next/navigation"
 import { revalidatePath } from 'next/cache';
 import { cookies } from "next/headers";
+import { createClient as createServerClient } from '@supabase/supabase-js';
 
 interface Children {
     childrenName: string,
@@ -532,13 +533,18 @@ const adminSchema = z.object({
 })
 
 export type FormState = {
-    success: string,
+    success: boolean,
     message: string,
-    errors: any;
+    errors?: any;
 }
 
-export async function createNewAdmin(formData: FormData) {
-    if (!formData) return;
+const supabaseAdmin = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+export async function createNewAdmin(prevState: FormState, formData: FormData): Promise<FormState> {
+    if (!formData) return { success: false, message: "All fields must be filled" };
 
     const rawData = {
         name: formData.get("name"),
@@ -550,9 +556,40 @@ export async function createNewAdmin(formData: FormData) {
 
     if (!validatedFields.success) {
         return {
+            success: false,
             errors: validatedFields.error.flatten().fieldErrors,
             message: "Missing or invalid fields. Please check your inputs.",
         };
+    }
+
+    const cleanData = validatedFields.data;
+
+    const supabase = await createClient();
+
+    const { data: { user }, error: userError } = await supabaseAdmin.auth.admin.createUser({
+        email: cleanData.email,
+        password: cleanData.password,
+        email_confirm: true,
+    });
+
+    if (userError) {
+        return { success: false, message: `Failed to create user, error: ${userError.message}` }
+    } else {
+
+        const newUser = {
+            id: user?.id,
+            name: cleanData.name,
+            role: "ADMIN",
+            email: user?.email
+        }
+        const { error: profileError } = await supabase
+            .from("profiles")
+            .insert(newUser);
+
+        if (profileError) {
+            return { success: false, message: `Failed to create profile, error: ${profileError.message}` }
+        }
+
     }
 
 }
