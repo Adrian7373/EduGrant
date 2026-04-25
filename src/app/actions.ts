@@ -531,6 +531,12 @@ const adminSchema = z.object({
     password: z.string()
 })
 
+export type FormState = {
+    success: string,
+    message: string,
+    errors: any;
+}
+
 export async function createNewAdmin(formData: FormData) {
     if (!formData) return;
 
@@ -541,5 +547,12 @@ export async function createNewAdmin(formData: FormData) {
     }
 
     const validatedFields = adminSchema.safeParse(rawData);
+
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            message: "Missing or invalid fields. Please check your inputs.",
+        };
+    }
 
 }
