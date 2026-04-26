@@ -25,18 +25,20 @@ export default function CreateAdminButton() {
                     <div className={style.modalContent}>
                         <form action={formAction}>
                             <label>Name:
-                                <input type="text" />
+                                <input name="name" type="text" />
                             </label><br />
                             <label>Email:
-                                <input type="text" />
+                                <input name="email" type="text" />
                             </label><br />
                             <label>Password:
-                                <input type={showPassword ? "text" : "password"} />
+                                <input name="password" type={showPassword ? "text" : "password"} />
                             </label>
                             <button type="button" onClick={() => setShowPassword(!showPassword)}>Show password</button>
                             <div className={style.modalActions}>
                                 <button type="button" onClick={() => setIsOpen(false)}>Cancel</button>
-                                <SubmitButton />
+                                <SubmitButton
+                                    isPending={isPending}
+                                />
                                 <p>
                                     {state.errors
                                         ? `${state.message}, ${state.errors}`

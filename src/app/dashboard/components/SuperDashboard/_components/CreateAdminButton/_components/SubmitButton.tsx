@@ -1,13 +1,10 @@
 import style from "./SubmitButton.module.css";
-import { useFormStatus } from "react-dom";
 
-export default function SubmitButton() {
-
-    const { pending } = useFormStatus();
+export default function SubmitButton({ isPending }: { isPending: boolean }) {
 
     return (
-        <button type="submit" disabled={pending}>
-            {pending ? "Creating..." : "Create"}
+        <button type="submit" disabled={isPending}>
+            {isPending ? "Creating..." : "Create"}
         </button>
     )
 }
