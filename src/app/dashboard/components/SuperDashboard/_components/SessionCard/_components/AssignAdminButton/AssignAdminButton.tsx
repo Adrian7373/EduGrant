@@ -1,6 +1,15 @@
 import style from "./AssignAdminButton.module.css";
 
-export default function AssignAdminButton() {
+interface Profile {
+    id: string,
+    name: string
+}
+
+interface AssignAdminButtonProps {
+    profiles: Profile[]
+}
+
+export default function AssignAdminButton({ profiles }: AssignAdminButtonProps) {
     return (
         <button>Assign Admin</button>
     )
