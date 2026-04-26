@@ -21,7 +21,13 @@ export default function AssignAdminButton({ profiles }: AssignAdminButtonProps) 
             {isOpen && (
                 <div className={style.modalOverlay}>
                     <div className={style.modalContent}>
-
+                        <form action="">
+                            {profiles?.map((profile) => (
+                                <label htmlFor="">
+                                    <input key={profile.id} type="checkbox" />
+                                </label>
+                            ))}
+                        </form>
                     </div>
                 </div>
             )}
