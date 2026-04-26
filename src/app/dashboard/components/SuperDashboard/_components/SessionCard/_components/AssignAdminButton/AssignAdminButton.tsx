@@ -25,6 +25,7 @@ export default function AssignAdminButton({ profiles }: AssignAdminButtonProps) 
                             {profiles?.map((profile) => (
                                 <label htmlFor="">
                                     <input key={profile.id} type="checkbox" />
+                                    {profile.name}
                                 </label>
                             ))}
                         </form>
