@@ -57,8 +57,8 @@ export default async function SessionCard({ session }: SessionCardProps) {
                 code={session.verification_code}
             />
 
-            {admins && admins.length > 0
-                ? <p> {admins.map(admin => (admin.profiles as any)?.name).join(", ")}</p>
+            {assignedAdmins && assignedAdmins.length > 0
+                ? <p> {assignedAdmins.map(admin => (admin.profiles as any)?.name).join(", ")}</p>
                 : <AssignAdminButton
                 />}
 
