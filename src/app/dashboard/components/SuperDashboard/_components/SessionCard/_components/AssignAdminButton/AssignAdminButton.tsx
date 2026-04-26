@@ -11,6 +11,8 @@ interface AssignAdminButtonProps {
 
 export default function AssignAdminButton({ profiles }: AssignAdminButtonProps) {
     return (
-        <button>Assign Admin</button>
+        <div className={style.mainDiv}>
+            <button>Assign Admin</button>
+        </div>
     )
 }
