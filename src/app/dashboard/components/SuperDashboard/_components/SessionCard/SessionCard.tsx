@@ -22,26 +22,28 @@ export default async function SessionCard({ session }: SessionCardProps) {
 
     const supabase = await createClient();
 
-    const { data: admins, error: adminError } = await supabase
+    const { data: allAdmins, error: adminError } = await supabase
         .from("batch_admins")
         .select(`
         admin_id,
+        batch_id,
         profiles (
             name
         )
     `)
-        .eq("batch_id", session.id);
+
+    if (!allAdmins || adminError) {
+        return;
+    }
+
+    const assignedAdmins = allAdmins.filter((admin) => admin.batch_id = session.id);
+    const availableAdmins
 
     const { count, error } = await supabase
         .from("applications")
         .select('*', { count: 'exact', head: true })
         .eq("batch_id", session.id)
         .eq("status", "APPROVED");
-
-    const { data: allProfiles, error: profilesError } = await supabase
-        .from("profiles")
-        .select("id, name")
-        .eq("role", "ADMIN")
 
     return (
         <div className={style.mainDiv}>
