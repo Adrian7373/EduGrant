@@ -36,8 +36,8 @@ export default async function SessionCard({ session }: SessionCardProps) {
         return;
     }
 
-    const assignedAdmins = allAdmins.filter((admin) => admin.batch_id = session.id);
-    const availableAdmins
+    const assignedAdmins = allAdmins.filter((admin) => admin.batch_id === session.id);
+    const availableAdmins = allAdmins.filter((admin) => admin.batch_id !== session.id);
 
     const { count, error } = await supabase
         .from("applications")
