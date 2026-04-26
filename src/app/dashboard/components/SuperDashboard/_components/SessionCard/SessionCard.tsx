@@ -38,6 +38,11 @@ export default async function SessionCard({ session }: SessionCardProps) {
         .eq("batch_id", session.id)
         .eq("status", "APPROVED");
 
+    const { data: allProfiles, error: profilesError } = await supabase
+        .from("profiles")
+        .select("id, name")
+        .eq("role", "ADMIN")
+
     return (
         <div className={style.mainDiv}>
             <p>{session.name}</p>
@@ -52,7 +57,8 @@ export default async function SessionCard({ session }: SessionCardProps) {
 
             {admins && admins.length > 0
                 ? <p> {admins.map(admin => (admin.profiles as any)?.name).join(", ")}</p>
-                : <AssignAdminButton />}
+                : <AssignAdminButton
+                />}
 
             <p>Application closes at {new Date(session.deadline).toLocaleDateString()}</p>
             <Link href={`/dashboard/configure?id=${session.id}&admins=${admins}`}>EDIT</Link>
