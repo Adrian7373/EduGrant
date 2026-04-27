@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import style from "./AssignAdminButton.module.css";
+import { assignAdmin } from "@/app/actions";
 
 interface Profile {
     id: string,
@@ -22,7 +23,7 @@ export default function AssignAdminButton({ profiles, sessionId }: AssignAdminBu
             {isOpen && (
                 <div className={style.modalOverlay}>
                     <div className={style.modalContent}>
-                        <form action="">
+                        <form action={assignAdmin}>
                             <input type="hidden" value={sessionId} name="sessionId" />
                             {profiles?.map((profile) => (
                                 <label>
