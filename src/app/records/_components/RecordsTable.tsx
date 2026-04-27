@@ -11,12 +11,8 @@ interface Application {
     status: string;
     created_at: string;
     contact: string;
-    sex: string;
-    marital_status: string;
-    school_type: string;
     grade_level?: string;
     year_level?: string;
-    age: number;
 };
 
 interface ApplicationProp {
@@ -68,8 +64,6 @@ export default function RecordsTable({ applications }: ApplicationProp) {
                 comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
             } else if (sort === "name") {
                 comparison = a.name.localeCompare(b.name);
-            } else if (sort === "age") {
-                comparison = a.age - b.age;
             }
 
             return isAscending ? comparison : -comparison;
