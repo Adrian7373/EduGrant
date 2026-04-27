@@ -623,5 +623,6 @@ export async function assignAdmin(formData: FormData) {
             .insert(adminRowsToInsert)
     }
 
+    revalidatePath("/dashboard");
 
 }
