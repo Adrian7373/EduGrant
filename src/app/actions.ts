@@ -595,6 +595,33 @@ export async function createNewAdmin(prevState: FormState, formData: FormData): 
     return { success: true, message: `Successfully created account for ${cleanData.name}`, errors: null }
 }
 
+const assignAdminSchema = z.object({
+    sessionId: z.string(),
+    adminsToAssign: z.array(z.string())
+})
+
 export async function assignAdmin(formData: FormData) {
+    const rawData = {
+        sessionId: formData.get("sessionId"),
+        adminsToAssign: formData.getAll("adminId")
+    }
+
+    if (rawData.adminsToAssign.length < 0) return;
+
+    const validatedFields = assignAdminSchema.safeParse(rawData);
+    const cleanData = validatedFields.data;
+
+    const adminRowsToInsert = cleanData?.adminsToAssign.map((adminId) => ({
+        batch_id: cleanData.sessionId,
+        admin_id: adminId
+    }))
+
+    if (adminRowsToInsert) {
+        const supabase = await createClient();
+        const { error: assignError } = await supabase
+            .from("batch_admins")
+            .insert(adminRowsToInsert)
+    }
+
 
 }
