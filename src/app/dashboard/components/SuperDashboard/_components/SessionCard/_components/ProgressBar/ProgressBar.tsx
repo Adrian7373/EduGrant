@@ -2,7 +2,10 @@ import style from "./ProgressBar.module.css";
 
 export default function ProgressBar({ current, max }: { current: number | null, max: number }) {
     // 1. Calculate the percentage (and cap it at 100% just in case!)
-    const percentage = Math.min(100, Math.max(0, (current / max) * 100));
+    if (current) {
+        const percentage = Math.min(100, Math.max(0, (current / max) * 100));
+    }
+
 
     return (
         <div style={{ width: "100%", fontFamily: "sans-serif" }}>
