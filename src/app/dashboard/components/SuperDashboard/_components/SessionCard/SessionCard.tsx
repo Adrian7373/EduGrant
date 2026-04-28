@@ -61,14 +61,11 @@ export default async function SessionCard({ session }: SessionCardProps) {
             />
 
             {admins && admins.length > 0
-                ? <>
-                    <p> {admins.map(admin => (admin.profiles as any)?.name).join(", ")}</p>
-                    <AssignAdminButton
-                        sessionId={session.id}
-                        profiles={allProfiles}
-                    />
-                </> :
-                <p>No available admins</p>}
+                ? <p> {admins.map(admin => (admin.profiles as any)?.name).join(", ")}</p>
+                : <AssignAdminButton
+                    sessionId={session.id}
+                    profiles={allProfiles}
+                />}
 
             <p>Application closes at {new Date(session.deadline).toLocaleDateString()}</p>
             <Link href={`/dashboard/configure?id=${session.id}&admins=${admins}`}>EDIT</Link>
