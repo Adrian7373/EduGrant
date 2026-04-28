@@ -8,6 +8,7 @@ import RecentApplications from "./components/RecentApplications/RecentApplicatio
 import { redirect } from "next/navigation";
 import SuperDashboard from "./components/SuperDashboard/page";
 import { cookies } from "next/headers";
+import TotalApplicationsCard from "./components/TotalApplicationsCard/TotalApplicationsCard";
 
 interface BatchOption {
     id: string;
@@ -136,6 +137,9 @@ export default async function Dashboard() {
             ) : (
                 <div className={style.detailsDiv}>
                     <h1>Profile:{profile.name}</h1>
+                    <TotalApplicationsCard
+                        totalCount={pending + approved + rejected}
+                    />
                     <PendingApplicationsCard
                         pendingCount={pending}
                     />
