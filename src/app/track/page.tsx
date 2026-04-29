@@ -21,6 +21,7 @@ export default function TrackPage() {
     const handleTracking = async () => {
         const details = await getTrackingDetails(id);
         setResult(details);
+        setId("");
     }
 
     const handleHome = () => {
@@ -33,7 +34,7 @@ export default function TrackPage() {
                 <button type="button" onClick={handleHome} className={style.homeButton1}>&#9664; Home</button>
                 <button type="button" onClick={handleHome} className={style.mobileHomeButton1}>&#9664;</button>
                 <label className={style.inputLabel}>Enter tracking ID:
-                    <input className={style.trackInput} type="text" onChange={(e) => {
+                    <input className={style.trackInput} value={id} type="text" onChange={(e) => {
                         setId(e.target.value)
                         e.target.value.length > 8 ? setIsValid(true) : setIsValid(false);
                     }} />
