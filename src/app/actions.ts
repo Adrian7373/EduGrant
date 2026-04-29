@@ -12,6 +12,12 @@ interface Children {
     childrenYearLevel: string
 }
 
+interface Batch {
+    id: string;
+    deadline: string;
+    max_approved: number;
+}
+
 const applicationSchema = z.object({
     name: z.string().min(2, "Full name is required"),
     age: z.coerce.number().min(1, "Valid age is required"),
@@ -340,22 +346,22 @@ export async function verifyCode(code: string) {
         .rpc("verify_batch_code", {
             submit_code: normalizedCode
         })
-        .single();
+        .maybeSingle() as { data: Batch | null; error: any };
 
     if (error) console.log(error);
 
     if (!batch) return { success: false, message: "Incorrect code", id: null };
 
-    if (new Date() > new Date(batch.deadline)) return { success: false, message: "The application deadline has passed.", id: null }
+    if (new Date() > new Date(batch.deadline)) return { success: false, message: "The application deadline has passed.", id: null };
 
     const { data: currentApps, error: countError } = await supabase
         .rpc("get_approved_count", {
             target_batch_id: batch.id
         });
 
-    if (currentApps !== null && currentApps >= batch.max_approved) return { success: false, message: "Sorry, this program has achieved the targeted number of beneficiaries.", id: null }
+    if (currentApps !== null && currentApps >= batch.max_approved) return { success: false, message: "Sorry, this program has achieved the targeted number of beneficiaries.", id: null };
 
-    return { success: true, message: "Success", id: batch.id }
+    return { success: true, message: "Success", id: batch.id };
 
 }
 
