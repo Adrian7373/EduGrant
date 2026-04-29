@@ -18,7 +18,7 @@ export default function ApplicationForm() {
     const nameInputRef = useRef<HTMLInputElement>(null);
     const [code, setCode] = useState<string>("");
     const [message, setMessage] = useState<string>("");
-    const [verifiedBatchId, setVerifiedBatchId] = useState<number | null>(null)
+    const [verifiedBatchId, setVerifiedBatchId] = useState<string | null>(null)
 
     const handleVerify = async () => {
         if (!code) return;

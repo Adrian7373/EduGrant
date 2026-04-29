@@ -72,7 +72,7 @@ const applicationSchema = z.object({
         })
     ).default([]),
     document_urls: z.array(z.string().url("Must be valid URL")).default([]),
-    batch_id: z.coerce.number()
+    batch_id: z.string()
 })
 
 export async function checkNameExists(name: string) {
