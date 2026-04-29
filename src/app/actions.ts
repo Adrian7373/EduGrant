@@ -352,7 +352,9 @@ export async function verifyCode(code: string) {
 
     if (!batch) return { success: false, message: "Incorrect code", id: null };
 
-    if (new Date() > new Date(batch.deadline)) return { success: false, message: "The application deadline has passed.", id: null };
+    if (batch.deadline) {
+        if (new Date() > new Date(batch.deadline)) return { success: false, message: "The application deadline has passed.", id: null };
+    }
 
     const { data: currentApps, error: countError } = await supabase
         .rpc("get_approved_count", {
