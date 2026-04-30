@@ -44,7 +44,7 @@ export function SideBar({ assignedBatches = [], currentBatchId = "", isFallback 
             {assignedBatches.length > 0 && (
                 <div className={style.batchDiv}>
                     <p>Active Branches:</p>
-                    <select value={currentBatchId} name="currentBatch" onChange={(e) => handleBatchChange(e.target.value)}>
+                    <select className={style.branchSelect} value={currentBatchId} name="currentBatch" onChange={(e) => handleBatchChange(e.target.value)}>
                         <option value="" disabled>Select a batch</option>
                         {assignedBatches.map((batch) => (
                             <option key={batch.id} value={batch.id}>{batch.name}</option>
