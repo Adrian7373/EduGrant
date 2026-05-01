@@ -37,7 +37,6 @@
     grid-template-areas:
         "totalDiv pendingDiv approvesDiv"
         "totalDiv pendingDiv rejectsDiv";
-    border: 1px solid red;
     padding: clamp(20px, calc(10.769px + 1.282vw), 60px);
 }
 
@@ -132,4 +131,61 @@
 
 .dashboardGrid div {
     border-radius: clamp(10px, calc(0.769px + 1.282vw), 50px);
+}
+
+.recentAppDiv {
+    width: 100%;
+    border-collapse: collapse;
+    height: 47vh;
+    text-align: left;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: clamp(15px, calc(8.077px + 0.962vw), 45px);
+}
+
+.recentAppDiv thead tr {
+    background-color: #6B52FF;
+    font-weight: bold;
+    border-radius: clamp(10px, calc(5.385px + 0.641vw), 30px) clamp(10px, calc(5.385px + 0.641vw), 30px) 0px 0px;
+}
+
+.recentAppDiv td,
+.recentAppDiv th {
+    padding: 15px 20px;
+    border-bottom: 1px solid #444444;
+}
+
+.recentAppDiv div p {
+    font-size: clamp(1.25rem, calc(0.615rem + 1.410vw), 4.00rem);
+}
+
+.recentAppDiv>table {
+    width: 100%;
+    display: block;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.recentAppDiv thead {
+    display: block;
+    width: 100%;
+}
+
+.recentAppDiv tbody {
+    display: block;
+    height: calc(47vh - 60px);
+    overflow-y: auto;
+    width: 100%;
+}
+
+.recentAppDiv th,
+.recentAppDiv td {
+    flex: 1;
+    min-width: 150px;
+}
+
+.recentAppDiv tr {
+    display: flex;
+    width: 100%;
 }

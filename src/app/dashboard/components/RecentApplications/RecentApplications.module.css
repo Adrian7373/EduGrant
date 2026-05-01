@@ -1,0 +1,30 @@
+.tableHeader {
+    display: flex;
+    align-items: center;
+    gap: clamp(13px, calc(11.385px + 0.224vw), 20px);
+    margin-bottom: clamp(5px, calc(1.538px + 0.481vw), 20px);
+    ;
+}
+
+.viewRecordButton {
+    text-decoration: none;
+    display: inline-block;
+    width: 10%;
+    height: 4.5vh;
+    padding: 12px 24px;
+    color: white;
+    background-color: #C309B0;
+    border-radius: clamp(5px, calc(1.538px + 0.481vw), 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.88rem, calc(0.624rem + 0.500vw), 1.67rem);
+    font-weight: bold;
+    text-align: center;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: clamp(3px, calc(1.615px + 0.192vw), 9px);
+}

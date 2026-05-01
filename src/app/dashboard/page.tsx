@@ -23,7 +23,7 @@ interface Application {
     status: string;
     created_at: string;
     contact: string;
-    address: string;
+    age: string;
 };
 
 export default async function Dashboard() {
@@ -105,7 +105,7 @@ export default async function Dashboard() {
                 .eq('batch_id', activeBatchId), // Filtered!
 
             supabase.from('applications')
-                .select('id, student_level, name, status, created_at, contact, address')
+                .select('id, student_level, name, status, created_at, contact, age')
                 .eq('batch_id', activeBatchId)  // Filtered!
                 .order('created_at', { ascending: false })
                 .limit(6)
@@ -168,10 +168,11 @@ export default async function Dashboard() {
                             />
                         </div>
                     </div>
-                    <RecentApplications
-                        recentApps={recentApps}
-                    />
-
+                    <div className={style.recentAppDiv}>
+                        <RecentApplications
+                            recentApps={recentApps}
+                        />
+                    </div>
                 </div>
             )}
 

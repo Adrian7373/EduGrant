@@ -1,3 +1,4 @@
+import { Square } from "lucide-react";
 import style from "./RecentApplications.module.css";
 import Link from "next/link";
 
@@ -8,7 +9,7 @@ interface Application {
     status: string;
     created_at: string;
     contact: string;
-    address: string;
+    age: string;
 };
 
 interface ApplicationProp {
@@ -18,31 +19,48 @@ interface ApplicationProp {
 export default function RecentApplications({ recentApps }: ApplicationProp) {
 
     return (
-        <div className={style.mainDiv}>
-            <p>Recent Applications</p>
-            <Link href={"/records"}>View Records</Link>
+        <>
+            <div className={style.tableHeader}>
+                <p>Recent Applications</p>
+                <Link className={style.viewRecordButton} href={"/records"}>View Records</Link>
+            </div>
             <table>
                 <thead>
                     <tr>
                         <th>Status</th>
                         <th>Name</th>
-                        <th>Created at</th>
+                        <th>Age</th>
                         <th>Student Level</th>
                         <th>Contact</th>
-                        <th>Address</th>
+                        <th>Submitted</th>
                     </tr>
                 </thead>
                 <tbody>
                     {recentApps.map((app) => (
                         <tr key={app.id}>
                             <td>
-                                {app.status}
+                                <span className={style.status}>
+                                    {app.status === "PENDING" ? (
+                                        <Square
+                                            fill="orange"
+                                            stroke="false" />
+                                    ) : app.status === "APPROVED" ? (
+                                        <Square
+                                            fill="#13A600"
+                                            stroke="false" />
+                                    ) : (
+                                        <Square
+                                            fill="#FF5050"
+                                            stroke="false" />
+                                    )}
+                                    {app.status}
+                                </span>
                             </td>
                             <td>
                                 {app.name}
                             </td>
                             <td>
-                                {new Date(app.created_at).toLocaleDateString()}
+                                {app.age}
                             </td>
                             <td>
                                 {app.student_level}
@@ -51,13 +69,13 @@ export default function RecentApplications({ recentApps }: ApplicationProp) {
                                 {app.contact}
                             </td>
                             <td>
-                                {app.address}
+                                {new Date(app.created_at).toLocaleDateString()}
                             </td>
                         </tr>
                     ))}
                 </tbody>
 
             </table>
-        </div>
+        </>
     )
 }
