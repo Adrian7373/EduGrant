@@ -17,6 +17,14 @@
 
 .header p {
     font-size: clamp(1.13rem, calc(0.447rem + 1.506vw), 4.06rem);
+    display: flex;
+    align-items: center;
+    gap: clamp(3px, calc(1.385px + 0.224vw), 10px);
+}
+
+.userIcon {
+    width: 100%;
+    height: auto;
 }
 
 .dashboardGrid {
@@ -95,6 +103,8 @@
 
 .detailsDiv {
     flex-grow: 1;
+    background-color: #171717;
+    color: white;
 }
 
 

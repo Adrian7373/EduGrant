@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import SuperDashboard from "./components/SuperDashboard/page";
 import { cookies } from "next/headers";
 import TotalApplicationsCard from "./components/TotalApplicationsCard/TotalApplicationsCard";
+import { User } from "lucide-react";
 
 interface BatchOption {
     id: string;
@@ -138,7 +139,12 @@ export default async function Dashboard() {
                 <div className={style.detailsDiv}>
                     <header className={style.header}>
                         <h1>DASHBOARD</h1>
-                        <p>{profile.name}</p>
+                        <p><User
+                            width="1em"
+                            height="1em"
+                            className="userIcon"
+                            viewBox="0 0 24 24"
+                        />{profile.name}</p>
                     </header>
                     <div className={style.dashboardGrid}>
                         <div className={style.totalDiv}>
