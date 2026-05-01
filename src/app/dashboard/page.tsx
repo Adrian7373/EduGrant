@@ -136,7 +136,10 @@ export default async function Dashboard() {
                 />
             ) : (
                 <div className={style.detailsDiv}>
-                    <h1>Profile:{profile.name}</h1>
+                    <header className={style.header}>
+                        <h1>DASHBOARD</h1>
+                        <p>{profile.name}</p>
+                    </header>
                     <div className={style.dashboardGrid}>
                         <div className={style.totalDiv}>
                             <TotalApplicationsCard
