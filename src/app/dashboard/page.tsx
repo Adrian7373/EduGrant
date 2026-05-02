@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import SuperDashboard from "./components/SuperDashboard/page";
 import { cookies } from "next/headers";
 import TotalApplicationsCard from "./components/TotalApplicationsCard/TotalApplicationsCard";
-import { User, FileUser, ClipboardClock } from "lucide-react";
+import { User, FileUser, ClipboardClock, BadgeCheck } from "lucide-react";
 
 interface BatchOption {
     id: string;
@@ -160,6 +160,7 @@ export default async function Dashboard() {
                             />
                         </div>
                         <div className={style.approvesDiv}>
+                            <BadgeCheck className={style.approvedLogo} />
                             <ApprovesCard
                                 approvesCount={approved}
                             />
