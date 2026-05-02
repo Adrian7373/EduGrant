@@ -148,7 +148,7 @@ export default async function Dashboard() {
                     </header>
                     <div className={style.dashboardGrid}>
                         <div className={style.totalDiv}>
-                            <FileUser />
+                            <FileUser className={style.fileLogo} />
                             <TotalApplicationsCard
                                 totalCount={pending + approved + rejected}
                             />
