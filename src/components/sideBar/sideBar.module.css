@@ -10,15 +10,8 @@
 }
 
 .logo {
-    height: 1em;
-    width: 1em;
-}
-
-.title {
-    font-size: clamp(2.00rem, calc(1.740rem + 0.577vw), 3.13rem);
-    margin: 0 auto;
-    margin-top: 2vh;
-    text-align: center;
+    height: 17vh;
+    width: 100%;
 }
 
 .batchDiv p {
