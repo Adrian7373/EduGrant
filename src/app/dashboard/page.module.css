@@ -139,8 +139,8 @@
     position: absolute;
     bottom: clamp(-3.125rem, calc(-0.817rem - 0.962vw), -1.25rem);
     right: clamp(-3.125rem, calc(-0.817rem - 0.962vw), -1.25rem);
-    width: clamp(6.25rem, calc(3.365rem + 6.41vw), 30.75rem);
-    height: clamp(6.25rem, calc(3.365rem + 6.41vw), 30.75rem);
+    width: clamp(6.25rem, calc(3.365rem + 6.41vw), 18.75rem);
+    height: clamp(6.25rem, calc(3.365rem + 6.41vw), 18.75rem);
     opacity: 0.3;
 }
 
@@ -194,12 +194,14 @@
     background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 50%, #5B21B6 100%);
     font-weight: bold;
     border-radius: clamp(10px, calc(5.385px + 0.641vw), 30px) clamp(10px, calc(5.385px + 0.641vw), 30px) 0px 0px;
+    font-size: clamp(0.88rem, calc(0.385rem + 1.090vw), 3.00rem);
 }
 
 .recentAppDiv td,
 .recentAppDiv th {
     padding: 15px 20px;
     border-bottom: 1px solid #444444;
+    font-size: clamp(0.63rem, calc(0.135rem + 1.090vw), 2.75rem);
 }
 
 .recentAppDiv div p {

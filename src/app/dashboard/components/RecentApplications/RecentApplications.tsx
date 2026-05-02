@@ -53,7 +53,7 @@ export default function RecentApplications({ recentApps }: ApplicationProp) {
                                             fill="#FF5050"
                                             stroke="false" />
                                     )}
-                                    {app.status}
+                                    <b>{app.status}</b>
                                 </span>
                             </td>
                             <td>
