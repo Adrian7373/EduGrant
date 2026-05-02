@@ -15,8 +15,6 @@
     font-weight: bold;
 }
 
-.recordsTableDiv table {}
-
 .recordsTableDiv p {
     font-size: clamp(1.13rem, 2.5vw, 6rem);
 }

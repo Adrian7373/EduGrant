@@ -75,54 +75,57 @@ export default function RecordsTable({ applications }: ApplicationProp) {
 
     return (
         <>
-            <div className={style.searchDiv}>
-                <label><Search />
-                    <input
-                        className={style.searchInput}
-                        type="text"
-                        value={displaySearch}
-                        onChange={(e) => setDisplaySearch(e.target.value)}
-                        placeholder="Search by name..."
-                    />
-                </label>
+            <div className={style.utils}>
+                <div className={style.searchDiv}>
+                    <label><Search height="1em" width="1em" />
+                        <input
+                            className={style.searchInput}
+                            type="text"
+                            value={displaySearch}
+                            onChange={(e) => setDisplaySearch(e.target.value)}
+                            placeholder="Search"
+                        />
+                    </label>
+                </div>
+
+                <div className={style.filterUtils}>
+                    <select value={sort} onChange={(e) => setSort(e.target.value)}>
+                        <option value="date">Sort by: Date</option>
+                        <option value="name">Sort by: Name</option>
+                    </select>
+
+                    <select value={filter} onChange={(e) => {
+                        setFilter(e.target.value);
+                        setfilterSpecial(""); // Reset special filter when category changes
+                    }}>
+                        <option value="status">Filter by: Status</option>
+                        <option value="studentLevel">Filter by: Student Level</option>
+                    </select>
+
+                    <select value={filterSpecial} onChange={(e) => setfilterSpecial(e.target.value)}>
+                        <option value="">Select Option</option>
+                        {filter == "status" && (
+                            <>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                            </>
+                        )}
+                        {filter == "studentLevel" && (
+                            <>
+                                <option value="junior">Junior High</option>
+                                <option value="senior">Senior High</option>
+                                <option value="college">College</option>
+                            </>
+                        )}
+                    </select>
+                    <button onClick={() => setIsAscending(!isAscending)}>
+                        {isAscending ? "Ascending ↑" : "Descending ↓"}
+                    </button>
+                </div>
             </div>
 
-            <select value={sort} onChange={(e) => setSort(e.target.value)}>
-                <option value="date">Sort by: Date</option>
-                <option value="name">Sort by: Name</option>
-            </select>
-
-            <button onClick={() => setIsAscending(!isAscending)}>
-                {isAscending ? "Ascending ↑" : "Descending ↓"}
-            </button>
-
-            <select value={filter} onChange={(e) => {
-                setFilter(e.target.value);
-                setfilterSpecial(""); // Reset special filter when category changes
-            }}>
-                <option value="status">Filter by: Status</option>
-                <option value="studentLevel">Filter by: Student Level</option>
-            </select>
-
-            <select value={filterSpecial} onChange={(e) => setfilterSpecial(e.target.value)}>
-                <option value="">Select Option</option>
-                {filter == "status" && (
-                    <>
-                        <option value="pending">Pending</option>
-                        <option value="approved">Approved</option>
-                        <option value="rejected">Rejected</option>
-                    </>
-                )}
-                {filter == "studentLevel" && (
-                    <>
-                        <option value="junior">Junior High</option>
-                        <option value="senior">Senior High</option>
-                        <option value="college">College</option>
-                    </>
-                )}
-            </select>
-
-            <table>
+            <table className={style.recordsTable}>
                 <thead>
                     <tr>
                         <th>Name</th>
