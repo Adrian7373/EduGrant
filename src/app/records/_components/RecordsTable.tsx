@@ -144,7 +144,7 @@ export default function RecordsTable({ applications }: ApplicationProp) {
                                 <td>{new Date(app.created_at).toLocaleDateString()}</td>
                                 <td>{app.student_level}</td>
                                 <td>{app.contact}</td>
-                                <td>{app.status}</td>
+                                <td style={{ color: app.status === "PENDING" ? "orange" : app.status === "APPROVED" ? "green" : "red" }}>{app.status}</td>
                                 <td>
                                     <Link href={`/records/${app.id}`} className={style.reviewLink}>
                                         Review
