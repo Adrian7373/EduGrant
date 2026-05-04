@@ -3,6 +3,7 @@ import { useState } from "react";
 import style from "./FileButtons.module.css";
 import { getSecuredFileURL } from "@/app/actions"
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface FileButtonProps {
     name: string,
@@ -18,6 +19,7 @@ export default function FileButtons({ name, status, enrollPath, gradePath, idPat
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [previewURL, setPreviewURL] = useState<string | null>(null);
+    const router = useRouter();
 
     const handleOpenFile = async (filePath: string) => {
         setIsLoading(true);
@@ -41,7 +43,7 @@ export default function FileButtons({ name, status, enrollPath, gradePath, idPat
 
     return (
         <div className={style.mainDiv}>
-            <Link href="/records">Back</Link>
+            <button onClick={() => router.back()}>Back</button>
             <p>{name}</p>
             <p>{status}</p>
             <button onClick={() => handleOpenFile(enrollPath)}>Enrollment</button>
@@ -53,7 +55,6 @@ export default function FileButtons({ name, status, enrollPath, gradePath, idPat
                 // 1. The dark, semi-transparent background that covers the whole screen
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
 
-          // 2. The white box that holds the document
                     <div className="relative w-full max-w-5xl h-[90vh] bg-gray-100 rounded-lg shadow-2xl flex flex-col overflow-hidden">
 
                         {/* 3. The Top Bar (Title & Close Button) */}

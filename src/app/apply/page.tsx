@@ -3,8 +3,9 @@
 import { useState, useRef, useEffect } from "react"
 import style from "./page.module.css"
 import { submitApplication, checkNameExists } from "../actions";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { verifyCode } from "../actions";
+
 
 export default function ApplicationForm() {
 
@@ -19,6 +20,7 @@ export default function ApplicationForm() {
     const [code, setCode] = useState<string>("");
     const [message, setMessage] = useState<string>("");
     const [verifiedBatchId, setVerifiedBatchId] = useState<string | null>(null)
+    const router = useRouter();
 
     const handleVerify = async () => {
         if (!code) return;
@@ -29,10 +31,6 @@ export default function ApplicationForm() {
 
         if (response.id) setVerifiedBatchId(response.id);
 
-    }
-
-    const handleHome = () => {
-        redirect("/");
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -110,8 +108,8 @@ export default function ApplicationForm() {
 
     if (!verifiedBatchId) return (
         <div className={style.verifyDiv}>
-            <button type="button" onClick={handleHome} className={style.homeButton1} hidden={formStep !== 1}>&#9664; Home</button>
-            <button type="button" onClick={handleHome} className={style.mobileHomeButton1} hidden={formStep !== 1}>&#9664;</button>
+            <button type="button" onClick={() => router.back()} className={style.homeButton1} hidden={formStep !== 1}>&#9664; Home</button>
+            <button type="button" onClick={() => router.back()} className={style.mobileHomeButton1} hidden={formStep !== 1}>&#9664;</button>
             <p>Enter Verification Code</p>
             <input type="text" onChange={(e) => setCode(e.target.value)} />
             <p>{message}</p>
@@ -125,7 +123,7 @@ export default function ApplicationForm() {
             <form action="POST" onSubmit={handleSubmit} ref={formRef}>
                 <div id="step-1" className={style.personalInfoDiv} hidden={formStep != 1}>
                     <p className={style.header}>PERSONAL INFORMATION</p>
-                    <button type="button" onClick={handleHome} className={style.homeButton} hidden={formStep !== 1}>&#9664; Home</button>
+                    <button type="button" onClick={() => router.back()} className={style.homeButton} hidden={formStep !== 1}>&#9664; Home</button>
                     <input type="hidden" value={verifiedBatchId} name="batch_id" />
                     <label>Name:
                         <input ref={nameInputRef} onChange={(e) => setNameInput(e.target.value)} required name="name" type="text" className={style.nameInput} />
