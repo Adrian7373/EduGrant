@@ -1,4 +1,4 @@
-
+import style from "./PersonalInfoCard.module.css";
 
 interface PersonalInfo {
     name: string,
@@ -25,7 +25,7 @@ export default function PersonalInfoCard({ personalData }: PersonalInfoProps) {
     return (
         <>
             <p>Personal Info</p>
-            <div>
+            <div className={style.detailsDiv}>
                 <div>
                     <p>FULL NAME</p>
                     <p>{name || "N/A"}</p>

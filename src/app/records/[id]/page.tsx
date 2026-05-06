@@ -58,9 +58,11 @@ export default async function RecordDetailsPage({ params }: DetailPageProps) {
 
     return (
         <div className={style.mainDiv}>
-            <PersonalInfoCard
-                personalData={personalInfo}
-            />
+            <div className={style.personalInfoDiv}>
+                <PersonalInfoCard
+                    personalData={personalInfo}
+                />
+            </div>
             <SiblingsCard
                 dependents={profile.dependents}
             />
