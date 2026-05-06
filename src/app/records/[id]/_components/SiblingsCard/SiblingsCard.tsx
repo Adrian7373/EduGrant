@@ -23,7 +23,7 @@ export default function SiblingsCard({ dependents }: SiblingsCardProps) {
         return (
             <>
                 <p>Siblings</p>
-                <p>No siblings recorded.</p>
+                <p>N/A</p>
             </>
         )
     }
@@ -45,16 +45,16 @@ export default function SiblingsCard({ dependents }: SiblingsCardProps) {
     return (
         <>
             <p>Siblings</p>
-            {list.length === 0 && <p>No siblings recorded.</p>}
+            {list.length === 0 && <p>N/A</p>}
             {list.map((dependent, index) => {
                 const d = normalizeDependent(dependent as RawDependent);
                 return (
                     <div key={index}>
                         <div>
-                            <p>{d.name || <i>—</i>}</p>
-                            <p>{d.yearLevel || <i>—</i>}</p>
+                            <p>{d.name || "N/A"}</p>
+                            <p>{d.yearLevel || "N/A"}</p>
                         </div>
-                        <p>{d.occupation || <i>—</i>}</p>
+                        <p>{d.occupation || "N/A"}</p>
                         {(!d.name && !d.yearLevel && !d.occupation) && (
                             <pre style={{ whiteSpace: 'pre-wrap', fontSize: 12 }}>
                                 {JSON.stringify(dependent, null, 2)}
