@@ -22,6 +22,15 @@ export default async function RecordDetailsPage({ params }: DetailPageProps) {
         .select("*")
         .eq("id", id)
         .single();
+    console.log("fetched profile:", profile, "error:", error);
+
+    if (error || !profile) {
+        return (
+            <div className={style.mainDiv}>
+                <p>Record not found.</p>
+            </div>
+        );
+    }
 
     const personalInfo = {
         name: profile.name,

@@ -1,27 +1,68 @@
 
 
-interface Dependent {
-    name: string,
-    yearLevel: string,
-    occupation: string
+type RawDependent = {
+    [key: string]: any
 }
+
 interface SiblingsCardProps {
-    dependents: Dependent[]
+    dependents: RawDependent[] | string | null | undefined
+}
+
+function normalizeDependent(d: RawDependent) {
+    return {
+        name: d.name ?? d.childrenName ?? d.children_name ?? d.full_name ?? d.fullName ?? "",
+        yearLevel: d.yearLevel ?? d.childrenYearLevel ?? d.children_year_level ?? d.year_level ?? d.year ?? "",
+        occupation: d.occupation ?? d.childrenOccupation ?? d.children_occupation ?? d.job ?? d.work ?? ""
+    }
 }
 
 export default function SiblingsCard({ dependents }: SiblingsCardProps) {
+    let list: RawDependent[] = [];
+
+    if (!dependents) {
+        return (
+            <>
+                <p>Siblings</p>
+                <p>No siblings recorded.</p>
+            </>
+        )
+    }
+
+    if (typeof dependents === "string") {
+        try {
+            list = JSON.parse(dependents);
+        } catch (e) {
+            // fallback: show raw string as single entry
+            list = [{ raw: dependents }];
+        }
+    } else if (Array.isArray(dependents)) {
+        list = dependents;
+    } else {
+        // single object
+        list = [dependents];
+    }
+
     return (
         <>
             <p>Siblings</p>
-            {dependents.map((dependent, index) => (
-                <div key={index}>
-                    <div>
-                        <p>{dependent.name}</p>
-                        <p>{dependent.yearLevel}</p>
+            {list.length === 0 && <p>No siblings recorded.</p>}
+            {list.map((dependent, index) => {
+                const d = normalizeDependent(dependent as RawDependent);
+                return (
+                    <div key={index}>
+                        <div>
+                            <p>{d.name || <i>—</i>}</p>
+                            <p>{d.yearLevel || <i>—</i>}</p>
+                        </div>
+                        <p>{d.occupation || <i>—</i>}</p>
+                        {(!d.name && !d.yearLevel && !d.occupation) && (
+                            <pre style={{ whiteSpace: 'pre-wrap', fontSize: 12 }}>
+                                {JSON.stringify(dependent, null, 2)}
+                            </pre>
+                        )}
                     </div>
-                    <p>{dependent.occupation}</p>
-                </div>
-            ))}
+                )
+            })}
         </>
     )
 }
