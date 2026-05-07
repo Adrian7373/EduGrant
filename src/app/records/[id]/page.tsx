@@ -74,10 +74,12 @@ export default async function RecordDetailsPage({ params }: DetailPageProps) {
 
     return (
         <div className={style.mainDiv}>
-            <RecordHeader
-                name={profile.name}
-                status={profile.status}
-            />
+            <div className={style.recordHeaderDiv}>
+                <RecordHeader
+                    name={profile.name}
+                    status={profile.status}
+                />
+            </div>
             <div className={style.personalInfoDiv}>
                 <PersonalInfoCard
                     personalData={personalInfo}
@@ -98,16 +100,18 @@ export default async function RecordDetailsPage({ params }: DetailPageProps) {
                     academicData={academicData}
                 />
             </div>
-            <FileButtons
-                name={profile.name}
-                status={profile.status}
-                enrollPath={profile.document_urls[0]}
-                gradePath={profile.document_urls[1]}
-                idPath={profile.document_urls[2]}
-            />
-            <ActionButtons
-                id={profile.id}
-            />
+            <div className={style.fileButtonDiv}>
+                <FileButtons
+                    enrollPath={profile.document_urls[0]}
+                    gradePath={profile.document_urls[1]}
+                    idPath={profile.document_urls[2]}
+                />
+            </div>
+            <div className={style.actionButtonsDiv}>
+                <ActionButtons
+                    id={profile.id}
+                />
+            </div>
         </div>
     )
 }

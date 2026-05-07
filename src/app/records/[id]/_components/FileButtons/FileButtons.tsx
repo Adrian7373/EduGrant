@@ -4,15 +4,13 @@ import style from "./FileButtons.module.css";
 import { getSecuredFileURL } from "@/app/actions"
 
 interface FileButtonProps {
-    name: string,
-    status: string,
     enrollPath: string,
     gradePath: string,
     idPath: string
 }
 
 
-export default function FileButtons({ name, status, enrollPath, gradePath, idPath }: FileButtonProps) {
+export default function FileButtons({ enrollPath, gradePath, idPath }: FileButtonProps) {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -112,10 +110,13 @@ export default function FileButtons({ name, status, enrollPath, gradePath, idPat
 
 
     return (
-        <div className={style.mainDiv}>
-            <button onClick={() => handleOpenFile(enrollPath, "Enrollment Document")}>Enrollment</button>
-            <button onClick={() => handleOpenFile(gradePath, "Grades Document")}>Grades</button>
-            <button onClick={() => handleOpenFile(idPath, "Valid ID")}>Valid ID</button>
+        <>
+            <p>Files</p>
+            <div className={style.buttonsDiv}>
+                <button onClick={() => handleOpenFile(enrollPath, "Enrollment Document")}>Enrollment</button>
+                <button onClick={() => handleOpenFile(gradePath, "Grades Document")}>Grades</button>
+                <button onClick={() => handleOpenFile(idPath, "Valid ID")}>Valid ID</button>
+            </div>
 
             {isOpen && previewURL && (
                 <div className={style.overlay}>
@@ -172,6 +173,6 @@ export default function FileButtons({ name, status, enrollPath, gradePath, idPat
                     </div>
                 </div>
             )}
-        </div>
+        </>
     )
 }

@@ -4,8 +4,13 @@ import { updateRecordStatus } from "@/app/actions"
 
 export default function ActionButtons({ id }: { id: string }) {
     return (
-        <div><button onClick={() => updateRecordStatus(id, "APPROVED")}>Approve</button>
-            <button onClick={() => updateRecordStatus(id, "REJECTED")}>Reject</button></div>
+        <>
+            <p>ACTIONS</p>
+            <div className={style.buttonsDiv}>
+                <button onClick={() => updateRecordStatus(id, "APPROVED")}>Approve</button>
+                <button onClick={() => updateRecordStatus(id, "REJECTED")}>Reject</button>
+            </div>
+        </>
 
     )
 }

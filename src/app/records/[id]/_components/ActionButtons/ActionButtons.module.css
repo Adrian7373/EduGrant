@@ -1,0 +1,4 @@
+.buttonsDiv {
+    display: flex;
+    flex-direction: column;
+}
