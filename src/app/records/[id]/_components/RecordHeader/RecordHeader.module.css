@@ -1,0 +1,19 @@
+.backName {
+    height: 100%;
+    display: flex;
+    gap: clamp(0.625rem, calc(0.337rem + 0.641vw), 1.875rem);
+    align-items: center;
+}
+
+.backName button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 5vw;
+    font-size: clamp(2.00rem, calc(1.538rem + 1.026vw), 4.00rem);
+    border-radius: clamp(0.313rem, calc(-0.308rem + 1.378vw), 3rem);
+    border: none;
+    background-color: #5B3FFF;
+    color: white;
+}

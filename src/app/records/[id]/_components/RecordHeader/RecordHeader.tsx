@@ -1,6 +1,7 @@
 "use client"
 import style from "./RecordHeader.module.css";
 import { useRouter } from "next/navigation";
+import { ArrowBigLeft } from "lucide-react";
 
 interface RecordHeaderProps {
     name: string,
@@ -13,8 +14,10 @@ export default function RecordHeader({ name, status }: RecordHeaderProps) {
 
     return (
         <>
-            <button onClick={() => router.back()}>Back</button>
-            <p>{name}</p>
+            <div className={style.backName}>
+                <button onClick={() => router.back()}><ArrowBigLeft height="80%" width="3vw" fill="white" /></button>
+                <p>{name}</p>
+            </div>
             <p>{status}</p>
         </>
     )
