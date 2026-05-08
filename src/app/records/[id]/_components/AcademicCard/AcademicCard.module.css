@@ -3,3 +3,13 @@
     grid-template-columns: 1fr 1fr;
     column-gap: 5%;
 }
+
+.detailsDiv div:first-child {
+    font-size: clamp(0.63rem, calc(0.337rem + 0.641vw), 1.88rem);
+    color: rgb(108, 108, 108);
+    margin-bottom: clamp(2px, calc(1.346px + 0.16vw), 8px);
+}
+
+.detailsDiv div:nth-child(2) {
+    font-size: clamp(0.63rem, calc(0.135rem + 1.090vw), 2.75rem);
+}
