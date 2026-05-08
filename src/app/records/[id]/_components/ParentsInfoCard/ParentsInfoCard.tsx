@@ -1,6 +1,7 @@
 "use client"
 import { MouseEvent, useState, useRef, useEffect } from "react";
 import style from "./ParentsInfoCard.module.css";
+import { HandHeart } from "lucide-react";
 
 interface ParentsInfo {
     father_name: string,
@@ -76,7 +77,7 @@ export default function ParentsInfoCard({ parentsInfo }: ParentsInfoCardProps) {
 
     return (
         <>
-            <p>Parents Info</p>
+            <p><HandHeart height="3vh" width="1.5vw" />Parents Info</p>
             <div className={style.detailsDiv}>
                 <div className={style.infoBlock}>
                     <div>
