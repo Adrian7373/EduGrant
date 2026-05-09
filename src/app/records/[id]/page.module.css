@@ -7,12 +7,12 @@
     box-sizing: border-box;
     display: grid;
     padding: clamp(1rem, calc(0.538rem + 1.026vw), 3rem);
-    grid-template-columns: 30% 1fr 30% 30%;
+    grid-template-columns: 20% 10% 10% 1fr 10% 10% 20%;
     grid-template-rows: 1fr 50% 40%;
     grid-template-areas:
-        "box-header box-header box-header box-header"
-        "box-personal box-personal box-parents box-siblings"
-        "box-academic box-academic box-files box-actions";
+        "box-header box-header box-header box-header box-header box-header box-header"
+        "box-personal box-personal box-personal box-parents box-parents box-academic box-academic"
+        "box-siblings box-siblings box-files box-files box-actions box-actions box-actions";
 }
 
 .personalInfoDiv {
