@@ -10,8 +10,8 @@ export default function ProgressBar({ current, max }: { current: number | null, 
 
             {/* 2. The Label (e.g., "37 / 1500") */}
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem", fontSize: "0.9rem" }}>
-                <span>Progress</span>
-                <span style={{ fontWeight: "bold" }}>
+                <span style={{ fontSize: "clamp(1.00rem, calc(0.654rem + 0.769vw), 2.50rem)" }}>Approved</span>
+                <span style={{ fontWeight: "bold", fontSize: "clamp(1.00rem, calc(0.654rem + 0.769vw), 2.50rem)" }}>
                     {current} / {max}
                 </span>
             </div>

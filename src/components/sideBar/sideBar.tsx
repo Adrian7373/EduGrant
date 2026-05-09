@@ -43,7 +43,7 @@ export function SideBar({ assignedBatches = [], currentBatchId = "", isFallback 
 
     return (
         <>
-            <img className={style.logo} src="EduGrant.png" alt="EduGrandLogo" />
+            <img className={style.logo} src="/EduGrant.png" alt="EduGrandLogo" />
             {assignedBatches.length > 0 && (
                 <div className={style.batchDiv}>
                     <p>Active Branches:</p>
