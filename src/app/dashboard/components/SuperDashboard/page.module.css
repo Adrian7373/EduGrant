@@ -9,3 +9,19 @@
     display: flex;
     justify-content: center;
 }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header div {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1vw;
+    align-items: center;
+}
+
+.header p:first-child {
+    font-size: clamp(1.13rem, calc(0.000rem + 2.500vw), 6.00rem);
+}

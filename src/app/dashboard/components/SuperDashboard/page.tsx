@@ -27,9 +27,11 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
     return (
         <div className={style.mainDiv}>
             <div className={style.header}>
-                <p>DASHBOARD</p>
-                <Link href="/dashboard/configure">Create new Batch</Link>
-                <CreateAdminButton />
+                <div>
+                    <p>DASHBOARD</p>
+                    <Link href="/dashboard/configure">Create new Batch</Link>
+                    <CreateAdminButton />
+                </div>
                 <p>{userName}</p>
             </div>
             <div className={style.sessionListDiv}>
