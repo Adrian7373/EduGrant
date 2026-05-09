@@ -32,9 +32,11 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
                 <CreateAdminButton />
                 <p>{userName}</p>
             </div>
-            <SessionCardList
-                sessions={sessions}
-            />
+            <div className={style.sessionListDiv}>
+                <SessionCardList
+                    sessions={sessions}
+                />
+            </div>
         </div>
     )
 }

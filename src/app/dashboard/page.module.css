@@ -237,3 +237,15 @@
     display: flex;
     width: 100%;
 }
+
+.sideBarDiv {
+    width: 20%;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+    gap: 6vh;
+    background-color: #252525;
+    color: white;
+}

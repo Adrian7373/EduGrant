@@ -91,12 +91,14 @@ export default async function Records() {
 
     return (
         <div className={style.mainDiv}>
-            <SideBar
-                assignedBatches={assignedBatches}
-                currentBatchId={activeBatchId}
-                isFallback={isFallback}
-                isAdmin={isAdmin}
-            />
+            <div className={style.sideBarDiv}>
+                <SideBar
+                    assignedBatches={assignedBatches}
+                    currentBatchId={activeBatchId}
+                    isFallback={isFallback}
+                    isAdmin={isAdmin}
+                />
+            </div>
             <div className={style.recordsTableDiv}>
                 <p>RECORDS</p>
                 <RecordsTable

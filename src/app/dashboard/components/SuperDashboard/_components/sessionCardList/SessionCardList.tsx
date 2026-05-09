@@ -20,7 +20,7 @@ export default function SessionCardList({ sessions }: SessionCardListProps) {
 
 
     return (
-        <div className={style.mainDiv}>
+        <>
             {sessions.map((session) => (
                 <span key={session.id}>
                     <SessionCard
@@ -28,6 +28,6 @@ export default function SessionCardList({ sessions }: SessionCardListProps) {
                     />
                 </span>
             ))}
-        </div>
+        </>
     )
 }

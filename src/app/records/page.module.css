@@ -22,3 +22,15 @@
 .recordsTableDiv p {
     font-size: clamp(1.13rem, 2.5vw, 6rem);
 }
+
+.sideBarDiv {
+    width: 20%;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+    gap: 6vh;
+    background-color: #252525;
+    color: white;
+}

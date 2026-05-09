@@ -125,12 +125,14 @@ export default async function Dashboard() {
 
     return (
         <div className={style.mainDiv}>
-            <SideBar
-                assignedBatches={assignedBatches}
-                currentBatchId={activeBatchId}
-                isFallback={isFallback}
-                isAdmin={profile.role === "SUPER_ADMIN" ? false : true}
-            />
+            <div className={style.sideBarDiv}>
+                <SideBar
+                    assignedBatches={assignedBatches}
+                    currentBatchId={activeBatchId}
+                    isFallback={isFallback}
+                    isAdmin={profile.role === "SUPER_ADMIN" ? false : true}
+                />
+            </div>
             {profile.role === "SUPER_ADMIN" ? (
                 <SuperDashboard
                     userName={profile.name}

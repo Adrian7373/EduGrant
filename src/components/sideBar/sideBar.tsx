@@ -42,7 +42,7 @@ export function SideBar({ assignedBatches = [], currentBatchId = "", isFallback 
     }
 
     return (
-        <div className={style.mainDiv}>
+        <>
             <img className={style.logo} src="EduGrant.png" alt="EduGrandLogo" />
             {assignedBatches.length > 0 && (
                 <div className={style.batchDiv}>
@@ -66,7 +66,7 @@ export function SideBar({ assignedBatches = [], currentBatchId = "", isFallback 
                     width="1em"
                 />Sign Out</button>
             </div>
-        </div>
+        </>
 
     )
 }
