@@ -9,3 +9,8 @@
     box-sizing: border-box;
     padding: 1rem;
 }
+
+.mainDiv>p:first-child {
+    font-weight: bold;
+    font-size: clamp(1rem, calc(0.5rem + 0.8vw), 1.5rem);
+}
