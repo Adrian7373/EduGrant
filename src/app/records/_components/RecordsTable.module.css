@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     font-size: clamp(0.88rem, calc(0.602rem + 1.364vw), 1.63rem);
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     padding: clamp(3px, calc(1.385px + 0.224vw), 10px);
     border-radius: clamp(20px, calc(10.769px + 1.282vw), 60px);
 }
@@ -43,14 +43,14 @@
 }
 
 .filterUtils select {
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     background: transparent;
     color: white;
     border-radius: clamp(10px, calc(6.538px + 0.481vw), 25px);
     width: 25%;
     height: 100%;
     padding: clamp(2px, calc(0.154px + 0.256vw), 10px);
-    font-size: clamp(0.63rem, calc(0.163rem + 1.026vw), 2.63rem);
+    font-size: clamp(0.75rem, calc(0.3rem + 0.6vw), 1.05rem);
 }
 
 .filterUtils button {
@@ -59,7 +59,7 @@
     flex-grow: 1;
     height: 100%;
     border-radius: clamp(10px, calc(6.538px + 0.481vw), 25px);
-    font-size: clamp(0.63rem, calc(0.163rem + 1.026vw), 2.63rem);
+    font-size: clamp(0.75rem, calc(0.3rem + 0.6vw), 1.05rem);
 }
 
 .tableContainer {
@@ -79,18 +79,21 @@
 }
 
 .recordsTable thead tr {
-    font-weight: bold;
+    font-weight: 700;
     text-align: left;
-    height: 7vh;
+    height: 6.5vh;
 }
 
 .recordsTable thead th {
-    padding: clamp(8px, calc(4.308px + 0.513vw), 24px);
+    padding: clamp(10px, calc(5px + 0.5vw), 20px);
     width: 15%;
     position: sticky;
     top: 0;
-    z-index: 10;
-    background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 50%, #5B21B6 100%);
+    z-index: 20;
+    background: rgba(15, 23, 42, 0.9);
+    /* neutral header */
+    color: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .recordsTable thead th:first-child {
@@ -103,24 +106,79 @@
 }
 
 .recordsTable tbody td {
-    border-bottom: 1px solid white;
-    padding: clamp(8px, calc(4.308px + 0.513vw), 24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: clamp(10px, calc(6px + 0.6vw), 20px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
+.recordsTable tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.recordsTable tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.recordsTable tbody td:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .reviewLink {
     color: white;
     text-decoration: none;
-    padding: clamp(5px, calc(2px + 0.5vw), 10px);
-    border: 1px solid white;
+    padding: clamp(6px, calc(3px + 0.4vw), 10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: clamp(5px, calc(2px + 0.5vw), 10px);
-    font-size: clamp(0.63rem, calc(0.163rem + 1.026vw), 2.63rem);
-    transition: background-color 0.3s, color 0.3s;
+    font-size: clamp(0.75rem, calc(0.3rem + 0.6vw), 1.05rem);
+    transition: background-color 0.18s, color 0.18s, transform 0.12s;
+    background: transparent;
 }
 
 .reviewLink:hover {
-    background-color: white;
-    color: #7C3AED;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #0f1720;
+    transform: translateY(-1px);
+}
+
+/* Responsive font-size adjustments for table and controls */
+@media (min-width: 1280px) {
+
+    .recordsTable,
+    .recordsTable tbody td,
+    .recordsTable thead th,
+    .reviewLink,
+    .filterUtils select,
+    .filterUtils button,
+    .searchInput {
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 1920px) {
+
+    .recordsTable,
+    .recordsTable tbody td,
+    .recordsTable thead th,
+    .reviewLink,
+    .filterUtils select,
+    .filterUtils button,
+    .searchInput {
+        font-size: 1.05rem;
+    }
+}
+
+@media (min-width: 3840px) {
+
+    .recordsTable,
+    .recordsTable tbody td,
+    .recordsTable thead th,
+    .reviewLink,
+    .filterUtils select,
+    .filterUtils button,
+    .searchInput {
+        font-size: 1.15rem;
+    }
 }

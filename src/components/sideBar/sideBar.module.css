@@ -50,7 +50,7 @@
 }
 
 .recordsButton.active {
-    background-color: #0a0a0a;
+    background-color: #171717;
 }
 
 .recordsButton.inactive {
@@ -63,20 +63,20 @@
 
 .signoutButton {
     text-decoration: none;
+    background-color: #3e3e3e;
     color: white;
-    background-color: #f83535;
     height: 9vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(1.50rem, calc(0.923rem + 1.282vw), 4.00rem);
+    font-size: clamp(0.81rem, calc(0.308rem + 1.122vw), 3.00rem);
     border-style: none;
     margin-top: auto;
     cursor: pointer;
 }
 
 .signoutButton:hover {
-    background-color: #fd4a4a;
+    background-color: #4c4c4c;
 }
 
 .batchDiv {
