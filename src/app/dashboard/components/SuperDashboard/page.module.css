@@ -43,4 +43,5 @@
     width: 11vw;
     border-radius: clamp(10px, calc(4.923px + 0.705vw), 32px);
     font-size: clamp(1.00rem, calc(0.769rem + 0.513vw), 2.00rem);
+    text-align: center;
 }
