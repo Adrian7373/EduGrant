@@ -21,6 +21,14 @@
     color: white;
 }
 
+.header>p {
+    margin-right: clamp(1px, calc(-5.692px + 0.929vw), 30px);
+    font-size: clamp(0.50rem, calc(0.183rem + 0.705vw), 1.88rem);
+    display: flex;
+    align-items: center;
+    gap: clamp(3px, calc(1.385px + 0.224vw), 10px);
+}
+
 .header div {
     display: flex;
     justify-content: space-evenly;

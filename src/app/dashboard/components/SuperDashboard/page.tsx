@@ -3,6 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import SessionCardList from "./_components/sessionCardList/SessionCardList";
 import Link from "next/link";
 import CreateAdminButton from "./_components/CreateAdminButton/CreateAdminButton";
+import { User } from "lucide-react";
 
 interface SuperDashboardProps {
     userName: string
@@ -32,7 +33,7 @@ export default async function SuperDashboard({ userName }: SuperDashboardProps) 
                     <Link className={style.newBatchButton} href="/dashboard/configure">Create new Batch</Link>
                     <CreateAdminButton />
                 </div>
-                <p>{userName}</p>
+                <p><User height="1rem" width="1rem" />{userName}</p>
             </div>
             <div className={style.sessionListDiv}>
                 <SessionCardList
