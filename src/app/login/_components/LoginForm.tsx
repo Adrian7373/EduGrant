@@ -39,7 +39,7 @@ export default function LoginForm() {
                         <label className={style.passwordLabel}>Password:
                             <div>
                                 <input name="password" type={isShowing ? "text" : "password"} />
-                                <button type="button" className={style.showPasswordButton}>{isShowing ? <EyeOff width="1rem" height="1rem" /> : <Eye width="1rem" height="1rem" />}</button>
+                                <button onClick={() => setIsShowing(!isShowing)} type="button" className={style.showPasswordButton}>{isShowing ? <EyeOff width="1rem" height="1rem" /> : <Eye width="1rem" height="1rem" />}</button>
                             </div>
                         </label>
                         <p>{message}</p>
