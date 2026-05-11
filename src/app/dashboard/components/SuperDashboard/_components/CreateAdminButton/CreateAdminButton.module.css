@@ -12,10 +12,12 @@
     background-color: #171717;
     padding: 2rem;
     border-radius: 8px;
-    max-width: 400px;
+    max-width: 800px;
+    border-radius: clamp(10px, calc(6.538px + 0.481vw), 25px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45), 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.mainDiv button:first-child {
+.mainDiv>button:first-child {
     border: none;
     color: rgb(255, 255, 255);
     display: flex;
@@ -31,9 +33,115 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
-.mainDiv button:first-child:hover {
+.mainDiv>button:first-child:hover {
     background: linear-gradient(135deg, #475569 0%, #334155 100%);
     border-color: #64748B;
     box-shadow: 0 14px 30px rgba(15, 23, 42, 0.28);
     transform: translateY(-1px);
+}
+
+.modalContent label {
+    display: flex;
+    flex-direction: column;
+    font-size: clamp(0.63rem, calc(0.337rem + 0.641vw), 1.88rem);
+}
+
+.modalContent div:first-child {
+    display: flex;
+}
+
+.modalContent input:focus {
+    outline: none;
+}
+
+.modalContent form {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(7px, calc(5.154px + 0.256vw), 15px);
+}
+
+.modalContent input {
+    border: 2px solid white;
+    background: none;
+    height: 3.5vh;
+    border-radius: clamp(5px, calc(2.692px + 0.321vw), 15px);
+    color: white;
+    padding: clamp(5px, calc(2.692px + 0.321vw), 15px);
+}
+
+.modalContent label:nth-child(3)>div>input {
+    border: none;
+}
+
+.modalContent label:nth-child(3)>div {
+    justify-content: start;
+    border: 2px solid white;
+    border-radius: clamp(5px, calc(2.692px + 0.321vw), 15px);
+}
+
+.modalContent label>div>input {
+    width: 80%;
+}
+
+.showPasswordButton {
+    flex-grow: 1;
+    border: none;
+    background: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalActions {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, calc(5.692px + 0.321vw), 18px);
+    margin-top: clamp(4px, calc(2.154px + 0.256vw), 12px);
+}
+
+.modalActions>button {
+    border: 1px solid #64748B;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #475569 0%, #334155 100%);
+    height: clamp(34px, 4.4vh, 48px);
+    min-width: clamp(90px, 8vw, 140px);
+    padding: 0 clamp(10px, calc(5.385px + 0.641vw), 20px);
+    border-radius: clamp(8px, calc(4.923px + 0.428vw), 18px);
+    font-size: clamp(0.75rem, calc(0.614rem + 0.321vw), 1.13rem);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.modalActions>button:hover:not(:disabled) {
+    border-color: #94A3B8;
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.26);
+    transform: translateY(-1px);
+}
+
+.modalActions>button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+}
+
+.modalActions>button:nth-child(2) {
+    border-color: #0EA5E9;
+    background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+    box-shadow: 0 10px 24px rgba(2, 132, 199, 0.28);
+}
+
+.modalActions>button:nth-child(2):hover:not(:disabled) {
+    border-color: #38BDF8;
+    background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%);
+    box-shadow: 0 14px 30px rgba(14, 165, 233, 0.34);
+}
+
+.modalActions p {
+    margin: 0;
+    color: #E2E8F0;
+    font-size: clamp(0.68rem, calc(0.545rem + 0.192vw), 1rem);
 }

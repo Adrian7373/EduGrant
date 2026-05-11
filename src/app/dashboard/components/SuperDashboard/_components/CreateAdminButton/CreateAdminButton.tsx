@@ -3,6 +3,7 @@ import style from "./CreateAdminButton.module.css";
 import { useActionState, useState } from "react";
 import SubmitButton from "./_components/SubmitButton";
 import { createNewAdmin } from "@/app/actions";
+import { Eye, EyeOff } from "lucide-react";
 
 const initialState = {
     success: false,
@@ -24,16 +25,19 @@ export default function CreateAdminButton() {
                 <div className={style.modalOverlay}>
                     <div className={style.modalContent}>
                         <form action={formAction}>
-                            <label>Name:
+                            <label>Name
                                 <input name="name" type="text" disabled={isPending} />
-                            </label><br />
-                            <label>Email:
-                                <input name="email" type="text" disabled={isPending} />
-                            </label><br />
-                            <label>Password:
-                                <input name="password" type={showPassword ? "text" : "password"} disabled={isPending} />
                             </label>
-                            <button type="button" onClick={() => setShowPassword(!showPassword)} disabled={isPending}>Show password</button>
+                            <label>Email
+                                <input name="email" type="text" disabled={isPending} />
+                            </label>
+                            <label>Password
+                                <div>
+                                    <input name="password" type={showPassword ? "text" : "password"} disabled={isPending} />
+                                    <button className={style.showPasswordButton} type="button" onClick={() => setShowPassword(!showPassword)} disabled={isPending}>{!showPassword ? <Eye height="1rem" width="1rem" /> : <EyeOff height="1rem" width="1rem" />}</button>
+                                </div>
+                            </label>
+
                             <div className={style.modalActions}>
                                 <button type="button" onClick={() => setIsOpen(false)} disabled={isPending}>Cancel</button>
                                 <SubmitButton
