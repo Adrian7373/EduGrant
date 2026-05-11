@@ -20,38 +20,35 @@ export default function CreateAdminButton() {
         <div className={style.mainDiv}>
             <button onClick={() => setIsOpen(true)}>Create new Admin</button>
 
-            {isOpen && !isPending && (
+            {isOpen && (
                 <div className={style.modalOverlay}>
                     <div className={style.modalContent}>
                         <form action={formAction}>
                             <label>Name:
-                                <input name="name" type="text" />
+                                <input name="name" type="text" disabled={isPending} />
                             </label><br />
                             <label>Email:
-                                <input name="email" type="text" />
+                                <input name="email" type="text" disabled={isPending} />
                             </label><br />
                             <label>Password:
-                                <input name="password" type={showPassword ? "text" : "password"} />
+                                <input name="password" type={showPassword ? "text" : "password"} disabled={isPending} />
                             </label>
-                            <button type="button" onClick={() => setShowPassword(!showPassword)}>Show password</button>
+                            <button type="button" onClick={() => setShowPassword(!showPassword)} disabled={isPending}>Show password</button>
                             <div className={style.modalActions}>
-                                <button type="button" onClick={() => setIsOpen(false)}>Cancel</button>
+                                <button type="button" onClick={() => setIsOpen(false)} disabled={isPending}>Cancel</button>
                                 <SubmitButton
                                     isPending={isPending}
                                 />
                                 <p>
-                                    {state.errors
+                                    {isPending ? "Creating account, please wait..." : (state.errors
                                         ? `${state.message}, ${state.errors}`
-                                        : `${state.message}`}
+                                        : `${state.message}`)}
                                 </p>
 
                             </div>
                         </form>
                     </div>
                 </div>
-            )}
-            {isOpen && (
-                <p>Creating account, please wait...</p>
             )}
         </div>
 
