@@ -22,8 +22,15 @@ export default function CreateAdminButton() {
             <button onClick={() => setIsOpen(true)}>Create new Admin</button>
 
             {isOpen && (
-                <div className={style.modalOverlay}>
-                    <div className={style.modalContent}>
+                <div
+                    className={style.modalOverlay}
+                    onClick={() => {
+                        if (!isPending) {
+                            setIsOpen(false);
+                        }
+                    }}
+                >
+                    <div className={style.modalContent} onClick={(e) => e.stopPropagation()}>
                         <form action={formAction}>
                             <label>Name
                                 <input name="name" type="text" disabled={isPending} />
