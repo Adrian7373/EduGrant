@@ -6,7 +6,7 @@ body {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    position: relative;
+    transform: translateY(6px);
     animation: rotate 1s linear infinite
 }
 
@@ -54,13 +54,33 @@ body {
 .mainDiv {
     width: 38%;
     height: 50vh;
+    position: relative;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: clamp(8px, calc(2.909px + 1.591vw), 64px);
-    border-radius: 2vw;
-    background-color: #3e3e3e;
+    border-radius: clamp(18px, calc(12.923px + 0.705vw), 30px);
+    background: linear-gradient(145deg, rgba(62, 62, 62, 0.96) 0%, rgba(31, 41, 55, 0.98) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.18);
     color: white;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.38),
+        0 8px 18px rgba(15, 23, 42, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    animation: floatCard 6s ease-in-out infinite;
+}
+
+.mainDiv::before {
+    content: "";
+    position: absolute;
+    inset: -35% -20% auto auto;
+    width: 55%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0) 70%);
+    pointer-events: none;
 }
 
 .loadingDiv {
@@ -78,7 +98,7 @@ body {
     justify-content: center;
     width: 80%;
     height: 80%;
-    font-size: clamp(1.50rem, calc(1.154rem + 0.769vw), 3.00rem);
+    font-size: clamp(0.81rem, calc(0.538rem + 0.609vw), 2.00rem);
     gap: clamp(10px, calc(4.923px + 0.705vw), 32px);
 }
 
@@ -94,6 +114,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0;
+    gap: clamp(2px, calc(0.385px + 0.224vw), 9px);
 }
 
 .formDiv>p {
