@@ -1,3 +1,7 @@
+body {
+    background-color: #171717;
+}
+
 .loader {
     width: 48px;
     height: 48px;
@@ -48,7 +52,6 @@
 }
 
 .mainDiv {
-    border: 1px solid;
     width: 38%;
     height: 50vh;
     display: flex;
@@ -56,6 +59,8 @@
     align-items: center;
     padding: clamp(8px, calc(2.909px + 1.591vw), 64px);
     border-radius: 2vw;
+    background-color: #3e3e3e;
+    color: white;
 }
 
 .loadingDiv {
