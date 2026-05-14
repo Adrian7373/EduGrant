@@ -58,6 +58,7 @@
     border: 1px solid red;
     color: white;
     flex-grow: 1;
+    width: 100%;
 }
 
 .mainDiv>button:first-child {

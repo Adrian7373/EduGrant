@@ -1,7 +1,47 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.assignedAdminsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.assignedAdminRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
 .assignForm {
     display: flex;
     flex-direction: column;
     width: 100%;
+    align-items: center;
+    flex-grow: 1;
+    gap: 1rem;
+}
+
+.formContent {
+    display: flex;
+    width: 100%;
+    flex-grow: 1;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.formDetailsColumn {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.assignForm button:last-child {
+    width: 60%;
 }
 
 .formDetails {
@@ -9,8 +49,6 @@
     flex-direction: column;
     align-items: start;
 }
-
-.formDetails label>input {}
 
 .formDetails label {
     display: flex;
@@ -20,6 +58,8 @@
 .assignDiv {
     display: flex;
     flex-direction: column;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .assignDiv div {
@@ -31,7 +71,8 @@
     padding-right: 0.25rem;
 }
 
-.formContent {
+.submitRow {
     display: flex;
     width: 100%;
+    justify-content: center;
 }

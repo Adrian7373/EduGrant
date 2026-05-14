@@ -56,18 +56,18 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
     console.log(initialData);
 
     return (
-        <>
+        <div className={style.root}>
             {isEditing && (
-                <div>
+                <div className={style.assignedAdminsSection}>
                     <p>Assigned admins:</p>
                     {Array.isArray(initialData?.admins) && initialData.admins.length > 0 ? (
                         initialData.admins.map((admin) => (
-                            <div key={admin.adminId}>
+                            <div key={admin.adminId} className={style.assignedAdminRow}>
                                 <p>{admin.profiles[0]?.name}</p>
                                 {unassignedAdmins.includes(admin.adminId) ? (
-                                    <button onClick={() => handleReassign(admin.adminId)}>Reassign</button>
+                                    <button type="button" onClick={() => handleReassign(admin.adminId)}>Reassign</button>
                                 ) : (
-                                    <button onClick={() => handleUnassign(admin.adminId)}>Unassign</button>
+                                    <button type="button" onClick={() => handleUnassign(admin.adminId)}>Unassign</button>
                                 )}
                             </div>
                         ))
@@ -80,22 +80,24 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
                 await createBatch(unassignedAdmins, formData);
             }}>
                 <div className={style.formContent}>
-                    {isEditing && (
-                        <input type="hidden" name="batchId" value={initialData.batchId} />
-                    )}
-                    <div className={style.formDetails}>
-                        <label>Name:
-                            <input name="name" type="text" required defaultValue={initialData?.name} />
-                        </label>
-                        <label>Max Beneficiaries:
-                            <input name="max_ben" type="text" defaultValue={initialData?.max_approved} />
-                        </label>
-                        <label>Set Verification Code:
-                            <input name="code" type="text" required defaultValue={initialData?.verification_code} />
-                        </label>
-                        <label>Deadline:
-                            <input name="deadline" type="date" defaultValue={initialData?.deadline} />
-                        </label>
+                    <div className={style.formDetailsColumn}>
+                        {isEditing && (
+                            <input type="hidden" name="batchId" value={initialData.batchId} />
+                        )}
+                        <div className={style.formDetails}>
+                            <label>Name:
+                                <input name="name" type="text" required defaultValue={initialData?.name} />
+                            </label>
+                            <label>Max Beneficiaries:
+                                <input name="max_ben" type="text" defaultValue={initialData?.max_approved} />
+                            </label>
+                            <label>Set Verification Code:
+                                <input name="code" type="text" required defaultValue={initialData?.verification_code} />
+                            </label>
+                            <label>Deadline:
+                                <input name="deadline" type="date" defaultValue={initialData?.deadline} />
+                            </label>
+                        </div>
                     </div>
                     {isAddingAdmin ? (
                         <div className={style.assignDiv}>
@@ -123,8 +125,10 @@ export default function BatchForm({ profiles, initialData }: BatchFormProps) {
                         <button type="button" className={style.newAdminButton} onClick={() => setIsAddingAdmin(true)}>Add a new admin</button>
                     )}
                 </div>
-                <button type="submit">{initialData ? "Update" : "Create"}</button>
+                <div className={style.submitRow}>
+                    <button type="submit">{initialData ? "Update" : "Create"}</button>
+                </div>
             </form>
-        </>
+        </div>
     )
 }
