@@ -22,7 +22,7 @@
 }
 
 .assignedAdminRow p,
-.assignedAdminsSection > p {
+.assignedAdminsSection>p {
     margin: 0;
 }
 
@@ -46,6 +46,15 @@
 .formDetailsColumn {
     flex: 1 1 0;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.18);
+    min-height: 18rem;
+    box-sizing: border-box;
 }
 
 .formDetails {
@@ -53,6 +62,7 @@
     flex-direction: column;
     align-items: start;
     gap: 0.85rem;
+    height: 100%;
 }
 
 .formDetails label {
@@ -85,14 +95,16 @@
     flex: 1 1 0;
     min-width: 0;
     gap: 0.75rem;
-    justify-content: center;
+    justify-content: space-between;
     padding: 1rem;
     border: 1px solid rgba(148, 163, 184, 0.22);
     border-radius: 16px;
     background: rgba(15, 23, 42, 0.18);
+    min-height: 18rem;
+    box-sizing: border-box;
 }
 
-.assignDiv > label {
+.assignDiv>label {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
@@ -196,4 +208,8 @@
     .submitRow button {
         width: 100%;
     }
+}
+
+.assignHint {
+    font-size: 20px;
 }
