@@ -31,8 +31,10 @@ export default function AssignAdminButton({ profiles, sessionId }: AssignAdminBu
                                     {profile.name}
                                 </label>
                             ))}
-                            <button type="button" onClick={() => setIsOpen(false)}>Cancel</button>
-                            <button type="submit">Assign</button>
+                            <div className={style.utils}>
+                                <button type="button" onClick={() => setIsOpen(false)}>Cancel</button>
+                                <button type="submit">Assign</button>
+                            </div>
                         </form>
                     </div>
                 </div>
