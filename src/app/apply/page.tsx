@@ -126,13 +126,13 @@ export default function ApplicationForm() {
                     <button type="button" onClick={() => router.back()} className={style.homeButton} hidden={formStep !== 1}>&#9664; Home</button>
                     <input type="hidden" value={verifiedBatchId} name="batch_id" />
                     <label>Name:
-                        <input ref={nameInputRef} onChange={(e) => setNameInput(e.target.value)} required name="name" type="text" className={style.nameInput} />
+                        <input placeholder="Juan Dela Cruz" ref={nameInputRef} onChange={(e) => setNameInput(e.target.value)} required name="name" type="text" className={style.nameInput} />
                     </label>
                     <label>Age:
-                        <input required name="age" type="number" className={style.ageInput} />
+                        <input required name="age" type="number" min={5} className={style.ageInput} />
                     </label>
                     <label>Sex:
-                        <select name="sex" id="sex">
+                        <select name="sex" id="sex" required>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
@@ -141,7 +141,7 @@ export default function ApplicationForm() {
                         <input name="religion" type="text" className={style.religionInput} />
                     </label>
                     <label>Citizenship:
-                        <input required name="citizenship" type="text" className={style.citizenShipInput} />
+                        <input placeholder="Filipino" required name="citizenship" type="text" className={style.citizenShipInput} />
                     </label>
                     <label>Date of Birth:
                         <input required name="bday" type="date" className={style.bdayInput} />
@@ -158,11 +158,11 @@ export default function ApplicationForm() {
                     </label>
 
                     <label>Contact number:
-                        <input required name="contact" type="tel" className={style.contactInput} />
+                        <input placeholder="09XXXXXXXXX" required name="contact" type="tel" className={style.contactInput} />
                     </label>
 
                     <label>Email:
-                        <input name="email" type="email" className={style.emailInput} />
+                        <input placeholder="sample@gmail.com" name="email" type="email" className={style.emailInput} />
                     </label>
 
                     <label>Permanent Address:
@@ -179,7 +179,7 @@ export default function ApplicationForm() {
                     </label>
 
                     <label>School Name:
-                        <input required name="schoolName" type="text" className={style.schoolNameInput} />
+                        <input placeholder="Paaralan National High School" required name="schoolName" type="text" className={style.schoolNameInput} />
                     </label>
 
                     <label>School Address:
@@ -209,7 +209,7 @@ export default function ApplicationForm() {
                             </label>
 
                             <label>Course:
-                                <input name="course" type="text" className={style.courseInput} />
+                                <input placeholder="BSIT" name="course" type="text" className={style.courseInput} />
                             </label>
                             <label>General Weighted Average(GWA):
                                 <input required name="gwa" type="number" step="0.01" className={style.gwaInput} />
@@ -232,7 +232,7 @@ export default function ApplicationForm() {
                             </label>
 
                             <label>Grade Average:
-                                <input required name="average" type="number" step="0.01" className={style.averageInput} />
+                                <input placeholder="XX" required name="average" type="number" step="0.01" className={style.averageInput} />
                             </label>
                         </>
                     )}
@@ -264,8 +264,8 @@ export default function ApplicationForm() {
                         </label>
                     </label>
 
-                    <label>Total Parents Gross Income:
-                        <input name="totalIncome" type="number" className={style.totalIncomeInput} />
+                    <label>Parents Total Monthly Income:
+                        <input placeholder="5000" name="totalIncome" type="number" className={style.totalIncomeInput} />
                     </label>
 
                     <label>Number of Child(not including yourself):
