@@ -1,3 +1,7 @@
+body {
+    background-color: #171717;
+}
+
 .personalInfoDiv[hidden] {
     padding: clamp(1rem, calc(0.909rem + 0.455vw), 2rem);
     display: none !important;
@@ -219,6 +223,7 @@
     justify-content: space-evenly;
     flex-direction: column;
     height: 40vh;
+    padding: clamp(16px, calc(12.308px + 0.513vw), 32px);
 }
 
 .verifyButton {
