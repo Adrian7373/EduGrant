@@ -212,7 +212,7 @@ export default function ApplicationForm() {
                                 <input placeholder="BSIT" name="course" type="text" className={style.courseInput} />
                             </label>
                             <label>General Weighted Average(GWA):
-                                <input required name="gwa" type="number" step="0.01" className={style.gwaInput} />
+                                <input max={5} min={1} required name="gwa" type="number" step="0.01" className={style.gwaInput} />
                             </label>
                         </>
                     )}
@@ -232,7 +232,7 @@ export default function ApplicationForm() {
                             </label>
 
                             <label>Grade Average:
-                                <input placeholder="XX" required name="average" type="number" step="0.01" className={style.averageInput} />
+                                <input min={65} placeholder="XX" required name="average" type="number" step="0.01" className={style.averageInput} />
                             </label>
                         </>
                     )}
@@ -265,11 +265,11 @@ export default function ApplicationForm() {
                     </label>
 
                     <label>Parents Total Monthly Income:
-                        <input placeholder="5000" name="totalIncome" type="number" className={style.totalIncomeInput} />
+                        <input min={0} placeholder="5000" name="totalIncome" type="number" className={style.totalIncomeInput} />
                     </label>
 
                     <label>Number of Child(not including yourself):
-                        <input onChange={(e) => handleDependents(e.target.value)} required name="numberOfChild" type="number" className={style.numberOfChildInput} />
+                        <input min={0} onChange={(e) => handleDependents(e.target.value)} required name="numberOfChild" type="number" className={style.numberOfChildInput} />
                     </label>
                 </div>
 
@@ -282,13 +282,13 @@ export default function ApplicationForm() {
                         <input name="motherName" type="text" className={style.motherNameInput} />
                     </label>
                     <label>Age:
-                        <input name="motherAge" type="text" className={style.motherAgeInput} />
+                        <input min={1} name="motherAge" type="text" className={style.motherAgeInput} />
                     </label>
                     <label>Address:
                         <input name="motherAddress" type="text" className={style.motherAddressInput} />
                     </label>
                     <label>Contact Number:
-                        <input name="motherContact" type="tel" className={style.motherContactInput} />
+                        <input placeholder="09XXXXXXXXX" name="motherContact" type="tel" className={style.motherContactInput} />
                     </label>
                     <label>Occupation:
                         <input name="motherOccupation" type="text" className={style.motherOccupationInput} />
@@ -312,13 +312,13 @@ export default function ApplicationForm() {
                         <input name="fatherName" type="text" className={style.fatherNameInput} />
                     </label>
                     <label>Age:
-                        <input name="fatherAge" type="text" className={style.fatherAgeInput} />
+                        <input min={1} name="fatherAge" type="text" className={style.fatherAgeInput} />
                     </label>
                     <label>Address:
                         <input name="fatherAddress" type="text" className={style.fatherAddressInput} />
                     </label>
                     <label>Contact Number:
-                        <input name="fatherContact" type="tel" className={style.fatherContactInput} />
+                        <input placeholder="09XXXXXXXXX" name="fatherContact" type="tel" className={style.fatherContactInput} />
                     </label>
                     <label>Occupation:
                         <input name="fatherOccupation" type="text" className={style.fatherOccupationInput} />
