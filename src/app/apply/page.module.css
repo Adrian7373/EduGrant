@@ -70,6 +70,7 @@ body {
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
 }
 
 .familyBackgroundDiv>label {
@@ -219,11 +220,9 @@ body {
 
 .homeButton {
     border: 2px solid;
-    width: 20%;
     background: none;
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
-    max-width: 200px;
-    font-size: clamp(0.7rem, 1.1rem, 8rem);
+    font-size: clamp(0.63rem, calc(0.318rem + 1.534vw), 4.00rem);
     color: #2563eb;
     border-radius: clamp(1rem, 1.2rem, 4rem);
     transition: all 0.2s ease-in-out;
