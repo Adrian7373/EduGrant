@@ -1,9 +1,51 @@
 .copyButton {
-    height: 80%;
-    width: 30%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.8rem;
     background-color: #2563eb;
     color: white;
-    border-style: hidden;
-    border-radius: 10px;
-    font-size: clamp(1.00rem, calc(0.909rem + 0.455vw), 2.00rem);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 160ms ease, transform 120ms ease, box-shadow 120ms ease;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.18);
+}
+
+.copyButton:hover {
+    background-color: #1e40af;
+    box-shadow: 0 6px 20px rgba(30, 64, 175, 0.22);
+}
+
+.copyButton:active {
+    transform: translateY(1px);
+}
+
+.copied {
+    background-color: #059669; /* green */
+    box-shadow: 0 6px 18px rgba(5, 150, 105, 0.18);
+}
+
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.label {
+    font-weight: 600;
+}
+
+.srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }

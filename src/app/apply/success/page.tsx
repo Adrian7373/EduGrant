@@ -9,36 +9,40 @@ interface SuccessProps {
 }
 
 export default async function SuccessPage({ searchParams }: SuccessProps) {
-
     const { id } = await searchParams;
 
     const supabase = await createClient();
 
-    const { data, error } = await supabase
-        .from("applications")
-        .select("status");
+    const { data, error } = await supabase.from("applications").select("status");
 
     if (error) {
-        throw new Error("Failed to get application count", error);
+        throw new Error("Failed to get application count");
     }
 
-    const appsCount = data.length;
-    const approvesCount = data.filter((record) => record.status === "APPROVED").length;
+    const appsCount = Array.isArray(data) ? data.length : 0;
+    const approvesCount = Array.isArray(data) ? data.filter((record: any) => record.status === "APPROVED").length : 0;
 
     return (
         <div className={style.mainDiv}>
-            <p>Thank You! Your application has been submitted successfully!</p>
-            <div>
-                Total applicants:{appsCount}
+            <div className={style.card}>
+                <div className={style.title}>Thank you — your application was submitted</div>
+                <div className={style.counts}>
+                    <div className={style.countItem}>Total applicants: {appsCount}</div>
+                    <div className={style.countItem}>Approved: {approvesCount}</div>
+                </div>
+
+                <div className={style.copyTrackID}>
+                    <div>
+                        <div className={style.note}>Your application tracking ID</div>
+                        <div className={style.idPill}>{id ?? "—"}</div>
+                    </div>
+                    <CopyButton text={id || ""} />
+                </div>
+
+                <div className={style.note}>Please save your tracking ID for future reference.</div>
+
+                <Link className={style.trackButton} href="/track">Track your application</Link>
             </div>
-            <div>
-                Total approved applicants:{approvesCount}
-            </div>
-            <div className={style.copyTrackID}>
-                <p>Your application tracking ID:{id}</p><CopyButton text={id || ""} />
-            </div>
-            <p>Please save your tracking ID.</p>
-            <Link className={style.trackButton} href="/track">Track your application</Link>
         </div>
-    )
+    );
 }
