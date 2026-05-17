@@ -147,8 +147,8 @@ export default function ApplicationForm() {
                         <input required name="bday" type="date" className={style.bdayInput} />
                     </label>
                     <label>Marital Status:
-                        <select required name="maritalStatus" id="maritalStatus" className={style.maritalStatusInput}>
-                            <option value="" disabled selected hidden>Select an option</option>
+                        <select required name="maritalStatus" id="maritalStatus" className={style.maritalStatusInput} defaultValue="">
+                            <option value="" disabled hidden>Select an option</option>
                             <option value="single">Single</option>
                             <option value="married">Married</option>
                             <option value="separated">Separated</option>
@@ -170,8 +170,8 @@ export default function ApplicationForm() {
                     </label>
 
                     <label>School Type:
-                        <select required name="schoolType" id="schoolType" className={style.schoolTypeInput}>
-                            <option value="" disabled selected hidden>Select an option</option>
+                        <select required name="schoolType" id="schoolType" className={style.schoolTypeInput} defaultValue="">
+                            <option value="" disabled hidden>Select an option</option>
                             <option value="private">Private</option>
                             <option value="public">Public</option>
                             <option value="vocational">Vocational</option>
@@ -187,8 +187,8 @@ export default function ApplicationForm() {
                     </label>
 
                     <label>Student Level:
-                        <select onChange={(e) => handleStudentLevel(e.target.value)} required name="studentLevel" id="studentLevel" className={style.studentLevelInput}>
-                            <option value="" disabled selected hidden>Select an option</option>
+                        <select onChange={(e) => handleStudentLevel(e.target.value)} required name="studentLevel" id="studentLevel" className={style.studentLevelInput} defaultValue="">
+                            <option value="" disabled hidden>Select an option</option>
                             <option value="junior">Junior High Student</option>
                             <option value="senior">Senior High Student</option>
                             <option value="college">College Student</option>
@@ -198,8 +198,8 @@ export default function ApplicationForm() {
                     {isCollegeStudent && (
                         <>
                             <label>Year Level:
-                                <select required name="yearLevel" id="yearLevel" className={style.yearLevelInput}>
-                                    <option value="" disabled selected hidden>Select an option</option>
+                                <select required name="yearLevel" id="yearLevel" className={style.yearLevelInput} defaultValue="">
+                                    <option value="" disabled hidden>Select an option</option>
                                     <option value="y1">1st Year College</option>
                                     <option value="y2">2nd Year College</option>
                                     <option value="y3">3rd Year College</option>
@@ -220,8 +220,8 @@ export default function ApplicationForm() {
                     {!isCollegeStudent && (
                         <>
                             <label>Grade:
-                                <select required name="gradeLevel" id="gradeLevel" className={style.gradeLevelInput}>
-                                    <option value="" disabled selected hidden>Select an option</option>
+                                <select required name="gradeLevel" id="gradeLevel" className={style.gradeLevelInput} defaultValue="">
+                                    <option value="" disabled hidden>Select an option</option>
                                     <option value="7">Grade 7</option>
                                     <option value="8">Grade 8</option>
                                     <option value="9">Grade 9</option>
@@ -294,8 +294,8 @@ export default function ApplicationForm() {
                         <input name="motherOccupation" type="text" className={style.motherOccupationInput} />
                     </label>
                     <label>Education Attainment:
-                        <select name="motherEducAttainment" id="motherEducAttainment" className={style.motherEducAttainmentInput}>
-                            <option value="" disabled selected hidden>Select an option</option>
+                        <select name="motherEducAttainment" id="motherEducAttainment" className={style.motherEducAttainmentInput} defaultValue="">
+                            <option value="" disabled hidden>Select an option</option>
                             <option value="college">College Graduate</option>
                             <option value="highSchool">High School Graduate</option>
                             <option value="elemSchool">Elementary School Graduate</option>
@@ -324,8 +324,8 @@ export default function ApplicationForm() {
                         <input name="fatherOccupation" type="text" className={style.fatherOccupationInput} />
                     </label>
                     <label>Education Attainment:
-                        <select name="fatherEducAttainment" id="fatherEducAttainment" className={style.fatherEducAttainmentInput}>
-                            <option value="" disabled selected hidden>Select an option</option>
+                        <select name="fatherEducAttainment" id="fatherEducAttainment" className={style.fatherEducAttainmentInput} defaultValue="">
+                            <option value="" disabled hidden>Select an option</option>
                             <option value="college">College Graduate</option>
                             <option value="highSchool">High School Graduate</option>
                             <option value="elemSchool">Elementary School Graduate</option>
@@ -343,8 +343,8 @@ export default function ApplicationForm() {
                                 <input name="childrenName" type="text" className={style.childrenNameInput} />
                             </label>
                             <label>Occupation:
-                                <select name="childrenOccupation" id="childrenOccupation" className={style.childrenOccupationInput}>
-                                    <option value="" disabled selected hidden>Select an option</option>
+                                <select name="childrenOccupation" id="childrenOccupation" className={style.childrenOccupationInput} defaultValue="">
+                                    <option value="" disabled hidden>Select an option</option>
                                     <option value="student">Student</option>
                                     <option value="graduate">Graduate</option>
                                     <option value="employed">Employed</option>
