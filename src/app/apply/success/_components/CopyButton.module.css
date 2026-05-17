@@ -23,7 +23,8 @@
 }
 
 .copied {
-    background-color: #059669; /* green */
+    background-color: #059669;
+    /* green */
     box-shadow: 0 6px 18px rgba(5, 150, 105, 0.18);
 }
 

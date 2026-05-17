@@ -75,6 +75,13 @@
 }
 
 @media (max-width: 520px) {
-    .counts { flex-direction: column; gap: 0.5rem; }
-    .copyTrackID { flex-direction: column; gap: 0.4rem; }
+    .counts {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .copyTrackID {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
 }
