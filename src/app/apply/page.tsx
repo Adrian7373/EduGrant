@@ -373,10 +373,10 @@ export default function ApplicationForm() {
                     </label>
                 </div>
 
-                <div className="absolute right-3 top-2.5 text-sm font-bold" hidden={isSubmitting}>
-                    {nameStatus === 'checking' && <span className="text-gray-500 animate-pulse">Checking...</span>}
-                    {nameStatus === 'record already exists!' && <span className="text-red-600">Your application is already submitted</span>}
-                    {nameStatus === 'Available for application' && <span className="text-green-600">Eligible for application</span>}
+                <div className={style.remarkDiv} hidden={isSubmitting}>
+                    {nameStatus === 'checking' && <p style={{ color: '#ffffff' }}>Checking...</p>}
+                    {nameStatus === 'record already exists!' && <p style={{ color: '#fb2a2a' }}>Your application is already submitted</p>}
+                    {nameStatus === 'Available for application' && <p style={{ color: '#2be11a' }}>Eligible for application</p>}
                 </div>
 
                 <div className={style.utilButtons}>

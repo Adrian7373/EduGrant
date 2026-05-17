@@ -54,6 +54,11 @@ body {
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
+}
+
+.personalInfoDiv>label>input:focus {
+    outline: none;
 }
 
 .personalInfoDiv>label>select {
@@ -154,6 +159,7 @@ body {
 .nextButton {
     background-color: #2563eb;
     width: 40%;
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     max-width: 200px;
     font-size: clamp(0.7rem, 1.1rem, 8rem);
     color: white;
@@ -170,6 +176,7 @@ body {
 .backButton {
     border: 2px solid;
     width: 40%;
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     background: none;
     max-width: 200px;
     height: 6vh;
@@ -316,4 +323,8 @@ body {
     .homeButton1 {
         display: none;
     }
+}
+
+.remarkDiv {
+    width: 80%;
 }
