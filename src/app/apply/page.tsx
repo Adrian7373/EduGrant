@@ -20,7 +20,17 @@ export default function ApplicationForm() {
     const [code, setCode] = useState<string>("");
     const [message, setMessage] = useState<string>("");
     const [verifiedBatchId, setVerifiedBatchId] = useState<string | null>(null)
+    const [selectedFiles, setSelectedFiles] = useState<{ coe: string; cog: string; validID: string }>({ coe: "", cog: "", validID: "" });
     const router = useRouter();
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fileType: "coe" | "cog" | "validID") => {
+        if (e.target.files && e.target.files[0]) {
+            setSelectedFiles(prev => ({
+                ...prev,
+                [fileType]: e.target.files![0].name
+            }));
+        }
+    };
 
     const handleVerify = async () => {
         if (!code) return;
@@ -332,7 +342,7 @@ export default function ApplicationForm() {
                         <input name="fatherAddress" type="text" className={style.fatherAddressInput} />
                     </label>
                     <label>Contact Number:
-                        <input placeholder="09XXXXXXXXX" name="fatherContact" type="tel" className={style.fatherContactInput} />
+                        <input minLength={11} placeholder="09XXXXXXXXX" name="fatherContact" type="tel" className={style.fatherContactInput} />
                     </label>
                     <label>Occupation:
                         <input name="fatherOccupation" type="text" className={style.fatherOccupationInput} />
@@ -379,22 +389,28 @@ export default function ApplicationForm() {
                     <label>
                         Certificate of Registration/Enrollment:
                         <div className={style.fileInputWrapper}>
-                            <input required name="coe" type="file" className={style.coeInput} id="coe" />
-                            <span className={style.fileLabel}>Add file</span>
+                            <input required name="coe" type="file" className={style.coeInput} id="coe" onChange={(e) => handleFileChange(e, "coe")} />
+                            <span className={`${style.fileLabel} ${selectedFiles.coe ? style.fileAdded : ""}`}>
+                                {selectedFiles.coe ? `✓ ${selectedFiles.coe}` : "Add file"}
+                            </span>
                         </div>
                     </label>
                     <label>
                         Certificate of Grades/Report Card:
                         <div className={style.fileInputWrapper}>
-                            <input required name="cog" type="file" className={style.cogInput} id="cog" />
-                            <span className={style.fileLabel}>Add file</span>
+                            <input required name="cog" type="file" className={style.cogInput} id="cog" onChange={(e) => handleFileChange(e, "cog")} />
+                            <span className={`${style.fileLabel} ${selectedFiles.cog ? style.fileAdded : ""}`}>
+                                {selectedFiles.cog ? `✓ ${selectedFiles.cog}` : "Add file"}
+                            </span>
                         </div>
                     </label>
                     <label>
                         School ID/Valid ID:
                         <div className={style.fileInputWrapper}>
-                            <input required name="validID" type="file" className={style.idInput} id="validID" />
-                            <span className={style.fileLabel}>Add file</span>
+                            <input required name="validID" type="file" className={style.idInput} id="validID" onChange={(e) => handleFileChange(e, "validID")} />
+                            <span className={`${style.fileLabel} ${selectedFiles.validID ? style.fileAdded : ""}`}>
+                                {selectedFiles.validID ? `✓ ${selectedFiles.validID}` : "Add file"}
+                            </span>
                         </div>
                     </label>
                 </div>

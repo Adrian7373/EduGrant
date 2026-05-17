@@ -260,6 +260,23 @@ body {
     text-align: center;
 }
 
+.requirementFilesDiv>label>.fileInputWrapper {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: clamp(0.5rem, calc(0.35rem + 0.75vw), 1.5rem);
+    padding: clamp(0.75rem, calc(0.55rem + 0.8vw), 1.5rem);
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.requirementFilesDiv>label>.fileInputWrapper:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
 .requirementFilesDiv>label>input:hover {
     background: rgba(0, 0, 0, 0.4);
     border-color: rgba(255, 255, 255, 0.12);
@@ -312,6 +329,15 @@ body {
 
 .fileInputWrapper>input:active+.fileLabel {
     transform: translateY(0);
+}
+
+.fileAdded {
+    background-color: #10b981 !important;
+    color: white;
+}
+
+.fileAdded:hover {
+    background-color: #059669 !important;
 }
 
 .nextButton {
