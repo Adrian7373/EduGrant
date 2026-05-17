@@ -2,6 +2,13 @@ body {
     background-color: #171717;
 }
 
+.mainDiv>form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .personalInfoDiv[hidden] {
     padding: clamp(1rem, calc(0.909rem + 0.455vw), 2rem);
     display: none !important;
@@ -9,6 +16,8 @@ body {
 
 .mainDiv {
     height: 100vh;
+    padding: clamp(0.625rem, calc(0.409rem + 1.08vw), 3rem);
+    width: 100vw;
 }
 
 .header {
@@ -18,18 +27,43 @@ body {
     color: white;
 }
 
+.personalInfoDiv {
+    width: 80%;
+}
+
 .personalInfoDiv>label {
     color: white;
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
     display: flex;
     flex-direction: column;
+    gap: clamp(0.188rem, calc(0.148rem + 0.199vw), 0.625rem);
 
     input {
         width: clamp(15rem, calc(-0.682rem + 78.409vw), 187.5rem);
         height: 3vh;
         ;
     }
+}
+
+.personalInfoDiv>label>input {
+    width: 100%;
+    height: 4vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
+}
+
+.personalInfoDiv>label>select {
+    width: 100%;
+    height: 5vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
 }
 
 .familyBackgroundDiv>label {
@@ -119,9 +153,8 @@ body {
 
 .nextButton {
     background-color: #2563eb;
-    width: 20%;
+    width: 40%;
     max-width: 200px;
-    height: 6vh;
     font-size: clamp(0.7rem, 1.1rem, 8rem);
     color: white;
     border-style: hidden;
@@ -136,7 +169,7 @@ body {
 
 .backButton {
     border: 2px solid;
-    width: 20%;
+    width: 40%;
     background: none;
     max-width: 200px;
     height: 6vh;
@@ -173,14 +206,15 @@ body {
 .utilButtons {
     display: flex;
     justify-content: right;
+    width: 80%;
 }
 
 .homeButton {
     border: 2px solid;
     width: 20%;
     background: none;
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     max-width: 200px;
-    height: 6vh;
     font-size: clamp(0.7rem, 1.1rem, 8rem);
     color: #2563eb;
     border-radius: clamp(1rem, 1.2rem, 4rem);
