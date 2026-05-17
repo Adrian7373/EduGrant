@@ -376,14 +376,26 @@ export default function ApplicationForm() {
 
                 <div id="step-6" className={style.requirementFilesDiv} hidden={formStep != 6 || isSubmitting}>
                     <p className={style.header}>ADDITIONAL REQUIREMENTS</p>
-                    <label>Certificate of Registration/Enrollment:
-                        <input required name="coe" type="file" className={style.coeInput} />
+                    <label>
+                        Certificate of Registration/Enrollment:
+                        <div className={style.fileInputWrapper}>
+                            <input required name="coe" type="file" className={style.coeInput} id="coe" />
+                            <span className={style.fileLabel}>Add file</span>
+                        </div>
                     </label>
-                    <label>Certificate of Grades/Report Card:
-                        <input required name="cog" type="file" className={style.cogInput} />
+                    <label>
+                        Certificate of Grades/Report Card:
+                        <div className={style.fileInputWrapper}>
+                            <input required name="cog" type="file" className={style.cogInput} id="cog" />
+                            <span className={style.fileLabel}>Add file</span>
+                        </div>
                     </label>
-                    <label>School ID/Valid ID:
-                        <input required name="validID" type="file" className={style.idInput} />
+                    <label>
+                        School ID/Valid ID:
+                        <div className={style.fileInputWrapper}>
+                            <input required name="validID" type="file" className={style.idInput} id="validID" />
+                            <span className={style.fileLabel}>Add file</span>
+                        </div>
                     </label>
                 </div>
 
