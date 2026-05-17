@@ -248,25 +248,35 @@ export default function ApplicationForm() {
 
                 <div id="step-2" className={style.familyBackgroundDiv} hidden={formStep != 2}>
                     <p className={style.header}>FAMILY BACKGROUND</p>
-                    <label>Mother:
-                        <label htmlFor="aliveTrue">
-                            <input type="radio" id="aliveMotherTrue" name="isMotherAlive" value="true" className={style.aliveInput} />Alive
+                    <div className={style.listContainer}>
+                        <label className={style.groupLabel}>Mother:</label>
+                        <label className={style.listRow}>
+                            <input type="radio" id="aliveMotherTrue" name="isMotherAlive" value="true" className={style.hiddenInput} />
+                            <span className={style.rowText}>Alive</span>
+                            <span className={style.customCircle} aria-hidden></span>
                         </label>
 
-                        <label htmlFor="aliveFalse">
-                            <input type="radio" id="aliveMotherFalse" name="isMotherAlive" value="false" className={style.aliveInput} />Deceased
+                        <label className={style.listRow}>
+                            <input type="radio" id="aliveMotherFalse" name="isMotherAlive" value="false" className={style.hiddenInput} />
+                            <span className={style.rowText}>Deceased</span>
+                            <span className={style.customCircle} aria-hidden></span>
                         </label>
-                    </label>
+                    </div>
 
-                    <label>Father:
-                        <label htmlFor="aliveTrue">
-                            <input type="radio" id="aliveFatherTrue" name="isFatherAlive" value="true" className={style.aliveInput} />Alive
+                    <div className={style.listContainer}>
+                        <label className={style.groupLabel}>Father:</label>
+                        <label className={style.listRow}>
+                            <input type="radio" id="aliveFatherTrue" name="isFatherAlive" value="true" className={style.hiddenInput} />
+                            <span className={style.rowText}>Alive</span>
+                            <span className={style.customCircle} aria-hidden></span>
                         </label>
 
-                        <label htmlFor="aliveFalse">
-                            <input type="radio" id="aliveFatherFalse" name="isFatherAlive" value="false" className={style.aliveInput} />Deceased
+                        <label className={style.listRow}>
+                            <input type="radio" id="aliveFatherFalse" name="isFatherAlive" value="false" className={style.hiddenInput} />
+                            <span className={style.rowText}>Deceased</span>
+                            <span className={style.customCircle} aria-hidden></span>
                         </label>
-                    </label>
+                    </div>
 
                     <label>Parents Total Monthly Income:
                         <input min={0} placeholder="5000" name="totalIncome" type="number" className={style.totalIncomeInput} />

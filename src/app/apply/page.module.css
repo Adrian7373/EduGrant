@@ -35,7 +35,7 @@ body {
 .personalInfoDiv>label {
     color: white;
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
-    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
     flex-direction: column;
     gap: clamp(0.188rem, calc(0.148rem + 0.199vw), 0.625rem);
@@ -75,9 +75,10 @@ body {
 
 .familyBackgroundDiv>label {
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
-    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
     flex-direction: column;
+    color: white;
 
     input {
         width: clamp(4rem, calc(7.636px + 7.614vw), 300px);
@@ -177,11 +178,10 @@ body {
 
 .backButton {
     border: 2px solid;
-    width: 40%;
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     background: none;
+    width: 40%;
     max-width: 200px;
-    height: 6vh;
     font-size: clamp(0.7rem, 1.1rem, 8rem);
     color: #2563eb;
     border-radius: clamp(1rem, 1.2rem, 4rem);
@@ -329,4 +329,99 @@ body {
     width: 100%;
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     margin-top: 0;
+}
+
+/* List row radio styling */
+.groupLabel {
+    display: block;
+    color: white;
+    margin: clamp(0.25rem, 0.5vw, 0.75rem) 0;
+    font-weight: 600;
+}
+
+.listRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.listRow:hover {
+    background: rgba(255, 255, 255, 0.02);
+    transform: translateY(-1px);
+}
+
+.listRow:active {
+    transform: translateY(0);
+}
+
+.rowText {
+    color: white;
+    flex: 1 1 auto;
+    font-size: 1rem;
+}
+
+.customCircle {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #555;
+    margin-left: 12px;
+    display: inline-block;
+    flex: 0 0 22px;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.customCircle::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: transparent;
+    transition: width 0.12s ease, height 0.12s ease, background 0.12s ease;
+}
+
+.hiddenInput {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* when radio is checked, show inner fill and stronger border */
+.hiddenInput:checked+.rowText+.customCircle {
+    border-color: #2be11a;
+    box-shadow: 0 0 0 6px rgba(43, 225, 26, 0.06);
+}
+
+.hiddenInput:checked+.rowText+.customCircle::after {
+    width: 10px;
+    height: 10px;
+    background: #2be11a;
+}
+
+.listContainer {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #171717;
+    /* Dark theme background */
+    padding: 1rem;
+    border-radius: 12px;
+    color: white;
+}
+
+.familyBackgroundDiv>label {
+    border: 1px solid red;
 }
