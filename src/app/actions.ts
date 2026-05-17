@@ -320,12 +320,14 @@ export async function signoutUser() {
 export async function getTrackingDetails(id: string) {
     const supabase = await createClient();
 
+    const cleanId = id.trim().toUpperCase();
+
     const { data: application, error } = await supabase
-        .rpc("get_application_status", { tracking_id: id })
+        .rpc("get_application_status", { query_id: cleanId }) // <-- Change this key!
         .maybeSingle();
 
     if (error) {
-        throw new Error("Failed to track", error)
+        console.error("Supabase Error in getTrackingDetails:", error);
     } else if (!application) return { message: "Application not found" }
 
     return { application };
