@@ -74,17 +74,38 @@ body {
 }
 
 .familyBackgroundDiv>label {
+    color: white;
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
     flex-direction: column;
-    color: white;
+    gap: clamp(0.188rem, calc(0.148rem + 0.199vw), 0.625rem);
+}
 
-    input {
-        width: clamp(4rem, calc(7.636px + 7.614vw), 300px);
-        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
-        ;
-    }
+.familyBackgroundDiv>label>input {
+    width: 100%;
+    height: 4vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
+}
+
+.familyBackgroundDiv>label>input:focus {
+    outline: none;
+}
+
+.familyBackgroundDiv>label>select {
+    width: 100%;
+    height: 5vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
 }
 
 .familyBackgroundDiv[hidden] {
@@ -93,16 +114,38 @@ body {
 }
 
 .motherInfoDiv>label {
+    color: white;
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
-    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
     flex-direction: column;
+    gap: clamp(0.188rem, calc(0.148rem + 0.199vw), 0.625rem);
+}
 
-    input {
-        width: clamp(15rem, calc(-0.682rem + 78.409vw), 187.5rem);
-        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
-        ;
-    }
+.motherInfoDiv>label>input {
+    width: 100%;
+    height: 4vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
+}
+
+.motherInfoDiv>label>input:focus {
+    outline: none;
+}
+
+.motherInfoDiv>label>select {
+    width: 100%;
+    height: 5vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
 }
 
 .motherInfoDiv[hidden] {
@@ -111,16 +154,38 @@ body {
 }
 
 .fatherInfoDiv>label {
+    color: white;
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
-    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
     flex-direction: column;
+    gap: clamp(0.188rem, calc(0.148rem + 0.199vw), 0.625rem);
+}
 
-    input {
-        width: clamp(15rem, calc(-0.682rem + 78.409vw), 187.5rem);
-        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
-        ;
-    }
+.fatherInfoDiv>label>input {
+    width: 100%;
+    height: 4vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
+}
+
+.fatherInfoDiv>label>input:focus {
+    outline: none;
+}
+
+.fatherInfoDiv>label>select {
+    width: 100%;
+    height: 5vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
 }
 
 .fatherInfoDiv[hidden] {
@@ -129,16 +194,38 @@ body {
 }
 
 .dependentDiv>label {
+    color: white;
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
-    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
     flex-direction: column;
+    gap: clamp(0.188rem, calc(0.148rem + 0.199vw), 0.625rem);
+}
 
-    input {
-        width: clamp(15rem, calc(-0.682rem + 78.409vw), 187.5rem);
-        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
-        ;
-    }
+.dependentDiv>label>input {
+    width: 100%;
+    height: 4vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
+}
+
+.dependentDiv>label>input:focus {
+    outline: none;
+}
+
+.dependentDiv>label>select {
+    width: 100%;
+    height: 5vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
 }
 
 .dependentDiv[hidden] {
@@ -147,16 +234,27 @@ body {
 }
 
 .requirementFilesDiv>label {
+    color: white;
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
-    font-size: clamp(1.5rem, 1.2955rem + 1.0227vw, 3.75rem);
+    font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
     flex-direction: column;
+    gap: clamp(0.188rem, calc(0.148rem + 0.199vw), 0.625rem);
+}
 
-    input {
-        width: clamp(15rem, calc(-0.682rem + 78.409vw), 187.5rem);
-        height: clamp(1.5rem, calc(1.273rem + 1.136vw), 4rem);
-        ;
-    }
+.requirementFilesDiv>label>input {
+    width: 100%;
+    height: 4vh;
+    background: none;
+    border: 2px solid white;
+    border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    color: white;
+    font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
+}
+
+.requirementFilesDiv>label>input:focus {
+    outline: none;
 }
 
 .nextButton {
@@ -420,8 +518,4 @@ body {
     padding: 1rem;
     border-radius: 12px;
     color: white;
-}
-
-.familyBackgroundDiv>label {
-    border: 1px solid red;
 }
