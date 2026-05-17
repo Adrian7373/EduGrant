@@ -127,7 +127,11 @@ export default function ApplicationForm() {
                     <input type="hidden" value={verifiedBatchId} name="batch_id" />
                     <label>Name:
                         <input placeholder="Juan Dela Cruz" ref={nameInputRef} onChange={(e) => setNameInput(e.target.value)} required name="name" type="text" className={style.nameInput} />
+                        {nameStatus === 'checking' && <p style={{ color: '#ffffff', fontSize: '1rem' }}>Checking...</p>}
+                        {nameStatus === 'record already exists!' && <p style={{ color: '#fb2a2a', fontSize: '1rem' }}>Your application is already submitted</p>}
+                        {nameStatus === 'Available for application' && <p style={{ color: '#2be11a', fontSize: '1rem' }}>Eligible for application</p>}
                     </label>
+
                     <label>Age:
                         <input required name="age" type="number" min={5} className={style.ageInput} />
                     </label>
@@ -161,7 +165,7 @@ export default function ApplicationForm() {
                         <input placeholder="09XXXXXXXXX" required name="contact" type="tel" className={style.contactInput} />
                     </label>
 
-                    <label>Email:
+                    <label>Email{"(optional)"}:
                         <input placeholder="sample@gmail.com" name="email" type="email" className={style.emailInput} />
                     </label>
 
@@ -371,12 +375,6 @@ export default function ApplicationForm() {
                     <label>School ID/Valid ID:
                         <input required name="validID" type="file" className={style.idInput} />
                     </label>
-                </div>
-
-                <div className={style.remarkDiv} hidden={isSubmitting}>
-                    {nameStatus === 'checking' && <p style={{ color: '#ffffff' }}>Checking...</p>}
-                    {nameStatus === 'record already exists!' && <p style={{ color: '#fb2a2a' }}>Your application is already submitted</p>}
-                    {nameStatus === 'Available for application' && <p style={{ color: '#2be11a' }}>Eligible for application</p>}
                 </div>
 
                 <div className={style.utilButtons}>

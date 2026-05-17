@@ -325,6 +325,8 @@ body {
     }
 }
 
-.remarkDiv {
-    width: 80%;
+.remarkDiv>p {
+    width: 100%;
+    margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
+    margin-top: 0;
 }
