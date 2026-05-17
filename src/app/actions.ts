@@ -27,7 +27,10 @@ const applicationSchema = z.object({
     bday: z.string().min(1, "Birthday is required"),
     maritalStatus: z.string().min(1, "Marital status is required"),
     contact: z.string().min(11, "Contact number must be at least 11 digits"),
-    email: z.string().email("Invalid email format").optional(),
+    email: z.preprocess(
+        (val) => (val === "" ? undefined : val),
+        z.string().email("Invalid email format").optional()
+    ),
     address: z.string().min(5, "Full address is required"),
 
     // --- Educational Info ---
