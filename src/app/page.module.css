@@ -1,88 +1,144 @@
-body {
-    background-color: #171717;
+/* --- THE MAIN LAYOUT & GLOW EFFECT --- */
+.heroContainer {
+    position: relative;
+    min-height: 100vh;
+    /* Forces the container to be the full height of the screen */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #121212;
+    /* Deep dark background */
+    padding: 2rem;
+    overflow: hidden;
+    /* Keeps the light from spilling over and causing scrollbars */
+    z-index: 1;
+    width: 100%
 }
 
+/* This is the magic glowing light in the center */
+.heroContainer::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle,
+            rgba(124, 58, 237, 0.15) 0%,
+            /* Purple center at 15% opacity */
+            rgba(18, 18, 18, 0) 70%
+            /* Fades into the background */
+        );
+    filter: blur(50px);
+    /* Softens the light beautifully */
+    pointer-events: none;
+    /* Ensures you can still click the buttons! */
+    z-index: -1;
+}
+
+/* --- THE LOGO --- */
 .logo {
     position: fixed;
     top: 20px;
     left: 20px;
     z-index: 1000;
-    width: clamp(6.25rem, calc(4.545rem + 8.523vw), 25rem);
+    width: clamp(6.25rem, calc(4.545rem + 8.523vw), 15rem);
     height: auto;
 }
 
-.header {
-    font-size: clamp(1.00rem, calc(0.722rem + 1.392vw), 4.06rem);
-    font-weight: bold;
-    text-align: center;
-    color: white;
-}
-
-.mainDiv {
+/* --- TYPOGRAPHY --- */
+.contentWrapper {
+    max-width: 800px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 1.5rem;
+    z-index: 2;
+    /* Keeps text above the glow */
 }
 
+.headline {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    text-align: center;
+    color: white;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.subheadline {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #a3a3a3;
+    text-align: center;
+    max-width: 600px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* --- BUTTONS --- */
 .buttonsDiv {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 16px;
+    margin-top: 1rem;
 }
 
-.applyButton {
-    text-decoration: none;
-    font-size: clamp(1.00rem, calc(0.886rem + 0.568vw), 2.25rem);
-    text-align: center;
-    color: white;
+/* Desktop: Put buttons side-by-side instead of stacked */
+@media (min-width: 640px) {
+    .buttonsDiv {
+        flex-direction: row;
+    }
 }
 
+.applyButton,
 .trackButton {
     text-decoration: none;
-    font-size: clamp(1.00rem, calc(0.886rem + 0.568vw), 2.25rem);
-    text-align: center;
-    color: rgb(53, 233, 21)
-}
-
-.applyButton {
-    width: 50%;
-    max-width: 600px;
-    height: 50px;
-    border-radius: 20px;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 600;
+    width: 100%;
+    max-width: 300px;
+    height: 54px;
+    border-radius: 12px;
+    /* Slightly less rounded for a more modern SaaS look */
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
-    background-color: rgb(53, 233, 21);
-    padding: clamp(0.2rem, 0.5rem, 2rem);
-    margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+}
+
+/* Primary Button (Solid Purple) */
+.applyButton {
+    background-color: #7C3AED;
+    color: white;
+    border: 2px solid #7C3AED;
 }
 
 .applyButton:hover {
-    background-color: rgb(59, 255, 24);
+    background-color: #6D28D9;
+    border-color: #6D28D9;
 }
 
+/* Secondary Button (Ghost/Outline Purple) */
 .trackButton {
-    width: 50%;
-    max-width: 300px;
-    height: 50px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: clamp(0.2rem, 0.5rem, 2rem);
-    cursor: pointer;
-    border: 2px solid rgb(53, 233, 21);
-    transition: all 0.2s ease-in-out;
+    background-color: transparent;
+    color: white;
+    border: 2px solid #555;
 }
 
 .trackButton:hover {
-    background-color: rgb(61, 255, 27);
-    border-color: rgb(61, 255, 27);
-    color: white;
+    background-color: rgba(124, 58, 237, 0.1);
+    /* Slight purple tint on hover */
+    border-color: #7C3AED;
+}
+
+@media screen and (max-height:600px) {
+    .logo {
+        display: none;
+    }
 }

@@ -20,3 +20,15 @@ body {
     justify-content: center;
     min-height: 100dvh;
 }
+
+html,
+body {
+    margin: 0;
+    /* Kills the default 8px white border browsers add */
+    padding: 0;
+    background-color: #121212;
+    /* Matches your hero container! */
+    color: white;
+    /* This prevents any accidental horizontal scrolling */
+    overflow-x: hidden;
+}
