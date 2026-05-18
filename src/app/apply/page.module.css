@@ -402,18 +402,19 @@ body {
 .homeButton {
     border: 1px solid white;
     background: none;
-    padding: clamp(8px, calc(6.182px + 0.568vw), 28px);
-    font-size: clamp(0.63rem, calc(0.318rem + 1.534vw), 4.00rem);
+    font-size: clamp(1.00rem, calc(0.909rem + 0.455vw), 2.00rem);
     color: white;
     border-radius: clamp(8px, calc(6.182px + 0.568vw), 28px);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-    margin-right: 3px;
+    margin-right: auto;
+    padding: clamp(13px, calc(11.273px + 0.54vw), 32px);
+    padding-right: clamp(15px, calc(11.300px + 0.57vw), 35px);
 }
 
 .homeButton:hover {
-    background-color: #2563eb;
-    color: white;
+    background-color: #6D28D9;
+    border-color: #6D28D9;
 }
 
 /* Verify */
@@ -426,12 +427,18 @@ body {
 }
 
 .verifyDiv>input {
-    height: clamp(1.5rem, 2.5rem, 5rem);
-    border-radius: 10px;
-    padding: clamp(3px, calc(1.615px + 0.192vw), 9px);
-    background: none;
+    height: clamp(1rem, 2rem, 6rem);
+    width: 80%;
+    max-width: 400px;
     border: 2px solid white;
+    background-color: #171717;
     color: white;
+    border-radius: clamp(3px, 6px, 15px);
+}
+
+.verifyUtils {
+    display: flex;
+    gap: clamp(5px, calc(2.545px + 0.767vw), 32px);
 }
 
 .verifyDiv>input:focus {
@@ -439,24 +446,30 @@ body {
 }
 
 .verifyDiv {
+    border: 1px solid white;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    gap: clamp(12px, calc(10.182px + 0.568vw), 32px);
+    justify-content: center;
     flex-direction: column;
     height: 40vh;
     width: 80%;
     max-width: 600px;
     padding: clamp(16px, calc(12.308px + 0.513vw), 32px);
+    border-radius: clamp(16px, calc(12.308px + 0.513vw), 32px);
 }
 
 .verifyButton {
-    background-color: rgb(53, 233, 21);
-    height: 22%;
-    width: 40%;
-    border-style: hidden;
-    border-radius: 15px;
+    font-size: clamp(1.00rem, calc(0.909rem + 0.455vw), 2.00rem);
+    font-weight: bold;
+    border-style: none;
+    background-color: #7C3AED;
+    border-radius: clamp(8px, calc(6.182px + 0.568vw), 28px);
     color: white;
-    font-size: clamp(1rem, 2rem, 5rem);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    padding: clamp(13px, calc(11.273px + 0.54vw), 32px);
+    white-space: nowrap;
 }
 
 .remarkDiv>p {
