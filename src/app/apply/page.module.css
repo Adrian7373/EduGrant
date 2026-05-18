@@ -438,6 +438,8 @@ body {
 
 .verifyUtils {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: clamp(5px, calc(2.545px + 0.767vw), 32px);
 }
 

@@ -32,14 +32,15 @@ export default function TrackPage() {
         <div className={style.mainDiv}>
             <img className={style.logo} src="/EduGrant.svg" alt="EduGrant logo" />
             <div className={style.trackDiv}>
-                <button type="button" onClick={handleHome} className={style.homeButton1}>&#9664; Home</button>
-                <label className={style.inputLabel}>Enter tracking ID:
-                    <input className={style.trackInput} value={id} type="text" onChange={(e) => {
-                        setId(e.target.value)
-                        e.target.value.length > 8 ? setIsValid(true) : setIsValid(false);
-                    }} />
-                </label>
-                <button className={style.trackButton} onClick={handleTracking} disabled={!isvalid}>Track Application</button>
+                <p className={style.inputLabel}>Enter tracking ID:</p>
+                <input className={style.trackInput} value={id} type="text" onChange={(e) => {
+                    setId(e.target.value)
+                    e.target.value.length > 8 ? setIsValid(true) : setIsValid(false);
+                }} />
+                <div className={style.utils}>
+                    <button type="button" onClick={handleHome} className={style.homeButton1}>&#9664; Home</button>
+                    <button className={style.trackButton} onClick={handleTracking} disabled={!isvalid}>Track Application</button>
+                </div>
 
                 <div className={style.trackInfo}>
                     <p>{result ? result?.message || "Status:" : ""}</p>

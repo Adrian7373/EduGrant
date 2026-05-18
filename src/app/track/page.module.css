@@ -3,17 +3,21 @@
 }
 
 .trackDiv {
-    width: 100%;
-    max-width: 500px;
+    height: 40vh;
+    width: 80%;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0;
     border: 1px solid white;
-    padding: clamp(10px, calc(7.727px + 0.71vw), 35px);
+    padding: clamp(16px, calc(12.308px + 0.513vw), 32px);
     border-radius: clamp(10px, calc(7.727px + 0.71vw), 35px);
+    gap: clamp(12px, calc(10.182px + 0.568vw), 32px);
 }
+
+
 
 .mainDiv {
     display: flex;
@@ -43,8 +47,9 @@
 }
 
 .inputLabel {
-    display: contents;
-    font-size: clamp(1.5rem, 2rem, 5rem);
+    font-size: clamp(1.38rem, calc(1.227rem + 0.739vw), 3.00rem);
+    margin: 0;
+    text-align: center;
     color: white;
 }
 
@@ -63,7 +68,6 @@
 }
 
 .trackButton {
-    margin-top: 3vh;
     font-size: clamp(1.00rem, calc(0.909rem + 0.455vw), 2.00rem);
     font-weight: bold;
     border-style: none;
@@ -79,6 +83,13 @@
 .trackButton:hover {
     background-color: #6D28D9;
     border-color: #6D28D9;
+}
+
+.utils {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(5px, calc(2.545px + 0.767vw), 32px);
 }
 
 .trackInfo {
@@ -107,21 +118,18 @@
     font-weight: bold;
 }
 
-.inputLabel {
-    font-size: clamp(0.6rem, 1.2rem, 16rem);
-}
-
 .homeButton1 {
-    padding: clamp(8px, calc(6.182px + 0.568vw), 28px);
-    border-radius: clamp(8px, calc(6.182px + 0.568vw), 28px);
     border: 1px solid white;
     background: none;
-    font-size: clamp(0.rem, 3rem, 5rem);
-    color: white;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-    margin-right: auto;
-    margin-bottom: 3vh;
+    font-size: clamp(1.00rem, calc(0.909rem + 0.455vw), 2.00rem);
+    font-weight: bold;
+    border-radius: clamp(0.5rem, 1rem, 5rem);
+    color: white;
+    transition: all 0.2s ease-in-out;
+    padding: clamp(13px, calc(11.273px + 0.54vw), 32px);
+    white-space: nowrap;
 }
 
 .logo {
@@ -135,7 +143,7 @@
 
 .homeButton1:hover {
     border-color: #6D28D9;
-    color: #6D28D9;
+    background-color: #6D28D9;
 }
 
 .trackInfo>p:nth-child(1) {
@@ -144,4 +152,10 @@
 
 .trackInfo>p:nth-child(4) {
     font-size: clamp(1.00rem, calc(0.636rem + 1.818vw), 2.00rem);
+}
+
+@media screen and (max-width:670px) {
+    .trackDiv {
+        border: none;
+    }
 }
