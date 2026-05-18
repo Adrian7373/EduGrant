@@ -118,6 +118,7 @@ export default function ApplicationForm() {
 
     if (!verifiedBatchId) return (
         <div className={style.verifyDiv}>
+            <img className={style.logo} src="/EduGrant.svg" alt="EduGrant logo" />
             <p>Enter Verification Code</p>
             <input type="text" onChange={(e) => setCode(e.target.value)} />
             <p>{message}</p>
