@@ -2,6 +2,13 @@ body {
     background-color: #171717;
 }
 
+.pageContainer {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .mainDiv>form {
     width: 100%;
     display: flex;
@@ -455,6 +462,7 @@ body {
 .verifyDiv>input:focus {
     outline: none;
 }
+
 
 .verifyDiv {
     background-color: #1E1E1E;

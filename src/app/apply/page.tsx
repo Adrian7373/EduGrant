@@ -117,14 +117,16 @@ export default function ApplicationForm() {
     }
 
     if (!verifiedBatchId) return (
-        <div className={style.verifyDiv}>
-            <img className={style.logo} src="/EduGrant.svg" alt="EduGrant logo" />
-            <p>Enter Verification Code</p>
-            <input type="text" onChange={(e) => setCode(e.target.value)} />
-            <p>{message}</p>
-            <div className={style.verifyUtils}>
-                <button type="button" onClick={() => router.back()} className={style.homeButton} hidden={formStep !== 1}>&#9664; Home</button>
-                <button type="button" className={style.verifyButton} onClick={handleVerify}>Proceed</button>
+        <div className={style.pageContainer}>
+            <div className={style.verifyDiv}>
+                <img className={style.logo} src="/EduGrant.svg" alt="EduGrant logo" />
+                <p>Enter Verification Code</p>
+                <input type="text" onChange={(e) => setCode(e.target.value)} />
+                <p>{message}</p>
+                <div className={style.verifyUtils}>
+                    <button type="button" onClick={() => router.back()} className={style.homeButton} hidden={formStep !== 1}>&#9664; Home</button>
+                    <button type="button" className={style.verifyButton} onClick={handleVerify}>Proceed</button>
+                </div>
             </div>
         </div>)
 

@@ -23,30 +23,32 @@ export default function LoginForm() {
     };
 
     return (
-        <div className={style.mainDiv}>
-            {isAuthing ? (
-                <div className={style.loadingDiv}>
-                    <span className={style.loader}></span>
-                    <p>Authenticating User</p>
-                </div>
-            ) : (
-                <div className={style.formDiv}>
-                    <p>Log In</p>
-                    <form action={handleSubmit}>
-                        <label>Username:
-                            <input name="email" type="text" />
-                        </label>
-                        <label className={style.passwordLabel}>Password:
-                            <div>
-                                <input name="password" type={isShowing ? "text" : "password"} />
-                                <button onClick={() => setIsShowing(!isShowing)} type="button" className={style.showPasswordButton}>{isShowing ? <EyeOff width="1rem" height="1rem" /> : <Eye width="1rem" height="1rem" />}</button>
-                            </div>
-                        </label>
-                        <p>{message}</p>
-                        <button className={style.loginButton} type="submit" >Login</button>
-                    </form>
-                </div>
-            )}
+        <div className={style.pageContainer}>
+            <div className={style.mainDiv}>
+                {isAuthing ? (
+                    <div className={style.loadingDiv}>
+                        <span className={style.loader}></span>
+                        <p>Authenticating User</p>
+                    </div>
+                ) : (
+                    <div className={style.formDiv}>
+                        <p>Log In</p>
+                        <form action={handleSubmit}>
+                            <label>Username:
+                                <input name="email" type="text" />
+                            </label>
+                            <label className={style.passwordLabel}>Password:
+                                <div>
+                                    <input name="password" type={isShowing ? "text" : "password"} />
+                                    <button onClick={() => setIsShowing(!isShowing)} type="button" className={style.showPasswordButton}>{isShowing ? <EyeOff width="1rem" height="1rem" /> : <Eye width="1rem" height="1rem" />}</button>
+                                </div>
+                            </label>
+                            <p>{message}</p>
+                            <button className={style.loginButton} type="submit" >Login</button>
+                        </form>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
