@@ -400,12 +400,12 @@ body {
 }
 
 .homeButton {
-    border: 2px solid;
+    border: 1px solid white;
     background: none;
-    padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
+    padding: clamp(8px, calc(6.182px + 0.568vw), 28px);
     font-size: clamp(0.63rem, calc(0.318rem + 1.534vw), 4.00rem);
-    color: #2563eb;
-    border-radius: clamp(1rem, 1.2rem, 4rem);
+    color: white;
+    border-radius: clamp(8px, calc(6.182px + 0.568vw), 28px);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     margin-right: 3px;
@@ -419,7 +419,7 @@ body {
 /* Verify */
 
 .verifyDiv>p {
-    font-size: clamp(2rem, 2.5rem, 25rem);
+    font-size: clamp(1.38rem, calc(1.227rem + 0.739vw), 3.00rem);
     margin: 0;
     text-align: center;
     color: white;
@@ -444,6 +444,8 @@ body {
     justify-content: space-evenly;
     flex-direction: column;
     height: 40vh;
+    width: 80%;
+    max-width: 600px;
     padding: clamp(16px, calc(12.308px + 0.513vw), 32px);
 }
 
@@ -457,62 +459,12 @@ body {
     font-size: clamp(1rem, 2rem, 5rem);
 }
 
-.homeButton1 {
-    border: 2px solid;
-    width: 20%;
-    background: none;
-    max-width: 200px;
-    height: 6vh;
-    font-size: clamp(0.7rem, 1.1rem, 8rem);
-    color: #2563eb;
-    border-radius: clamp(1rem, 1.2rem, 4rem);
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-    margin-right: auto;
-}
-
-.homeButton1:hover {
-    background-color: #2563eb;
-    color: white;
-}
-
-.mobileHomeButton1 {
-    border: 2px solid;
-    width: 20%;
-    background: none;
-    max-width: 200px;
-    height: 6vh;
-    font-size: clamp(0.7rem, 1.1rem, 8rem);
-    color: #2563eb;
-    border-radius: clamp(1rem, 1.2rem, 4rem);
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-    margin-right: auto;
-    display: none;
-}
-
-.mobileHomeButton1:hover {
-    background-color: #2563eb;
-    color: white;
-}
-
-@media screen and (max-width:600px) {
-    .mobileHomeButton1 {
-        display: inline;
-    }
-
-    .homeButton1 {
-        display: none;
-    }
-}
-
 .remarkDiv>p {
     width: 100%;
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     margin-top: 0;
 }
 
-/* List row radio styling */
 .groupLabel {
     display: block;
     color: white;
