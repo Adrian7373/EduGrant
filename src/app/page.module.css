@@ -1,22 +1,17 @@
-/* --- THE MAIN LAYOUT & GLOW EFFECT --- */
 .heroContainer {
     position: relative;
     min-height: 100vh;
-    /* Forces the container to be the full height of the screen */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #121212;
-    /* Deep dark background */
     padding: 2rem;
     overflow: hidden;
-    /* Keeps the light from spilling over and causing scrollbars */
     z-index: 1;
     width: 100%
 }
 
-/* This is the magic glowing light in the center */
 .heroContainer::before {
     content: '';
     position: absolute;
@@ -27,18 +22,12 @@
     height: 600px;
     background: radial-gradient(circle,
             rgba(124, 58, 237, 0.15) 0%,
-            /* Purple center at 15% opacity */
-            rgba(18, 18, 18, 0) 70%
-            /* Fades into the background */
-        );
+            rgba(18, 18, 18, 0) 70%);
     filter: blur(50px);
-    /* Softens the light beautifully */
     pointer-events: none;
-    /* Ensures you can still click the buttons! */
     z-index: -1;
 }
 
-/* --- THE LOGO --- */
 .logo {
     position: fixed;
     top: 20px;
@@ -48,7 +37,6 @@
     height: auto;
 }
 
-/* --- TYPOGRAPHY --- */
 .contentWrapper {
     max-width: 800px;
     display: flex;
@@ -56,7 +44,6 @@
     align-items: center;
     gap: 1.5rem;
     z-index: 2;
-    /* Keeps text above the glow */
 }
 
 .headline {
@@ -77,7 +64,6 @@
     line-height: 1.5;
 }
 
-/* --- BUTTONS --- */
 .buttonsDiv {
     width: 100%;
     display: flex;
@@ -88,7 +74,6 @@
     margin-top: 1rem;
 }
 
-/* Desktop: Put buttons side-by-side instead of stacked */
 @media (min-width: 640px) {
     .buttonsDiv {
         flex-direction: row;
@@ -104,7 +89,6 @@
     max-width: 300px;
     height: 54px;
     border-radius: 12px;
-    /* Slightly less rounded for a more modern SaaS look */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,7 +96,6 @@
     transition: all 0.2s ease-in-out;
 }
 
-/* Primary Button (Solid Purple) */
 .applyButton {
     background-color: #7C3AED;
     color: white;
@@ -124,7 +107,6 @@
     border-color: #6D28D9;
 }
 
-/* Secondary Button (Ghost/Outline Purple) */
 .trackButton {
     background-color: transparent;
     color: white;
@@ -133,7 +115,6 @@
 
 .trackButton:hover {
     background-color: rgba(124, 58, 237, 0.1);
-    /* Slight purple tint on hover */
     border-color: #7C3AED;
 }
 

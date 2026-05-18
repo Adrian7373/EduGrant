@@ -4,9 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className={style.heroContainer}>
-      {/* Note: I added a forward slash (/) to the src. 
-        This ensures Next.js always looks in your 'public' folder for it! 
-      */}
+
       <img className={style.logo} src="/EduGrant.svg" alt="EduGrant logo" />
 
       <div className={style.contentWrapper}>
