@@ -547,11 +547,6 @@ export type FormState = {
     errors?: any;
 }
 
-const supabaseAdmin = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 export async function createNewAdmin(prevState: FormState, formData: FormData): Promise<FormState> {
     if (!formData) return { success: false, message: "All fields must be filled", errors: null };
 
@@ -572,6 +567,11 @@ export async function createNewAdmin(prevState: FormState, formData: FormData): 
     }
 
     const cleanData = validatedFields.data;
+
+    const supabaseAdmin = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
 
     const supabase = await createClient();
 
