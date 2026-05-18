@@ -3,11 +3,16 @@
 }
 
 .trackDiv {
+    width: 100%;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0;
+    border: 1px solid white;
+    padding: clamp(10px, calc(7.727px + 0.71vw), 35px);
+    border-radius: clamp(10px, calc(7.727px + 0.71vw), 35px);
 }
 
 .mainDiv {
@@ -18,6 +23,23 @@
     flex-direction: column;
     width: 70%;
     min-width: 250px;
+    z-index: 1;
+}
+
+.mainDiv::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle,
+            rgba(124, 58, 237, 0.10) 0%,
+            rgba(18, 18, 18, 0) 70%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: -1;
 }
 
 .inputLabel {
@@ -27,8 +49,9 @@
 }
 
 .trackInput {
-    height: clamp(1rem, 2rem, 5rem);
+    height: clamp(1rem, 2rem, 6rem);
     width: 80%;
+    max-width: 400px;
     border: 2px solid white;
     background-color: #171717;
     color: white;
@@ -40,21 +63,22 @@
 }
 
 .trackButton {
-    margin-top: 10px;
-    height: 7vh;
-    width: 45vw;
-    font-size: clamp(1rem, 1.5rem, 5rem);
+    margin-top: 3vh;
+    font-size: clamp(1.00rem, calc(0.909rem + 0.455vw), 2.00rem);
     font-weight: bold;
     border-style: none;
-    background-color: rgb(53, 233, 21);
+    background-color: #7C3AED;
     border-radius: clamp(0.5rem, 1rem, 5rem);
     color: white;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+    padding: clamp(13px, calc(11.273px + 0.54vw), 32px);
+    white-space: nowrap;
 }
 
 .trackButton:hover {
-    background-color: rgb(59, 255, 24);
+    background-color: #6D28D9;
+    border-color: #6D28D9;
 }
 
 .trackInfo {
@@ -88,54 +112,21 @@
 }
 
 .homeButton1 {
-    border: 2px solid;
-    width: 5vw;
-    background-color: #171717;
-    max-width: 200px;
-    height: 8vh;
+    padding: clamp(8px, calc(6.182px + 0.568vw), 28px);
+    border-radius: clamp(8px, calc(6.182px + 0.568vw), 28px);
+    border: 1px solid white;
+    background: none;
     font-size: clamp(0.rem, 3rem, 5rem);
-    color: #2563eb;
-    border-radius: clamp(1rem, 1.2rem, 4rem);
+    color: white;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     margin-right: auto;
-    margin-bottom: clamp(10px, calc(8px + 0.625vw), 32px);
+    margin-bottom: 3vh;
 }
 
 .homeButton1:hover {
-    background-color: #2563eb;
-    color: white;
-}
-
-.mobileHomeButton1 {
-    border: 2px solid;
-    width: 5vh;
-    background-color: #171717;
-    max-width: 200px;
-    height: 6vh;
-    font-size: clamp(0.7rem, 1.1rem, 8rem);
-    color: #2563eb;
-    border-radius: clamp(1rem, 1.2rem, 4rem);
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-    margin-right: auto;
-    display: none;
-    margin-bottom: clamp(10px, calc(8px + 0.625vw), 32px);
-}
-
-.mobileHomeButton1:hover {
-    background-color: #2563eb;
-    color: white;
-}
-
-@media screen and (max-width:600px) {
-    .mobileHomeButton1 {
-        display: inline;
-    }
-
-    .homeButton1 {
-        display: none;
-    }
+    border-color: #6D28D9;
+    color: #6D28D9;
 }
 
 .trackInfo>p:nth-child(1) {

@@ -32,7 +32,6 @@ export default function TrackPage() {
         <div className={style.mainDiv}>
             <div className={style.trackDiv}>
                 <button type="button" onClick={handleHome} className={style.homeButton1}>&#9664; Home</button>
-                <button type="button" onClick={handleHome} className={style.mobileHomeButton1}>&#9664;</button>
                 <label className={style.inputLabel}>Enter tracking ID:
                     <input className={style.trackInput} value={id} type="text" onChange={(e) => {
                         setId(e.target.value)
