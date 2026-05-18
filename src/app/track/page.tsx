@@ -20,7 +20,7 @@ export default function TrackPage() {
 
     const handleTracking = async () => {
         const details = await getTrackingDetails(id);
-        setResult(details);
+        setResult(details as Result);
         setId("");
     }
 
