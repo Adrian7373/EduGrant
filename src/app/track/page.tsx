@@ -30,6 +30,7 @@ export default function TrackPage() {
 
     return (
         <div className={style.mainDiv}>
+            <img className={style.logo} src="/EduGrant.svg" alt="EduGrant logo" />
             <div className={style.trackDiv}>
                 <button type="button" onClick={handleHome} className={style.homeButton1}>&#9664; Home</button>
                 <label className={style.inputLabel}>Enter tracking ID:

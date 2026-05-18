@@ -124,6 +124,15 @@
     margin-bottom: 3vh;
 }
 
+.logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    width: clamp(6.25rem, calc(4.545rem + 8.523vw), 15rem);
+    height: auto;
+}
+
 .homeButton1:hover {
     border-color: #6D28D9;
     color: #6D28D9;
