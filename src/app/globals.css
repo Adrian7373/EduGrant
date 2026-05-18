@@ -15,6 +15,4 @@ body {
     padding: 0;
     background-color: #121212;
     color: white;
-    /* This stops the whole page from scrolling sideways */
-    overflow-x: hidden;
 }
