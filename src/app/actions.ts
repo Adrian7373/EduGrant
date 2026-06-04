@@ -8,8 +8,7 @@ import { createClient as createServerClient } from '@supabase/supabase-js';
 
 interface Children {
     childrenName: string,
-    childrenOccupation: string,
-    childrenYearLevel: string
+    childrenOccupation: string
 }
 
 interface Batch {
@@ -113,14 +112,17 @@ export async function submitApplication(formData: FormData) {
 
     const childrenNameArray = formData.getAll("childrenName");
     const childrenOccupationArray = formData.getAll("childrenOccupation");
-    const childrenYearLevelArray = formData.getAll("childrenYearLevel");
+    const childrenOccupationSpecArray = formData.getAll("childrenOccupationSpec");
     const childrenArray: Children[] = [];
 
     for (let i = 0; i < numberOfChild; i++) {
+        const occupation = String(childrenOccupationArray[i] ?? '');
+        const specifiedOccupation = String(childrenOccupationSpecArray[i] ?? '').trim();
         const child: Children = {
             childrenName: String(childrenNameArray[i] ?? ''),
-            childrenOccupation: String(childrenOccupationArray[i] ?? ''),
-            childrenYearLevel: String(childrenYearLevelArray[i] ?? '')
+            childrenOccupation: occupation === 'others' && specifiedOccupation
+                ? specifiedOccupation
+                : occupation
         };
         childrenArray.push(child);
     }
@@ -136,7 +138,10 @@ export async function submitApplication(formData: FormData) {
     });
     if (!validatedFields.success) {
         console.error("Validation Failed:", validatedFields.error.flatten().fieldErrors);
-        return { success: false, message: "Please check your inputs and try again." };
+        const fieldErrors = validatedFields.error.flatten().fieldErrors;
+        // Create a concise message summary while returning full field errors for the client
+        const summary = Object.values(fieldErrors).flat().slice(0, 3).join("; ") || "Please check your inputs and try again.";
+        return { success: false, message: `Validation failed: ${summary}`, errors: fieldErrors } as any;
     }
     const cleanData = validatedFields.data;
 
@@ -208,8 +213,6 @@ export async function submitApplication(formData: FormData) {
                 gwa: cleanData?.gwa,
                 average: cleanData?.average,
 
-                is_mother_alive: cleanData?.isMotherAlive,
-                is_father_alive: cleanData?.isFatherAlive,
                 total_income: cleanData?.totalIncome,
                 number_of_child: cleanData?.numberOfChild,
 
@@ -241,7 +244,8 @@ export async function submitApplication(formData: FormData) {
 
 interface Response {
     success: boolean,
-    message: string
+    message: string,
+    errors?: any
 }
 
 export async function authenticateUser(formData: FormData): Promise<Response> {

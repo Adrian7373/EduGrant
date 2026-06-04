@@ -5,15 +5,20 @@ import style from "./page.module.css"
 import { submitApplication, checkNameExists } from "../actions";
 import { useRouter } from "next/navigation";
 import { verifyCode } from "../actions";
+import imageCompression from "browser-image-compression";
 
 
 export default function ApplicationForm() {
+    type UploadKey = "coe" | "cog" | "validID";
+    const MAX_UPLOAD_MB = 5;
 
     const [formStep, setFormStep] = useState<number>(1);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const formRef = useRef<HTMLFormElement>(null);
     const [isCollegeStudent, setIsCollegeStudent] = useState<boolean>(false);
     const [dependents, setDependents] = useState<number>(0);
+    const [childrenOccupations, setChildrenOccupations] = useState<string[]>([]);
+    const [childrenSpecs, setChildrenSpecs] = useState<string[]>([]);
     const [fname, setFname] = useState("");
     const [midname, setMidname] = useState("");
     const [lname, setLname] = useState("");
@@ -23,6 +28,8 @@ export default function ApplicationForm() {
     const [message, setMessage] = useState<string>("");
     const [verifiedBatchId, setVerifiedBatchId] = useState<string | null>(null)
     const [selectedFiles, setSelectedFiles] = useState<{ coe: string; cog: string; validID: string }>({ coe: "", cog: "", validID: "" });
+    const [processedFiles, setProcessedFiles] = useState<Record<UploadKey, File | null>>({ coe: null, cog: null, validID: null });
+    const [isProcessingFile, setIsProcessingFile] = useState<Record<UploadKey, boolean>>({ coe: false, cog: false, validID: false });
     const router = useRouter();
     const fullName = [fname, midname, lname]
         .map((part) => part.trim())
@@ -30,12 +37,47 @@ export default function ApplicationForm() {
         .join(" ")
         .trim();
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fileType: "coe" | "cog" | "validID") => {
-        if (e.target.files && e.target.files[0]) {
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>, fileType: UploadKey) => {
+        if (!e.target.files || !e.target.files[0]) return;
+
+        const originalFile = e.target.files[0];
+        setIsProcessingFile(prev => ({ ...prev, [fileType]: true }));
+
+        try {
+            let finalFile = originalFile;
+
+            // Compress only images. Other file types keep original quality.
+            if (originalFile.type.startsWith("image/")) {
+                finalFile = await imageCompression(originalFile, {
+                    maxSizeMB: 2,
+                    maxWidthOrHeight: 1920,
+                    useWebWorker: true,
+                    initialQuality: 0.8,
+                });
+            }
+
+            const sizeInMB = finalFile.size / (1024 * 1024);
+            if (sizeInMB > MAX_UPLOAD_MB) {
+                setProcessedFiles(prev => ({ ...prev, [fileType]: null }));
+                setSelectedFiles(prev => ({ ...prev, [fileType]: "" }));
+                e.target.value = "";
+                alert(`File is too large (${sizeInMB.toFixed(2)}MB). Please upload a file under ${MAX_UPLOAD_MB}MB.`);
+                return;
+            }
+
+            setProcessedFiles(prev => ({ ...prev, [fileType]: finalFile }));
             setSelectedFiles(prev => ({
                 ...prev,
-                [fileType]: e.target.files![0].name
+                [fileType]: `${finalFile.name} (${sizeInMB.toFixed(2)}MB)`
             }));
+        } catch (error) {
+            console.error("File processing failed:", error);
+            setProcessedFiles(prev => ({ ...prev, [fileType]: null }));
+            setSelectedFiles(prev => ({ ...prev, [fileType]: "" }));
+            e.target.value = "";
+            alert("Could not process this file. Please try another file.");
+        } finally {
+            setIsProcessingFile(prev => ({ ...prev, [fileType]: false }));
         }
     };
 
@@ -56,16 +98,41 @@ export default function ApplicationForm() {
 
         if (!formElement) return;
 
+        if (Object.values(isProcessingFile).some(Boolean)) {
+            alert("Please wait for file processing to finish.");
+            return;
+        }
+
         setIsSubmitting(true);
         const formData = new FormData(formElement);
+
+        // Replace raw uploads with client-processed files (compressed images)
+        (Object.keys(processedFiles) as UploadKey[]).forEach((key) => {
+            const file = processedFiles[key];
+            if (file) {
+                formData.set(key, file, file.name);
+            }
+        });
+
         const response = await submitApplication(formData);
 
         if (response.success) {
-            alert(response.message)
+            alert(response.message);
             setIsSubmitting(false);
+            return;
         }
 
-        alert(response.message)
+        // If there are field-level errors, show them concisely to the user
+        if ((response as any).errors) {
+            const fieldErrors: Record<string, string[]> = (response as any).errors;
+            const messages = Object.entries(fieldErrors)
+                .flatMap(([field, msgs]) => msgs.map((m) => `${field}: ${m}`))
+                .join('\n');
+            alert(messages || response.message);
+        } else {
+            alert(response.message);
+        }
+
         setIsSubmitting(false);
 
     }
@@ -97,7 +164,47 @@ export default function ApplicationForm() {
     const handleDependents = (value: string) => {
         if (!value) return;
         const numberOfDependents = Number(value);
-        if (numberOfDependents > 0) setDependents(numberOfDependents);
+        if (numberOfDependents > 0) {
+            setDependents(numberOfDependents);
+            setChildrenOccupations(prev => {
+                const arr = Array(numberOfDependents).fill("");
+                for (let i = 0; i < Math.min(prev.length, numberOfDependents); i++) arr[i] = prev[i];
+                return arr;
+            });
+            setChildrenSpecs(prev => {
+                const arr = Array(numberOfDependents).fill("");
+                for (let i = 0; i < Math.min(prev.length, numberOfDependents); i++) arr[i] = prev[i];
+                return arr;
+            });
+        } else {
+            setDependents(0);
+            setChildrenOccupations([]);
+            setChildrenSpecs([]);
+        }
+    }
+
+    const handleChildOccupationChange = (index: number, value: string) => {
+        setChildrenOccupations(prev => {
+            const copy = [...prev];
+            copy[index] = value;
+            return copy;
+        });
+
+        if (value !== 'others') {
+            setChildrenSpecs(prev => {
+                const copy = [...prev];
+                copy[index] = "";
+                return copy;
+            });
+        }
+    }
+
+    const handleChildSpecChange = (index: number, value: string) => {
+        setChildrenSpecs(prev => {
+            const copy = [...prev];
+            copy[index] = value;
+            return copy;
+        });
     }
 
     const handleNext = () => {
@@ -151,8 +258,8 @@ export default function ApplicationForm() {
                     <label>First Name:
                         <input placeholder="e.g Juan" ref={nameInputRef} onChange={(e) => setFname(e.target.value)} required name="fname" type="text" className={style.nameInput} />
                     </label>
-                    <label>Middle Name:
-                        <input placeholder="e.g Reyes" ref={nameInputRef} onChange={(e) => setMidname(e.target.value)} required name="midname" type="text" className={style.nameInput} />
+                    <label>Middle Name {"(Leave empty if none)"}:
+                        <input placeholder="e.g Reyes" ref={nameInputRef} onChange={(e) => setMidname(e.target.value)} name="midname" type="text" className={style.nameInput} />
                     </label>
                     <label>Last Name:
                         <input placeholder="e.g Dela Cruz" ref={nameInputRef} onChange={(e) => setLname(e.target.value)} required name="lname" type="text" className={style.nameInput} />
@@ -191,7 +298,7 @@ export default function ApplicationForm() {
                     </label>
 
                     <label>Contact number:
-                        <input placeholder="09XXXXXXXXX" required name="contact" type="tel" className={style.contactInput} />
+                        <input placeholder="09XXXXXXXXX" required minLength={11} name="contact" type="tel" className={style.contactInput} />
                     </label>
 
                     <label>Email{"(optional)"}:
@@ -277,41 +384,12 @@ export default function ApplicationForm() {
 
                 <div id="step-2" className={style.familyBackgroundDiv} hidden={formStep != 2}>
                     <p className={style.header}>FAMILY BACKGROUND</p>
-                    <div className={style.listContainer}>
-                        <label className={style.groupLabel}>Mother:</label>
-                        <label className={style.listRow}>
-                            <input type="radio" id="aliveMotherTrue" name="isMotherAlive" value="true" className={style.hiddenInput} />
-                            <span className={style.rowText}>Alive</span>
-                            <span className={style.customCircle} aria-hidden></span>
-                        </label>
-
-                        <label className={style.listRow}>
-                            <input type="radio" id="aliveMotherFalse" name="isMotherAlive" value="false" className={style.hiddenInput} />
-                            <span className={style.rowText}>Deceased</span>
-                            <span className={style.customCircle} aria-hidden></span>
-                        </label>
-                    </div>
-
-                    <div className={style.listContainer}>
-                        <label className={style.groupLabel}>Father:</label>
-                        <label className={style.listRow}>
-                            <input type="radio" id="aliveFatherTrue" name="isFatherAlive" value="true" className={style.hiddenInput} />
-                            <span className={style.rowText}>Alive</span>
-                            <span className={style.customCircle} aria-hidden></span>
-                        </label>
-
-                        <label className={style.listRow}>
-                            <input type="radio" id="aliveFatherFalse" name="isFatherAlive" value="false" className={style.hiddenInput} />
-                            <span className={style.rowText}>Deceased</span>
-                            <span className={style.customCircle} aria-hidden></span>
-                        </label>
-                    </div>
 
                     <label>Parents Total Monthly Income:
                         <input min={0} placeholder="e.g 5000" name="totalIncome" type="number" className={style.totalIncomeInput} />
                     </label>
 
-                    <label>Number of Child(not including yourself):
+                    <label>Number of Child(0 if only no siblings):
                         <input min={0} onChange={(e) => handleDependents(e.target.value)} required name="numberOfChild" type="number" className={style.numberOfChildInput} />
                     </label>
                 </div>
@@ -331,7 +409,7 @@ export default function ApplicationForm() {
                         <input name="motherAddress" type="text" className={style.motherAddressInput} />
                     </label>
                     <label>Contact Number:
-                        <input placeholder="09XXXXXXXXX" name="motherContact" type="tel" className={style.motherContactInput} />
+                        <input placeholder="09XXXXXXXXX" minLength={11} name="motherContact" type="tel" className={style.motherContactInput} />
                     </label>
                     <label>Occupation:
                         <input name="motherOccupation" type="text" className={style.motherOccupationInput} />
@@ -342,6 +420,7 @@ export default function ApplicationForm() {
                             <option value="college">College Graduate</option>
                             <option value="highSchool">High School Graduate</option>
                             <option value="elemSchool">Elementary School Graduate</option>
+                            <option value="undergrad">Undergraduate</option>
                         </select>
                     </label>
                 </div>
@@ -372,30 +451,54 @@ export default function ApplicationForm() {
                             <option value="college">College Graduate</option>
                             <option value="highSchool">High School Graduate</option>
                             <option value="elemSchool">Elementary School Graduate</option>
+                            <option value="undergrad">Undergraduate</option>
                         </select>
                     </label>
                 </div>
 
-                {/*CHILDREN INFORMATION */}
+                {/*SIBLINGS INFORMATION */}
 
                 <div id="step-5" className={style.childrenInfoDiv} hidden={formStep != 5}>
-                    <p className={style.header}>CHILDREN INFORMATION</p>
+                    <p className={style.header}>SIBLINGS INFORMATION</p>
                     {Array.from({ length: dependents }).map((_, index) => (
                         <div className={style.dependentDiv} key={index}>
                             <label>Name:
                                 <input name="childrenName" type="text" className={style.childrenNameInput} />
                             </label>
                             <label>Occupation:
-                                <select name="childrenOccupation" id="childrenOccupation" className={style.childrenOccupationInput} defaultValue="">
+                                <select
+                                    name="childrenOccupation"
+                                    id={`childrenOccupation-${index}`}
+                                    className={style.childrenOccupationInput}
+                                    value={childrenOccupations[index] || ""}
+                                    onChange={(e) => handleChildOccupationChange(index, e.target.value)}
+                                >
                                     <option value="" disabled hidden>Select an option</option>
                                     <option value="student">Student</option>
                                     <option value="graduate">Graduate</option>
                                     <option value="employed">Employed</option>
+                                    <option value="undergraduate">Undergraduate</option>
+                                    <option value="vocational">Vocational</option>
+                                    <option value="unemployed">Unemployed</option>
+                                    <option value="pwd">PWD</option>
+                                    <option value="others">Others</option>
                                 </select>
                             </label>
-                            <label>Course & Year/ Grade Level:
-                                <input name="childrenYearLevel" type="text" className={style.childrenYearLevelInput} />
-                            </label>
+                            <input
+                                type="hidden"
+                                name="childrenOccupationSpec"
+                                value={childrenSpecs[index] || ""}
+                            />
+                            {childrenOccupations[index] === 'others' && (
+                                <label> Please specify:
+                                    <input
+                                        required
+                                        type="text"
+                                        value={childrenSpecs[index] || ""}
+                                        onChange={(e) => handleChildSpecChange(index, e.target.value)}
+                                    />
+                                </label>
+                            )}
                         </div>
                     ))}
 

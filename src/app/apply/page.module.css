@@ -404,6 +404,7 @@ body {
     display: flex;
     justify-content: right;
     width: 80%;
+    margin-top: 3vh;
 }
 
 .homeButton {
@@ -586,4 +587,10 @@ body {
     padding: 1rem;
     border-radius: 12px;
     color: white;
+}
+
+.dependentDiv {
+    border: 1px solid white;
+    margin-top: 4vh;
+    border-radius: clamp(3px, calc(1.909px + 0.341vw), 15px);
 }
