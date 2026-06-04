@@ -40,7 +40,7 @@ body {
 }
 
 .personalInfoDiv>label {
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -81,7 +81,7 @@ body {
 }
 
 .familyBackgroundDiv>label {
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -111,7 +111,7 @@ body {
     border: 2px solid white;
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
-    color: white;
+    color: rgba(255, 255, 255, 0.60);
     font-size: clamp(0.63rem, calc(0.477rem + 0.739vw), 2.25rem);
 }
 
@@ -121,7 +121,7 @@ body {
 }
 
 .motherInfoDiv>label {
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -161,7 +161,7 @@ body {
 }
 
 .fatherInfoDiv>label {
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -201,7 +201,7 @@ body {
 }
 
 .dependentDiv>label {
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -241,7 +241,7 @@ body {
 }
 
 .requirementFilesDiv>label {
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
