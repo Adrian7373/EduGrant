@@ -14,7 +14,9 @@ export default function ApplicationForm() {
     const formRef = useRef<HTMLFormElement>(null);
     const [isCollegeStudent, setIsCollegeStudent] = useState<boolean>(false);
     const [dependents, setDependents] = useState<number>(0);
-    const [nameInput, setNameInput] = useState<string>("");
+    const [fname, setFname] = useState("");
+    const [midname, setMidname] = useState("");
+    const [lname, setLname] = useState("");
     const [nameStatus, setNameStatus] = useState<"idle" | "checking" | "record already exists!" | "Available for application">("idle");
     const nameInputRef = useRef<HTMLInputElement>(null);
     const [code, setCode] = useState<string>("");
@@ -22,6 +24,11 @@ export default function ApplicationForm() {
     const [verifiedBatchId, setVerifiedBatchId] = useState<string | null>(null)
     const [selectedFiles, setSelectedFiles] = useState<{ coe: string; cog: string; validID: string }>({ coe: "", cog: "", validID: "" });
     const router = useRouter();
+    const fullName = [fname, midname, lname]
+        .map((part) => part.trim())
+        .filter(Boolean)
+        .join(" ")
+        .trim();
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fileType: "coe" | "cog" | "validID") => {
         if (e.target.files && e.target.files[0]) {
@@ -64,19 +71,20 @@ export default function ApplicationForm() {
     }
 
     useEffect(() => {
-        if (nameInputRef && nameStatus == "record already exists!") {
+        if (nameStatus == "record already exists!") {
             nameInputRef.current?.focus();
         }
     }, [nameStatus])
 
     useEffect(() => {
-        if (nameInput.length < 2) {
+        if (fullName.length < 2) {
             setNameStatus("idle");
             return;
         }
         setNameStatus("checking");
+        console.log(fullName);
         const delayBounce = setTimeout(async () => {
-            const isDuplicate = await checkNameExists(nameInput);
+            const isDuplicate = await checkNameExists(fullName);
             isDuplicate ? setNameStatus("record already exists!")
                 : setNameStatus("Available for application")
                 ;
@@ -84,7 +92,7 @@ export default function ApplicationForm() {
 
         return () => clearTimeout(delayBounce);
 
-    }, [nameInput]);
+    }, [fullName]);
 
     const handleDependents = (value: string) => {
         if (!value) return;
@@ -138,9 +146,16 @@ export default function ApplicationForm() {
                 <div id="step-1" className={style.personalInfoDiv} hidden={formStep != 1}>
                     <p className={style.header}>PERSONAL INFORMATION</p>
                     <button type="button" onClick={() => router.back()} className={style.homeButton} hidden={formStep !== 1}>&#9664; Home</button>
+                    <input type="hidden" value={fullName} name="name" />
                     <input type="hidden" value={verifiedBatchId} name="batch_id" />
-                    <label>Name:
-                        <input placeholder="Juan Dela Cruz" ref={nameInputRef} onChange={(e) => setNameInput(e.target.value)} required name="name" type="text" className={style.nameInput} />
+                    <label>First Name:
+                        <input placeholder="e.g Juan" ref={nameInputRef} onChange={(e) => setFname(e.target.value)} required name="fname" type="text" className={style.nameInput} />
+                    </label>
+                    <label>Middle Name:
+                        <input placeholder="e.g Reyes" ref={nameInputRef} onChange={(e) => setMidname(e.target.value)} required name="midname" type="text" className={style.nameInput} />
+                    </label>
+                    <label>Last Name:
+                        <input placeholder="e.g Dela Cruz" ref={nameInputRef} onChange={(e) => setLname(e.target.value)} required name="lname" type="text" className={style.nameInput} />
                         {nameStatus === 'checking' && <p style={{ color: '#ffffff', fontSize: '1rem' }}>Checking...</p>}
                         {nameStatus === 'record already exists!' && <p style={{ color: '#fb2a2a', fontSize: '1rem' }}>Your application is already submitted</p>}
                         {nameStatus === 'Available for application' && <p style={{ color: '#2be11a', fontSize: '1rem' }}>Eligible for application</p>}
@@ -159,7 +174,7 @@ export default function ApplicationForm() {
                         <input name="religion" type="text" className={style.religionInput} />
                     </label>
                     <label>Citizenship:
-                        <input placeholder="Filipino" required name="citizenship" type="text" className={style.citizenShipInput} />
+                        <input placeholder="e.g Filipino" required name="citizenship" type="text" className={style.citizenShipInput} />
                     </label>
                     <label>Date of Birth:
                         <input required name="bday" type="date" className={style.bdayInput} />
@@ -180,7 +195,7 @@ export default function ApplicationForm() {
                     </label>
 
                     <label>Email{"(optional)"}:
-                        <input placeholder="sample@gmail.com" name="email" type="email" className={style.emailInput} />
+                        <input placeholder="e.g sample@gmail.com" name="email" type="email" className={style.emailInput} />
                     </label>
 
                     <label>Permanent Address:
@@ -197,7 +212,7 @@ export default function ApplicationForm() {
                     </label>
 
                     <label>School Name:
-                        <input placeholder="Paaralan National High School" required name="schoolName" type="text" className={style.schoolNameInput} />
+                        <input placeholder="e.g Paaralan National High School" required name="schoolName" type="text" className={style.schoolNameInput} />
                     </label>
 
                     <label>School Address:
@@ -227,7 +242,7 @@ export default function ApplicationForm() {
                             </label>
 
                             <label>Course:
-                                <input placeholder="BSIT" name="course" type="text" className={style.courseInput} />
+                                <input placeholder="e.g BSIT" name="course" type="text" className={style.courseInput} />
                             </label>
                             <label>General Weighted Average(GWA):
                                 <input max={5} min={1} required name="gwa" type="number" step="0.01" className={style.gwaInput} />
@@ -293,7 +308,7 @@ export default function ApplicationForm() {
                     </div>
 
                     <label>Parents Total Monthly Income:
-                        <input min={0} placeholder="5000" name="totalIncome" type="number" className={style.totalIncomeInput} />
+                        <input min={0} placeholder="e.g 5000" name="totalIncome" type="number" className={style.totalIncomeInput} />
                     </label>
 
                     <label>Number of Child(not including yourself):

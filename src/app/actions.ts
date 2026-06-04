@@ -18,6 +18,12 @@ interface Batch {
     max_approved: number;
 }
 
+function normalizeApplicantName(value: string) {
+    return value
+        .trim()
+        .replace(/\s+/g, " ");
+}
+
 const applicationSchema = z.object({
     name: z.string().min(2, "Full name is required"),
     age: z.coerce.number().min(1, "Valid age is required"),
@@ -79,15 +85,16 @@ const applicationSchema = z.object({
 })
 
 export async function checkNameExists(name: string) {
+    const normalizedName = normalizeApplicantName(name);
 
-    if (!name || name.length < 2) return false;
+    if (!normalizedName || normalizedName.length < 2) return false;
 
     const supabase = await createClient();
 
     const { data, error } = await supabase
         .from("applications")
-        .select("name, status")
-        .ilike("name", name)
+        .select("name")
+        .ilike("name", normalizedName)
         .maybeSingle();
 
     if (error) {
@@ -95,14 +102,7 @@ export async function checkNameExists(name: string) {
         return false;
     }
 
-    if (!!data) {
-        if (data.status === "PENDING" || data.status === "APPROVED") {
-            return true;
-        }
-        return false;
-    }
-
-    return false;
+    return !!data;
 
 }
 
@@ -128,7 +128,12 @@ export async function submitApplication(formData: FormData) {
     const { coe, cog, validID, ...databaseData } = rawData;
     const supabase = await createClient();
 
-    const validatedFields = applicationSchema.safeParse(databaseData);
+    const normalizedName = normalizeApplicantName(String(databaseData.name ?? ""));
+
+    const validatedFields = applicationSchema.safeParse({
+        ...databaseData,
+        name: normalizedName,
+    });
     if (!validatedFields.success) {
         console.error("Validation Failed:", validatedFields.error.flatten().fieldErrors);
         return { success: false, message: "Please check your inputs and try again." };

@@ -12,7 +12,7 @@ export default function Home() {
 
         <p className={style.subheadline}>
           Providing accessible financial assistance and streamlined
-          scholarship tracking for senior high and college students.
+          scholarship tracking for high school and college students.
         </p>
 
         <div className={style.buttonsDiv}>
