@@ -83,14 +83,22 @@ const applicationSchema = z.object({
     batch_id: z.string()
 })
 
+// Make sure you have this import at the top of your actions.ts file:
+// import { createClient as createServerClient } from '@supabase/supabase-js';
+
 export async function checkNameExists(name: string) {
     const normalizedName = normalizeApplicantName(name);
 
     if (!normalizedName || normalizedName.length < 2) return false;
 
-    const supabase = await createClient();
+    // 1. Initialize the Admin Client to bypass RLS for public users
+    const supabaseAdmin = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
 
-    const { data, error } = await supabase
+    // 2. Use supabaseAdmin instead of standard supabase
+    const { data, error } = await supabaseAdmin
         .from("applications")
         .select("name")
         .ilike("name", normalizedName)
@@ -102,7 +110,6 @@ export async function checkNameExists(name: string) {
     }
 
     return !!data;
-
 }
 
 export async function submitApplication(formData: FormData) {
