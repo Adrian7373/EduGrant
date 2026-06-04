@@ -289,11 +289,11 @@ export default function ApplicationForm() {
                     <label>Marital Status:
                         <select required name="maritalStatus" id="maritalStatus" className={style.maritalStatusInput} defaultValue="">
                             <option value="" disabled hidden>Select an option</option>
-                            <option value="single">Single</option>
-                            <option value="married">Married</option>
-                            <option value="separated">Separated</option>
-                            <option value="divorced">Divorced</option>
-                            <option value="widowed">Widowed</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Separated">Separated</option>
+                            <option value="Divorced">Divorced</option>
+                            <option value="Widowed">Widowed</option>
                         </select>
                     </label>
 
@@ -312,9 +312,9 @@ export default function ApplicationForm() {
                     <label>School Type:
                         <select required name="schoolType" id="schoolType" className={style.schoolTypeInput} defaultValue="">
                             <option value="" disabled hidden>Select an option</option>
-                            <option value="private">Private</option>
-                            <option value="public">Public</option>
-                            <option value="vocational">Vocational</option>
+                            <option value="Private">Private</option>
+                            <option value="Public">Public</option>
+                            <option value="Vocational">Vocational</option>
                         </select>
                     </label>
 
@@ -329,9 +329,9 @@ export default function ApplicationForm() {
                     <label>Student Level:
                         <select onChange={(e) => handleStudentLevel(e.target.value)} required name="studentLevel" id="studentLevel" className={style.studentLevelInput} defaultValue="">
                             <option value="" disabled hidden>Select an option</option>
-                            <option value="junior">Junior High Student</option>
-                            <option value="senior">Senior High Student</option>
-                            <option value="college">College Student</option>
+                            <option value="Junior">Junior High Student</option>
+                            <option value="Senior">Senior High Student</option>
+                            <option value="College">College Student</option>
                         </select>
                     </label>
 
@@ -340,11 +340,12 @@ export default function ApplicationForm() {
                             <label>Year Level:
                                 <select required name="yearLevel" id="yearLevel" className={style.yearLevelInput} defaultValue="">
                                     <option value="" disabled hidden>Select an option</option>
-                                    <option value="y1">1st Year College</option>
-                                    <option value="y2">2nd Year College</option>
-                                    <option value="y3">3rd Year College</option>
-                                    <option value="y4">4th Year College</option>
-                                    <option value="y5">5th Year College</option>
+                                    <option value="1st Year College">1st Year College</option>
+                                    <option value="2nd Year College">2nd Year College</option>
+                                    <option value="3rd Year College">3rd Year College</option>
+                                    <option value="4th Year College">4th Year College</option>
+                                    <option value="5th Year College">5th Year College</option>
+                                    <option value="5th Year College">Undergraduate</option>
                                 </select>
                             </label>
 
@@ -362,12 +363,12 @@ export default function ApplicationForm() {
                             <label>Grade:
                                 <select required name="gradeLevel" id="gradeLevel" className={style.gradeLevelInput} defaultValue="">
                                     <option value="" disabled hidden>Select an option</option>
-                                    <option value="7">Grade 7</option>
-                                    <option value="8">Grade 8</option>
-                                    <option value="9">Grade 9</option>
-                                    <option value="10">Grade 10</option>
-                                    <option value="11">Grade 11</option>
-                                    <option value="12">Grade 12</option>
+                                    <option value="Grade 7">Grade 7</option>
+                                    <option value="Grade 8">Grade 8</option>
+                                    <option value="Grade 9">Grade 9</option>
+                                    <option value="Grade 10">Grade 10</option>
+                                    <option value="Grade 11">Grade 11</option>
+                                    <option value="Grade 12">Grade 12</option>
                                 </select>
                             </label>
 
