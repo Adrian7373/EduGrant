@@ -421,6 +421,7 @@ export default function ApplicationForm() {
                             <option value="college">College Graduate</option>
                             <option value="highSchool">High School Graduate</option>
                             <option value="elemSchool">Elementary School Graduate</option>
+                            <option value="elemSchool">Vocational</option>
                             <option value="undergrad">Undergraduate</option>
                         </select>
                     </label>
@@ -452,6 +453,7 @@ export default function ApplicationForm() {
                             <option value="college">College Graduate</option>
                             <option value="highSchool">High School Graduate</option>
                             <option value="elemSchool">Elementary School Graduate</option>
+                            <option value="elemSchool">Vocational</option>
                             <option value="undergrad">Undergraduate</option>
                         </select>
                     </label>
