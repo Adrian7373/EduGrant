@@ -83,7 +83,7 @@ export default function ExportCSVButton() {
         <button
             onClick={handleExport}
             disabled={isExporting}
-            style={{ padding: '10px 16px', borderRadius: '8px', backgroundColor: '#7C3AED', color: 'white', border: 'none', cursor: 'pointer' }}
+            style={{ width: "max-content", padding: '10px 16px', borderRadius: '8px', backgroundColor: '#7C3AED', color: 'white', border: 'none', cursor: 'pointer', marginLeft: "auto" }}
         >
             {isExporting ? "Preparing File..." : "Download CSV"}
         </button>
