@@ -242,6 +242,11 @@ export async function submitApplication(formData: FormData) {
                 batch_id: cleanData?.batch_id
             });
 
+        if (dbError) {
+            console.error("Database insert error:", dbError);
+            return { success: false, message: "Failed to save application. Please try again." };
+        }
+
     } catch (error) {
         console.error("Parallel upload Error:", error);
         return { success: false, message: "One or more files failed to upload" }

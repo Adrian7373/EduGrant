@@ -1,37 +1,43 @@
 import style from "./page.module.css";
-import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import CopyButton from "./_components/CopyButton";
 
 interface SuccessProps {
-    searchParams: Promise<{ id?: string, batch_id?: string }>;
+    searchParams: Promise<{ id?: string, batchId?: string }>;
 }
 
 export default async function SuccessPage({ searchParams }: SuccessProps) {
-    const { id, batch_id } = await searchParams;
+    const { id, batchId } = await searchParams;
+    const resolvedBatchId = batchId;
 
     const supabase = await createClient();
 
-    const { data, error } = await supabase
+    const { count: appsCount, error: totalError } = await supabase
         .from("applications")
-        .select("status")
-        .eq("batch_id", batch_id);
+        .select("id", { count: "exact", head: true })
+        .eq("batch_id", resolvedBatchId);
 
-    if (error) {
+    const { count: approvesCount, error: approvedError } = await supabase
+        .from("applications")
+        .select("id", { count: "exact", head: true })
+        .eq("batch_id", resolvedBatchId)
+        .eq("status", "APPROVED");
+
+    if (totalError || approvedError) {
         throw new Error("Failed to get application count");
     }
 
-    const appsCount = Array.isArray(data) ? data.length : 0;
-    const approvesCount = Array.isArray(data) ? data.filter((record: any) => record.status === "APPROVED").length : 0;
+    const safeAppsCount = appsCount ?? 0;
+    const safeApprovesCount = approvesCount ?? 0;
 
     return (
         <div className={style.mainDiv}>
             <div className={style.card}>
                 <div className={style.title}>Thank you — your application was submitted</div>
                 <div className={style.counts}>
-                    <div className={style.countItem}>Total applicants: {appsCount}</div>
-                    <div className={style.countItem}>Approved: {approvesCount}</div>
+                    <div className={style.countItem}>Total applicants: {safeAppsCount}</div>
+                    <div className={style.countItem}>Approved: {safeApprovesCount}</div>
                 </div>
 
                 <div className={style.copyTrackID}>
