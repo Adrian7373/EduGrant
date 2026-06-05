@@ -48,7 +48,6 @@ export default function ApplicationForm() {
         try {
             let finalFile = originalFile;
 
-            // Compress only images. Other file types keep original quality.
             if (originalFile.type.startsWith("image/")) {
                 finalFile = await imageCompression(originalFile, {
                     maxSizeMB: 2,
@@ -100,6 +99,32 @@ export default function ApplicationForm() {
 
     }
 
+    const handleFormSave = (e: React.FormEvent<HTMLFormElement>) => {
+        const formData = new FormData(e.currentTarget);
+        const dataToSave: Record<string, any> = {};
+
+        formData.forEach((value, key) => {
+            if (value instanceof File) return;
+
+            if (dataToSave[key]) {
+                if (Array.isArray(dataToSave[key])) {
+                    dataToSave[key].push(value);
+                } else {
+                    dataToSave[key] = [dataToSave[key], value];
+                }
+            } else {
+                dataToSave[key] = value;
+            }
+        });
+
+        localStorage.setItem("eduGrantDraft", JSON.stringify({
+            fields: dataToSave,
+            step: formStep,
+            dependentsCount: dependents,
+            isCollege: isCollegeStudent,
+        }));
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const formElement = e.currentTarget.closest('form');
         e.preventDefault()
@@ -114,7 +139,6 @@ export default function ApplicationForm() {
         setIsSubmitting(true);
         const formData = new FormData(formElement);
 
-        // Replace raw uploads with client-processed files (compressed images)
         (Object.keys(processedFiles) as UploadKey[]).forEach((key) => {
             const file = processedFiles[key];
             if (file) {
@@ -127,10 +151,10 @@ export default function ApplicationForm() {
         if (response.success) {
             alert(response.message);
             setIsSubmitting(false);
+            localStorage.removeItem("eduGrantDraft");
             return;
         }
 
-        // If there are field-level errors, show them concisely to the user
         if ((response as any).errors) {
             const fieldErrors: Record<string, string[]> = (response as any).errors;
             const messages = Object.entries(fieldErrors)
@@ -150,6 +174,44 @@ export default function ApplicationForm() {
             nameInputRef.current?.focus();
         }
     }, [nameStatus])
+
+    useEffect(() => {
+        const savedDraft = localStorage.getItem("eduGrantDraft");
+
+        if (savedDraft) {
+            const parsed = JSON.parse(savedDraft);
+
+            setFormStep(parsed.step || 1);
+            setDependents(parsed.dependentsCount || 0);
+            setIsCollegeStudent(parsed.isCollege || false);
+
+            setTimeout(() => {
+                if (formRef.current) {
+                    Object.entries(parsed.fields).forEach(([key, value]) => {
+                        const inputs = formRef.current!.querySelectorAll(`[name="${key}"]`);
+
+                        if (Array.isArray(value)) {
+                            inputs.forEach((input, index) => {
+                                if (input && 'value' in input && value[index]) {
+                                    (input as HTMLInputElement).value = value[index];
+                                }
+                            });
+                        } else if (inputs.length > 0) {
+                            if ((inputs[0] as HTMLInputElement).type === "radio") {
+                                inputs.forEach(r => {
+                                    if ((r as HTMLInputElement).value === value) {
+                                        (r as HTMLInputElement).checked = true;
+                                    }
+                                });
+                            } else {
+                                (inputs[0] as HTMLInputElement).value = value as string;
+                            }
+                        }
+                    });
+                }
+            }, 50);
+        }
+    }, []);
 
     useEffect(() => {
         if (fullName.length < 2) {
@@ -230,7 +292,6 @@ export default function ApplicationForm() {
             }
         }
 
-        // 4. If the loop finishes without returning, everything is valid!
         setFormStep(prev => prev + 1);
     };
     const handleBack = () => setFormStep(prevStep => prevStep - 1);
@@ -265,7 +326,7 @@ export default function ApplicationForm() {
 
     if (verifiedBatchId) return (
         <div className={style.mainDiv}>
-            <form action="POST" onSubmit={handleSubmit} ref={formRef}>
+            <form action="POST" onSubmit={handleSubmit} ref={formRef} onChange={handleFormSave}>
                 <div id="step-1" className={style.personalInfoDiv} hidden={formStep != 1}>
                     <p className={style.header}>PERSONAL INFORMATION</p>
                     <button type="button" onClick={() => router.back()} className={style.homeButton} hidden={formStep !== 1}>&#9664; Home</button>
