@@ -26,6 +26,7 @@ export default function ApplicationForm() {
     const nameInputRef = useRef<HTMLInputElement>(null);
     const [code, setCode] = useState<string>("");
     const [message, setMessage] = useState<string>("");
+    const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const [verifiedBatchId, setVerifiedBatchId] = useState<string | null>(null)
     const [selectedFiles, setSelectedFiles] = useState<{ coe: string; cog: string; validID: string }>({ coe: "", cog: "", validID: "" });
     const [processedFiles, setProcessedFiles] = useState<Record<UploadKey, File | null>>({ coe: null, cog: null, validID: null });
@@ -85,11 +86,17 @@ export default function ApplicationForm() {
     const handleVerify = async () => {
         if (!code) return;
 
-        const response = await verifyCode(code);
+        setIsVerifying(true);
 
-        setMessage(response.message);
+        try {
+            const response = await verifyCode(code);
 
-        if (response.id) setVerifiedBatchId(response.id);
+            setMessage(response.message);
+
+            if (response.id) setVerifiedBatchId(response.id);
+        } finally {
+            setIsVerifying(false);
+        }
 
     }
 
@@ -239,9 +246,17 @@ export default function ApplicationForm() {
                 <p>Enter Verification Code</p>
                 <input type="text" onChange={(e) => setCode(e.target.value)} />
                 <p>{message}</p>
+                {isVerifying && (
+                    <div className={style.verifyLoading} role="status" aria-live="polite">
+                        <span className={style.loadingSpinner} aria-hidden="true" />
+                        <p>Checking verification code. Please wait</p>
+                    </div>
+                )}
                 <div className={style.verifyUtils}>
                     <button type="button" onClick={() => router.back()} className={style.homeButton} hidden={formStep !== 1}>&#9664; Home</button>
-                    <button type="button" className={style.verifyButton} onClick={handleVerify}>Proceed</button>
+                    <button type="button" className={style.verifyButton} onClick={handleVerify} disabled={isVerifying}>
+                        {isVerifying ? "Checking..." : "Proceed"}
+                    </button>
                 </div>
             </div>
         </div>)

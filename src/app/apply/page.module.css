@@ -503,13 +503,37 @@ body {
     gap: clamp(5px, calc(2.545px + 0.767vw), 32px);
 }
 
+.verifyLoading {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1vw, 16px);
+    padding: clamp(10px, 1.4vw, 18px);
+    border-radius: clamp(10px, 1.1vw, 18px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.verifyLoading>p {
+    margin: 0;
+    color: white;
+    font-size: clamp(0.9rem, 1.05vw, 1.2rem);
+    text-align: center;
+}
+
+.verifyButton:disabled {
+    opacity: 0.72;
+    cursor: not-allowed;
+    transform: none;
+}
+
 .verifyDiv>input:focus {
     outline: none;
 }
 
 
 .verifyDiv {
-    background-color: #1E1E1E;
     display: flex;
     align-items: center;
     gap: clamp(12px, calc(10.182px + 0.568vw), 32px);
@@ -520,7 +544,6 @@ body {
     max-width: 600px;
     padding: clamp(16px, calc(12.308px + 0.513vw), 32px);
     border-radius: clamp(16px, calc(12.308px + 0.513vw), 32px);
-    box-shadow: 0 16px 64px -16px rgba(255, 255, 255, 0.05);
 }
 
 .verifyButton {
@@ -667,6 +690,26 @@ body {
     }
 
     .submittingState {
+        width: 100%;
+    }
+
+    .verifyDiv {
+        width: 92%;
+        height: auto;
+        min-height: 40vh;
+    }
+
+    .verifyUtils {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .verifyButton,
+    .homeButton {
+        width: 100%;
+    }
+
+    .verifyLoading {
         width: 100%;
     }
 }
