@@ -343,6 +343,11 @@ body {
     color: white;
 }
 
+.fileProcessing {
+    background-color: #f59e0b !important;
+    color: #101010;
+}
+
 .fileAdded:hover {
     background-color: #059669 !important;
 }
@@ -405,6 +410,44 @@ body {
     justify-content: right;
     width: 80%;
     margin-top: 3vh;
+}
+
+.submittingState {
+    width: 80%;
+    max-width: 760px;
+    margin-top: clamp(12px, 2vh, 28px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 1.2vw, 20px);
+    padding: clamp(12px, 1.8vw, 24px);
+    border-radius: clamp(12px, 1.2vw, 20px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.submittingState>p {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(0.9rem, 1.1vw, 1.35rem);
+    text-align: center;
+    line-height: 1.4;
+}
+
+.loadingSpinner {
+    width: clamp(18px, 2.4vw, 34px);
+    height: clamp(18px, 2.4vw, 34px);
+    border: 3px solid rgba(255, 255, 255, 0.28);
+    border-top-color: #5b7cfa;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+    flex: 0 0 auto;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .homeButton {
@@ -593,4 +636,37 @@ body {
     border: 1px solid white;
     margin-top: 4vh;
     border-radius: clamp(3px, calc(1.909px + 0.341vw), 15px);
+}
+
+@media (max-width: 480px) {
+    .mainDiv {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .personalInfoDiv,
+    .familyBackgroundDiv,
+    .motherInfoDiv,
+    .fatherInfoDiv,
+    .childrenInfoDiv,
+    .requirementFilesDiv {
+        width: 100%;
+    }
+
+    .utilButtons {
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .nextButton,
+    .backButton,
+    .formSubmitButton {
+        width: 100%;
+        max-width: none;
+    }
+
+    .submittingState {
+        width: 100%;
+    }
 }

@@ -31,6 +31,7 @@ export default function ApplicationForm() {
     const [processedFiles, setProcessedFiles] = useState<Record<UploadKey, File | null>>({ coe: null, cog: null, validID: null });
     const [isProcessingFile, setIsProcessingFile] = useState<Record<UploadKey, boolean>>({ coe: false, cog: false, validID: false });
     const router = useRouter();
+    const isAnyFileProcessing = Object.values(isProcessingFile).some(Boolean);
     const fullName = [fname, midname, lname]
         .map((part) => part.trim())
         .filter(Boolean)
@@ -98,7 +99,7 @@ export default function ApplicationForm() {
 
         if (!formElement) return;
 
-        if (Object.values(isProcessingFile).some(Boolean)) {
+        if (isAnyFileProcessing) {
             alert("Please wait for file processing to finish.");
             return;
         }
@@ -390,7 +391,7 @@ export default function ApplicationForm() {
                         <input min={0} placeholder="e.g 5000" name="totalIncome" type="number" className={style.totalIncomeInput} />
                     </label>
 
-                    <label>Number of Child(0 if only no siblings):
+                    <label>Number of Siblings(0 if only no siblings):
                         <input min={0} onChange={(e) => handleDependents(e.target.value)} required name="numberOfChild" type="number" className={style.numberOfChildInput} />
                     </label>
                 </div>
@@ -509,44 +510,63 @@ export default function ApplicationForm() {
 
                 {/*REQUIREMENT FILES*/}
 
-                <div id="step-6" className={style.requirementFilesDiv} hidden={formStep != 6 || isSubmitting}>
+                <div id="step-6" className={style.requirementFilesDiv} hidden={formStep != 6}>
                     <p className={style.header}>ADDITIONAL REQUIREMENTS</p>
                     <label>
                         Certificate of Registration/Enrollment:
                         <div className={style.fileInputWrapper}>
-                            <input required name="coe" type="file" className={style.coeInput} id="coe" onChange={(e) => handleFileChange(e, "coe")} />
-                            <span className={`${style.fileLabel} ${selectedFiles.coe ? style.fileAdded : ""}`}>
-                                {selectedFiles.coe ? `✓ ${selectedFiles.coe}` : "Add file"}
+                            <input required name="coe" type="file" className={style.coeInput} id="coe" disabled={isSubmitting || isProcessingFile.coe} onChange={(e) => handleFileChange(e, "coe")} />
+                            <span className={`${style.fileLabel} ${isProcessingFile.coe ? style.fileProcessing : selectedFiles.coe ? style.fileAdded : ""}`}>
+                                {isProcessingFile.coe
+                                    ? "Processing file..."
+                                    : selectedFiles.coe
+                                        ? `✓ ${selectedFiles.coe}`
+                                        : "Add file"}
                             </span>
                         </div>
                     </label>
                     <label>
                         Certificate of Grades/Report Card:
                         <div className={style.fileInputWrapper}>
-                            <input required name="cog" type="file" className={style.cogInput} id="cog" onChange={(e) => handleFileChange(e, "cog")} />
-                            <span className={`${style.fileLabel} ${selectedFiles.cog ? style.fileAdded : ""}`}>
-                                {selectedFiles.cog ? `✓ ${selectedFiles.cog}` : "Add file"}
+                            <input required name="cog" type="file" className={style.cogInput} id="cog" disabled={isSubmitting || isProcessingFile.cog} onChange={(e) => handleFileChange(e, "cog")} />
+                            <span className={`${style.fileLabel} ${isProcessingFile.cog ? style.fileProcessing : selectedFiles.cog ? style.fileAdded : ""}`}>
+                                {isProcessingFile.cog
+                                    ? "Processing file..."
+                                    : selectedFiles.cog
+                                        ? `✓ ${selectedFiles.cog}`
+                                        : "Add file"}
                             </span>
                         </div>
                     </label>
                     <label>
                         School ID/Valid ID:
                         <div className={style.fileInputWrapper}>
-                            <input required name="validID" type="file" className={style.idInput} id="validID" onChange={(e) => handleFileChange(e, "validID")} />
-                            <span className={`${style.fileLabel} ${selectedFiles.validID ? style.fileAdded : ""}`}>
-                                {selectedFiles.validID ? `✓ ${selectedFiles.validID}` : "Add file"}
+                            <input required name="validID" type="file" className={style.idInput} id="validID" disabled={isSubmitting || isProcessingFile.validID} onChange={(e) => handleFileChange(e, "validID")} />
+                            <span className={`${style.fileLabel} ${isProcessingFile.validID ? style.fileProcessing : selectedFiles.validID ? style.fileAdded : ""}`}>
+                                {isProcessingFile.validID
+                                    ? "Processing file..."
+                                    : selectedFiles.validID
+                                        ? `✓ ${selectedFiles.validID}`
+                                        : "Add file"}
                             </span>
                         </div>
                     </label>
                 </div>
 
-                <div className={style.utilButtons}>
+                <div className={style.utilButtons} hidden={isSubmitting}>
                     <button type="button" onClick={handleBack} className={style.backButton} hidden={formStep == 1}>&#9664; Back</button>
-                    <button type="button" onClick={handleNext} className={style.nextButton} hidden={formStep == 6} disabled={nameStatus === "record already exists!"}>Next &#9654;</button>
-                    <button type="submit" className={style.formSubmitButton} hidden={formStep != 6}>
+                    <button type="button" onClick={handleNext} className={style.nextButton} hidden={formStep == 6} disabled={nameStatus === "record already exists!" || isAnyFileProcessing}>Next &#9654;</button>
+                    <button type="submit" className={style.formSubmitButton} hidden={formStep != 6 || isAnyFileProcessing}>
                         {isSubmitting ? "Uploading submission" : "Submit"}
                     </button>
                 </div>
+
+                {isSubmitting && (
+                    <div className={style.submittingState} role="status" aria-live="polite">
+                        <span className={style.loadingSpinner} aria-hidden="true" />
+                        <p>Submitting application. Please wait</p>
+                    </div>
+                )}
 
             </form>
         </div >
