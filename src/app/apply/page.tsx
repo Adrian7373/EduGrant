@@ -150,8 +150,9 @@ export default function ApplicationForm() {
 
         if (response.success) {
             alert(response.message);
-            setIsSubmitting(false);
             localStorage.removeItem("eduGrantDraft");
+            router.push(`/apply/success?id=${response.trackingID}&batchId=${response.batchId}`);
+            setIsSubmitting(false);
             return;
         }
 
@@ -187,6 +188,9 @@ export default function ApplicationForm() {
         setFormStep(parsed.step || 1);
         setDependents(parsed.dependentsCount || 0);
         setIsCollegeStudent(parsed.isCollege || false);
+        setFname(parsed.fields?.fname || "");
+        setMidname(parsed.fields?.midname || "");
+        setLname(parsed.fields?.lname || "");
 
         setTimeout(() => {
             if (!formRef.current) return;
@@ -335,13 +339,13 @@ export default function ApplicationForm() {
                     <input type="hidden" value={fullName} name="name" />
                     <input type="hidden" value={verifiedBatchId} name="batch_id" />
                     <label>First Name:
-                        <input placeholder="e.g Juan" ref={nameInputRef} onChange={(e) => setFname(e.target.value)} required name="fname" type="text" className={style.nameInput} />
+                        <input value={fname} placeholder="e.g Juan" ref={nameInputRef} onChange={(e) => setFname(e.target.value)} required name="fname" type="text" className={style.nameInput} />
                     </label>
                     <label>Middle Name {"(Leave empty if none)"}:
-                        <input placeholder="e.g Reyes" ref={nameInputRef} onChange={(e) => setMidname(e.target.value)} name="midname" type="text" className={style.nameInput} />
+                        <input value={midname} placeholder="e.g Reyes" ref={nameInputRef} onChange={(e) => setMidname(e.target.value)} name="midname" type="text" className={style.nameInput} />
                     </label>
                     <label>Last Name:
-                        <input placeholder="e.g Dela Cruz" ref={nameInputRef} onChange={(e) => setLname(e.target.value)} required name="lname" type="text" className={style.nameInput} />
+                        <input value={lname} placeholder="e.g Dela Cruz" ref={nameInputRef} onChange={(e) => setLname(e.target.value)} required name="lname" type="text" className={style.nameInput} />
                         {nameStatus === 'checking' && <p style={{ color: '#ffffff', fontSize: '1rem' }}>Checking...</p>}
                         {nameStatus === 'record already exists!' && <p style={{ color: '#fb2a2a', fontSize: '1rem' }}>Your application is already submitted</p>}
                         {nameStatus === 'Available for application' && <p style={{ color: '#2be11a', fontSize: '1rem' }}>Eligible for application</p>}
@@ -377,7 +381,7 @@ export default function ApplicationForm() {
                     </label>
 
                     <label>Contact number:
-                        <input placeholder="09XXXXXXXXX" required minLength={11} name="contact" type="tel" className={style.contactInput} />
+                        <input placeholder="09XXXXXXXXX" required minLength={11} maxLength={11} name="contact" type="tel" className={style.contactInput} />
                     </label>
 
                     <label>Email{"(optional)"}:
@@ -489,7 +493,7 @@ export default function ApplicationForm() {
                         <input name="motherAddress" type="text" className={style.motherAddressInput} />
                     </label>
                     <label>Contact Number:
-                        <input placeholder="09XXXXXXXXX" minLength={11} name="motherContact" type="tel" className={style.motherContactInput} />
+                        <input placeholder="09XXXXXXXXX" minLength={11} maxLength={11} name="motherContact" type="tel" className={style.motherContactInput} />
                     </label>
                     <label>Occupation:
                         <input name="motherOccupation" type="text" className={style.motherOccupationInput} />
@@ -521,7 +525,7 @@ export default function ApplicationForm() {
                         <input name="fatherAddress" type="text" className={style.fatherAddressInput} />
                     </label>
                     <label>Contact Number:
-                        <input minLength={11} placeholder="09XXXXXXXXX" name="fatherContact" type="tel" className={style.fatherContactInput} />
+                        <input minLength={11} maxLength={11} placeholder="09XXXXXXXXX" name="fatherContact" type="tel" className={style.fatherContactInput} />
                     </label>
                     <label>Occupation:
                         <input name="fatherOccupation" type="text" className={style.fatherOccupationInput} />

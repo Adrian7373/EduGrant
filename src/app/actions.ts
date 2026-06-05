@@ -251,7 +251,13 @@ export async function submitApplication(formData: FormData) {
         console.error("Parallel upload Error:", error);
         return { success: false, message: "One or more files failed to upload" }
     }
-    redirect(`/apply/success?id=${trackingID}&batchId=${cleanData?.batch_id}`);
+
+    return {
+        success: true,
+        message: "Application submitted successfully.",
+        trackingID,
+        batchId: cleanData?.batch_id,
+    };
 }
 
 interface Response {

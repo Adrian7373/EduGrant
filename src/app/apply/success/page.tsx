@@ -1,5 +1,5 @@
 import style from "./page.module.css";
-import { createClient } from "@/utils/supabase/server";
+import { createClient as createServerClient } from '@supabase/supabase-js';
 import Link from "next/link";
 import CopyButton from "./_components/CopyButton";
 
@@ -11,14 +11,17 @@ export default async function SuccessPage({ searchParams }: SuccessProps) {
     const { id, batchId } = await searchParams;
     const resolvedBatchId = batchId;
 
-    const supabase = await createClient();
+    const supabaseAdmin = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
 
-    const { count: appsCount, error: totalError } = await supabase
+    const { count: appsCount, error: totalError } = await supabaseAdmin
         .from("applications")
         .select("id", { count: "exact", head: true })
         .eq("batch_id", resolvedBatchId);
 
-    const { count: approvesCount, error: approvedError } = await supabase
+    const { count: approvesCount, error: approvedError } = await supabaseAdmin
         .from("applications")
         .select("id", { count: "exact", head: true })
         .eq("batch_id", resolvedBatchId)
