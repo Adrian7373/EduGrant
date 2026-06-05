@@ -5,15 +5,18 @@ import Link from "next/link";
 import CopyButton from "./_components/CopyButton";
 
 interface SuccessProps {
-    searchParams: Promise<{ id?: string }>;
+    searchParams: Promise<{ id?: string, batch_id?: string }>;
 }
 
 export default async function SuccessPage({ searchParams }: SuccessProps) {
-    const { id } = await searchParams;
+    const { id, batch_id } = await searchParams;
 
     const supabase = await createClient();
 
-    const { data, error } = await supabase.from("applications").select("status");
+    const { data, error } = await supabase
+        .from("applications")
+        .select("status")
+        .eq("batch_id", batch_id);
 
     if (error) {
         throw new Error("Failed to get application count");
