@@ -105,7 +105,9 @@ export default async function Records() {
                 <RecordsTable
                     applications={applications}
                 />
-                <ExportCSVButton />
+                <ExportCSVButton
+                    currentBatchId={activeBatchId}
+                />
             </div>
         </div>
     )

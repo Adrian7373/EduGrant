@@ -4,14 +4,21 @@ import { useState } from "react";
 import Papa from "papaparse";
 import { getAllApplicationsForExport } from "@/app/actions";
 
-export default function ExportCSVButton() {
+export default function ExportCSVButton({ currentBatchId }: { currentBatchId?: string }) {
     const [isExporting, setIsExporting] = useState(false);
 
     const handleExport = async () => {
         setIsExporting(true);
         try {
-            const rawData = await getAllApplicationsForExport();
-
+            if (!currentBatchId) {
+                alert("No batch selected for export.");
+                setIsExporting(false);
+                return;
+            }
+            const rawData = await getAllApplicationsForExport(currentBatchId) as any[] | undefined;
+            if (!rawData) {
+                return;
+            }
             const formattedData = rawData.map(app => {
 
                 const formattedDependents = app.dependents && app.dependents.length > 0

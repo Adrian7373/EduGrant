@@ -663,17 +663,21 @@ export async function assignAdmin(formData: FormData) {
 
 }
 
-export async function getAllApplicationsForExport() {
+export async function getAllApplicationsForExport(currentBatchId: string) {
     const supabase = await createClient();
+
+    if (!currentBatchId) {
+        return
+    }
 
     const { data, error } = await supabase
         .from("applications")
         .select("*")
+        .eq("batch_id", currentBatchId)
         .order("created_at", { ascending: false });
 
     if (error) {
         throw new Error("Failed to fetch records for export");
     }
-
     return data;
 }
