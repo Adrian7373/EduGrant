@@ -21,6 +21,7 @@ EduGrant is a comprehensive, full-stack web application designed to streamline t
 * **Batch & Session Management:** Super Admins can create new assistance programs, set application deadlines, define maximum beneficiary limits, and assign specific admins to handle them.
 * **Analytics Dashboard:** Real-time metrics tracking Total, Pending, Approved, and Rejected applications.
 * **Application Review Portal:** A dedicated interface to review student data, verify uploaded documents (COE, COG, Valid ID) via secure signed URLs, and update statuses.
+* **CSV Export:** Admins can export application records as a CSV file.
 
 
 ## 🛠️ Tech Stack
