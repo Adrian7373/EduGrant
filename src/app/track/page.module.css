@@ -6,7 +6,6 @@
 }
 
 .trackDiv {
-    background-color: #1E1E1E;
     height: 40vh;
     width: 80%;
     max-width: 600px;
@@ -18,7 +17,6 @@
     padding: clamp(16px, calc(12.308px + 0.513vw), 32px);
     border-radius: clamp(10px, calc(7.727px + 0.71vw), 35px);
     gap: clamp(12px, calc(10.182px + 0.568vw), 32px);
-    box-shadow: 0 16px 64px -16px rgba(255, 255, 255, 0.05);
 }
 
 
