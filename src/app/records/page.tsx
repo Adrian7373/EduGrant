@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import style from "./page.module.css";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import ExportCSVButton from "./_components/ExportCSVButton";
 
 interface BatchOption {
     id: string;
@@ -104,7 +105,7 @@ export default async function Records() {
                 <RecordsTable
                     applications={applications}
                 />
-                <button>Export to CSV</button>
+                <ExportCSVButton />
             </div>
         </div>
     )
