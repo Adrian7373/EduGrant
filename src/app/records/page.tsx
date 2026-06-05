@@ -104,6 +104,7 @@ export default async function Records() {
                 <RecordsTable
                     applications={applications}
                 />
+                <button>Export to CSV</button>
             </div>
         </div>
     )

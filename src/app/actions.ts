@@ -662,3 +662,18 @@ export async function assignAdmin(formData: FormData) {
     revalidatePath("/dashboard");
 
 }
+
+export async function getAllApplicationsForExport() {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from("applications")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        throw new Error("Failed to fetch records for export");
+    }
+
+    return data;
+}

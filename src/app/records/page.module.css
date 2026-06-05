@@ -15,6 +15,25 @@
     gap: clamp(8px, calc(4.308px + 0.513vw), 24px);
 }
 
+.recordsTableDiv>button {
+    padding: clamp(7px, calc(4px + 0.417vw), 20px);
+    width: max-content;
+    margin-left: auto;
+    border-radius: clamp(7px, calc(4px + 0.417vw), 20px);
+    color: rgb(255, 255, 255);
+    display: flex;
+    background: linear-gradient(135deg, #334155 0%, #1F2937 100%);
+    border: 1px solid #475569;
+    cursor: pointer;
+}
+
+.recordsTableDiv>button:hover {
+    background: linear-gradient(135deg, #475569 0%, #334155 100%);
+    border-color: #64748B;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.28);
+    transform: translateY(-1px);
+}
+
 .recordsTableDiv thead th {
     font-weight: bold;
 }
