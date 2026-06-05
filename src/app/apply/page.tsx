@@ -176,42 +176,44 @@ export default function ApplicationForm() {
     }, [nameStatus])
 
     useEffect(() => {
+        if (!verifiedBatchId) return;
+
         const savedDraft = localStorage.getItem("eduGrantDraft");
 
-        if (savedDraft) {
-            const parsed = JSON.parse(savedDraft);
+        if (!savedDraft) return;
 
-            setFormStep(parsed.step || 1);
-            setDependents(parsed.dependentsCount || 0);
-            setIsCollegeStudent(parsed.isCollege || false);
+        const parsed = JSON.parse(savedDraft);
 
-            setTimeout(() => {
-                if (formRef.current) {
-                    Object.entries(parsed.fields).forEach(([key, value]) => {
-                        const inputs = formRef.current!.querySelectorAll(`[name="${key}"]`);
+        setFormStep(parsed.step || 1);
+        setDependents(parsed.dependentsCount || 0);
+        setIsCollegeStudent(parsed.isCollege || false);
 
-                        if (Array.isArray(value)) {
-                            inputs.forEach((input, index) => {
-                                if (input && 'value' in input && value[index]) {
-                                    (input as HTMLInputElement).value = value[index];
-                                }
-                            });
-                        } else if (inputs.length > 0) {
-                            if ((inputs[0] as HTMLInputElement).type === "radio") {
-                                inputs.forEach(r => {
-                                    if ((r as HTMLInputElement).value === value) {
-                                        (r as HTMLInputElement).checked = true;
-                                    }
-                                });
-                            } else {
-                                (inputs[0] as HTMLInputElement).value = value as string;
-                            }
+        setTimeout(() => {
+            if (!formRef.current) return;
+
+            Object.entries(parsed.fields).forEach(([key, value]) => {
+                const inputs = formRef.current!.querySelectorAll(`[name="${key}"]`);
+
+                if (Array.isArray(value)) {
+                    inputs.forEach((input, index) => {
+                        if (input && "value" in input && value[index]) {
+                            (input as HTMLInputElement).value = value[index];
                         }
                     });
+                } else if (inputs.length > 0) {
+                    if ((inputs[0] as HTMLInputElement).type === "radio") {
+                        inputs.forEach((radio) => {
+                            if ((radio as HTMLInputElement).value === value) {
+                                (radio as HTMLInputElement).checked = true;
+                            }
+                        });
+                    } else {
+                        (inputs[0] as HTMLInputElement).value = value as string;
+                    }
                 }
-            }, 50);
-        }
-    }, []);
+            });
+        }, 50);
+    }, [verifiedBatchId]);
 
     useEffect(() => {
         if (fullName.length < 2) {
