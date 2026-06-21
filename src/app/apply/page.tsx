@@ -546,6 +546,9 @@ export default function ApplicationForm() {
 
                 <div id="step-5" className={style.childrenInfoDiv} hidden={formStep != 5}>
                     <p className={style.header}>SIBLINGS INFORMATION</p>
+                    {dependents == 0 && (
+                        <p className="noSiblings">You have no siblings</p>
+                    )}
                     {Array.from({ length: dependents }).map((_, index) => (
                         <div className={style.dependentDiv} key={index}>
                             <label>Name:
@@ -637,7 +640,7 @@ export default function ApplicationForm() {
 
                 <div className={style.utilButtons} hidden={isSubmitting}>
                     <button type="button" onClick={handleBack} className={style.backButton} hidden={formStep == 1}>&#9664; Back</button>
-                    <button type="button" onClick={handleNext} className={style.nextButton} hidden={formStep == 6} disabled={nameStatus === "record already exists!" || isAnyFileProcessing}>Next &#9654;</button>
+                    <button type="button" onClick={handleNext} className={style.nextButton} hidden={formStep == 6} disabled={nameStatus === "record already exists!" || isAnyFileProcessing || nameStatus === "checking"}>Next &#9654;</button>
                     <button type="submit" className={style.formSubmitButton} hidden={formStep != 6 || isAnyFileProcessing}>
                         {isSubmitting ? "Uploading submission" : "Submit"}
                     </button>

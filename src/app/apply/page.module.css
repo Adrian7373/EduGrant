@@ -40,7 +40,7 @@ body {
 }
 
 .personalInfoDiv>label {
-    color: rgba(255, 255, 255, 0.87);
+    color: rgba(255, 255, 255, 0.757);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -58,7 +58,7 @@ body {
     width: 100%;
     height: 4vh;
     background: none;
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.475);
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
@@ -73,7 +73,7 @@ body {
     width: 100%;
     height: 5vh;
     background: none;
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.488);
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
@@ -81,7 +81,7 @@ body {
 }
 
 .familyBackgroundDiv>label {
-    color: rgba(255, 255, 255, 0.87);
+    color: rgba(255, 255, 255, 0.757);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -93,7 +93,7 @@ body {
     width: 100%;
     height: 4vh;
     background: none;
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.475);
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
@@ -108,7 +108,7 @@ body {
     width: 100%;
     height: 5vh;
     background: none;
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.475);
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: rgba(255, 255, 255, 0.60);
@@ -121,7 +121,7 @@ body {
 }
 
 .motherInfoDiv>label {
-    color: rgba(255, 255, 255, 0.87);
+    color: rgba(255, 255, 255, 0.757);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -133,7 +133,7 @@ body {
     width: 100%;
     height: 4vh;
     background: none;
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.475);
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
@@ -148,7 +148,7 @@ body {
     width: 100%;
     height: 5vh;
     background: none;
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.475);
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
@@ -161,7 +161,7 @@ body {
 }
 
 .fatherInfoDiv>label {
-    color: rgba(255, 255, 255, 0.87);
+    color: rgba(255, 255, 255, 0.757);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -173,7 +173,7 @@ body {
     width: 100%;
     height: 4vh;
     background: none;
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.475);
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
@@ -188,7 +188,7 @@ body {
     width: 100%;
     height: 5vh;
     background: none;
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.475);
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
@@ -201,7 +201,7 @@ body {
 }
 
 .dependentDiv>label {
-    color: rgba(255, 255, 255, 0.87);
+    color: rgba(255, 255, 255, 0.757);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -213,7 +213,7 @@ body {
     width: 100%;
     height: 4vh;
     background: none;
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.475);
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
@@ -228,7 +228,7 @@ body {
     width: 100%;
     height: 5vh;
     background: none;
-    border: 2px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.475);
     border-radius: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     padding: clamp(0.188rem, calc(0.119rem + 0.341vw), 0.938rem);
     color: white;
@@ -241,7 +241,7 @@ body {
 }
 
 .requirementFilesDiv>label {
-    color: rgba(255, 255, 255, 0.87);
+    color: rgba(255, 255, 255, 0.757);
     margin: clamp(0.5rem, calc(0.909rem + 0.455vw), 2rem);
     font-size: clamp(1.00rem, calc(0.920rem + 0.398vw), 1.88rem);
     display: flex;
@@ -458,7 +458,6 @@ body {
     border-radius: clamp(8px, calc(6.182px + 0.568vw), 28px);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-    margin-right: auto;
     padding: clamp(13px, calc(11.273px + 0.54vw), 32px);
     padding-right: clamp(15px, calc(11.300px + 0.57vw), 35px);
 }
@@ -701,15 +700,13 @@ body {
 
     .verifyUtils {
         width: 100%;
-        flex-direction: column;
-    }
-
-    .verifyButton,
-    .homeButton {
-        width: 100%;
     }
 
     .verifyLoading {
         width: 100%;
     }
+}
+
+.noSiblings {
+    text-align: center;
 }
