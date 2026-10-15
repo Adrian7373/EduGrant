@@ -90,5 +90,9 @@ Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:30
 * `/src/app/actions.ts` - Core Next.js Server Actions handling database interactions, validations, and email triggers.
 * `/src/utils/supabase` - Supabase SSR client configurations.
 
+## Snapshot
+
+<img width="1919" height="909" alt="Screenshot 2026-10-15 214848" src="https://github.com/user-attachments/assets/028908dc-fec4-4ae2-80a8-224b850eead8" />
+
 
 Made with ❤️ by Adrian Ablaza
